@@ -1,0 +1,18 @@
+<mat-toolbar class="white"></mat-toolbar>
+
+<span *ngIf="session!=undefined">
+
+  <div fxLayout="row" fxLayoutAlign="end">
+    <div fxLayout="row" fxLayoutAlign="end center">
+      <input cdkFocusInitial style="display: none" type='text'/>
+      <!-- Necesario para sacar el autofocus cuando se abre el sidenav. Bug de Angular -->
+      <a [matMenuTriggerFor]="account" class="role-button" mat-flat-button>
+        <mat-label>{{session.role}}</mat-label>
+        <mat-icon>account_circle</mat-icon>
+      </a>
+      <mat-menu #account="matMenu">
+        <button (click)="closeSession()" mat-menu-item>{{menu}}</button>
+      </mat-menu>
+    </div>
+  </div>
+</span>

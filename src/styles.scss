@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.btn-primary:hover {
+    color: black;
+    background-color: orange;
+}
+.padding-top-15 {
+    padding-top: 15px;
+}
+.padding-left-50 {
+    padding-left: 50px;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.padding-2 {
+    padding: 2vh;
+}

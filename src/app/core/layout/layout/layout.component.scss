@@ -1,0 +1,17 @@
+:host {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+
+mat-drawer-container {
+  height: 100% !important;
+}
+
+.offSidebar {
+  width: 60px;
+}
+
+.padding-bottom-20 {
+  padding-bottom: 20px;
+}

@@ -1,0 +1,42 @@
+<mat-toolbar class="grad" color="primary">
+  <mat-toolbar-row>
+    <button *ngIf="!hide" id="btnHeader" mat-icon-button class="btn btn-menu" color="white" matTooltip="Menu" (click)="toggleSideBar()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <a routerLink="/" mat-list-avatar class="navbar-brand logo">
+    </a>
+
+    <span class="example-spacer"></span>
+
+    <div class="padding-top-20 float-right" fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+      <div>
+        <ul>
+          <li>
+            <button mat-button [matMenuTriggerFor]="menu" class="btn btn-personal-menu">
+              <mat-icon>person_outline</mat-icon>
+              {{userName}}
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item class="btn" id="btnMisDatos" (click)="myData()">
+                <mat-icon>account_circle</mat-icon>
+                Mis datos
+              </button>
+              <button mat-menu-item class="btn" id="btnCambiar" (click)="change()">
+                <mat-icon>loop</mat-icon>
+                Cambiar sesión
+              </button>
+              <button mat-menu-item class="btn" id="btnSalir" >
+                <mat-icon>exit_to_app</mat-icon>
+                Salir
+              </button>
+            </mat-menu>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+    <div>
+
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
