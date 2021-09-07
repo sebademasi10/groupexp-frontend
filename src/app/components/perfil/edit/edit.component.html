@@ -1,7 +1,7 @@
 <div class="main-div padding-2">
     <div>
         <mat-card class="example-card">
-            <form (ngSubmit)="saveChanges()" [formGroup]="profileForm">
+            <form [formGroup]="profileForm" (ngSubmit)="saveChanges()">
                 <mat-form-field>
                     <mat-label>Nombre</mat-label>
                     <input matInput formControlName="name">
@@ -10,19 +10,15 @@
                     <mat-label>Apellido</mat-label>
                     <input matInput formControlName="surname">
                 </mat-form-field>
-                <mat-form-field>
-                    <mat-label>Correo electrónico</mat-label>
-                    <input matInput formControlName="email">
-                </mat-form-field>
-            </form>
 
-            <mat-card-actions>
-                <button mat-raised-button color="accent">
-                    <mat-icon>undo</mat-icon> Cancelar
-                </button>
-                <button type="submit" mat-raised-button class="btn-primary">
-                    <mat-icon>save</mat-icon> Guardar cambios
-                </button>
-            </mat-card-actions>
+                <mat-card-actions>
+                    <button mat-raised-button type="button" color="accent">
+                        <mat-icon>undo</mat-icon> Cancelar
+                    </button>
+                    <button type="submit" mat-raised-button class="btn-primary">
+                        <mat-icon>save</mat-icon> Guardar cambios
+                    </button>
+                </mat-card-actions>
+            </form>
         </mat-card>
     </div>

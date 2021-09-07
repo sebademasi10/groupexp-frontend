@@ -3,6 +3,13 @@ input {
     width: 20vw;
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-end;
+}
+
 .main-div {
     padding: 20px;
     display: flex;

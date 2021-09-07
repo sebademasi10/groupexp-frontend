@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-edit',
@@ -15,7 +17,10 @@ export class EditComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private router: Router,
+    private fb: FormBuilder,
+    private snackService: SnackBarService,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -23,15 +28,17 @@ export class EditComponent implements OnInit {
     this.profileForm = this.fb.group({
       name: [this.user.name, Validators.required],
       surname: [this.user.surname, Validators.required],
-      email: [this.user.email, [Validators.required, Validators.email]],
     })
   }
 
   saveChanges() {
     this.user.name = this.profileForm.value.name;
     this.user.surname = this.profileForm.value.surname;
-    this.user.email = this.profileForm.value.email;
-    console.log(this.user);
+
+    this.userService.update(this.route.snapshot.params['id'], this.user).subscribe(() => {
+      this.snackService.openSnackBar('¡Usuario actualizado con éxito!', true);
+      this.router.navigate(['/perfil/ver', this.route.snapshot.params['id']])
+    })
   }
 
 }
