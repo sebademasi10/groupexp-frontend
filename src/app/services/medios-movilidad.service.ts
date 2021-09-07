@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MediosMovilidad } from '../models/medios-movilidad';
+import { MediosMovilidad } from '../models/medios-movilidad.model';
 
 @Injectable({
   providedIn: 'root'

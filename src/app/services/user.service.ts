@@ -29,4 +29,8 @@ export class UserService {
   getUser(userId: string): Observable<User> {
     return this.http.get<User>(`${this._controllerName}/${userId}`);
   }
+
+  getAll() {
+    return this.http.get(`${this._controllerName}`);
+  }
 }

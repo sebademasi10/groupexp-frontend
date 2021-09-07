@@ -9,6 +9,7 @@ export class User {
     img: string;
     role: string;
     active: boolean;
+    contacts: User[]
 
     constructor(
         name?: string,
@@ -19,6 +20,7 @@ export class User {
         role?: string,
         img?: string,
         active?: boolean,
+        contacts?: User[]
     ) {
         this.name = name;
         this.surname = surname;
@@ -28,6 +30,7 @@ export class User {
         this.img = img;
         this.role = role;
         this.active = active;
+        this.contacts = contacts
     }
 }
 

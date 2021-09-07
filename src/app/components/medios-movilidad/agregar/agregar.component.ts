@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { MediosMovilidad } from 'src/app/models/medios-movilidad';
+import { MediosMovilidad } from 'src/app/models/medios-movilidad.model';
 import { MediosMovilidadService } from 'src/app/services/medios-movilidad.service';
 
 

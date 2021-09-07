@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { User } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/services/auth.service';
+import { ContactosService } from 'src/app/services/contactos.service';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -14,34 +19,44 @@ export class AgregarComponent implements OnInit {
 
   selectedOption: string;
 
-  public dataSource = [
-    {
-      nombre: 'Ricardo',
-      apellido: 'Galván'
-    },
-    {
-      nombre: 'Máximo',
-      apellido: 'Cozzeti'
-    }
-  ];
+  public contacts: User[];
+  public contactsAmount: number;
+  private _userId: string;
 
-  displayedColumns: string[] = ['nombreApellido', 'acciones'];
+  displayedColumns: string[] = ['nombreApellido', 'email', 'acciones'];
 
   myControl = new FormControl();
-  options: string[] = ['Tomás Bonanzea', 'Carlos Pérez', 'Román Riquelme'];
-  filteredOptions: Observable<string[]>;
+  users: User[];
+  filteredOptions: Observable<User[]>;
+
+  constructor(
+    private route: ActivatedRoute,
+    private contactosService: ContactosService,
+    private authService: AuthService
+  ) {
+
+  }
 
   ngOnInit() {
+    this._userId = this.route.snapshot.params['id'];
+    this.users = this.route.snapshot.data['UsersResolver'].users;
+    this.contacts = this.route.snapshot.data['ContactsResolver'].contacts.filter((contact) => contact !== null);
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
     );
+
+
+    console.log(this.users)
+
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
+  private _filter(name: string): User[] {
+    const filterValue = name.toLowerCase();
 
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    return this.users.filter(option =>
+      option.name.toLowerCase().includes(filterValue)
+    );
   }
 
   onSelectionChange(option: MatAutocompleteSelectedEvent) {
@@ -49,13 +64,13 @@ export class AgregarComponent implements OnInit {
   }
 
   agregarContacto() {
-    let [nombre, apellido] = this.selectedOption.split(' ');
-    console.log(nombre, apellido);
-    this.dataSource.push({
-      nombre: nombre,
-      apellido: apellido
+    this.contactosService.add(this.authService.getUserId(), this.selectedOption).subscribe(() => {
+      this.getContacts()
     })
-    this.dataSource = [...this.dataSource];
+  }
+
+  getContacts() {
+    this.contactosService.get(this._userId).subscribe((contactos: User[]) => this.contacts = contactos)
   }
 
 }
