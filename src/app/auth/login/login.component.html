@@ -3,7 +3,7 @@
     <div>
         <mat-card class="example-card">
             <h1><strong>Iniciar sesión</strong></h1>
-            <form class="example-form text-align-center" [formGroup]="loginForm">
+            <form class="example-form text-align-center" [formGroup]="loginForm" (ngSubmit)="login()">
                 <p>
                     <mat-form-field class="example-full-width" appearance="fill">
                         <mat-label>Correo electrónico</mat-label>
@@ -16,9 +16,13 @@
                         <input type="password" matInput formControlName="password">
                     </mat-form-field>
                 </p>
-                <button type="button" (click)="login()" mat-raised-button class="btn-primary">
+                <button type="submit" mat-raised-button class="btn-primary">
                     <mat-icon>login</mat-icon> Iniciar sesión
                 </button>
+                &nbsp;
+                <a type="button" routerLink="/register" mat-raised-button color="primary" class="btn-accent">
+                    <mat-icon>app_registration</mat-icon> Registrarse
+                </a>
             </form>
         </mat-card>
     </div>

@@ -1,0 +1,28 @@
+mat-form-field,
+input {
+    width: 20vw;
+}
+
+.main-div {
+    padding: 20px;
+    display: flex;
+    width: 100vw;
+    height: 70vh;
+    align-content: flex-start;
+    justify-content: center;
+}
+
+.example-card {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    width: 30vw;
+    height: 35vh;
+    justify-content: center;
+    align-items: flex-end;
+}
+.example-header-image {
+    background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
+    background-size: cover;
+}

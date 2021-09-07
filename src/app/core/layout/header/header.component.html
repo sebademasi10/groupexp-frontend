@@ -1,6 +1,7 @@
 <mat-toolbar class="grad" color="primary">
   <mat-toolbar-row>
-    <button *ngIf="!hide" id="btnHeader" mat-icon-button class="btn btn-menu" color="white" matTooltip="Menu" (click)="toggleSideBar()">
+    <button *ngIf="!hide" id="btnHeader" mat-icon-button class="btn btn-menu" color="white" matTooltip="Menu"
+      (click)="toggleSideBar()">
       <mat-icon>menu</mat-icon>
     </button>
     <a routerLink="/" mat-list-avatar class="navbar-brand logo">
@@ -14,18 +15,14 @@
           <li>
             <button mat-button [matMenuTriggerFor]="menu" class="btn btn-personal-menu">
               <mat-icon>person_outline</mat-icon>
-              {{userName}}
+              {{ getfullName() }}
             </button>
             <mat-menu #menu="matMenu">
               <button mat-menu-item class="btn" id="btnMisDatos" (click)="myData()">
                 <mat-icon>account_circle</mat-icon>
                 Mis datos
               </button>
-              <button mat-menu-item class="btn" id="btnCambiar" (click)="change()">
-                <mat-icon>loop</mat-icon>
-                Cambiar sesión
-              </button>
-              <button mat-menu-item class="btn" id="btnSalir" >
+              <button mat-menu-item (click)="logout()" class="btn" id="btnSalir">
                 <mat-icon>exit_to_app</mat-icon>
                 Salir
               </button>

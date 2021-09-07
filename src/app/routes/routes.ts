@@ -40,6 +40,13 @@ export const routes: Routes = [
           import('../auth/auth.module').then(
             (h) => h.AuthModule
           )
+      },
+      {
+        path: 'perfil',
+        loadChildren: () =>
+          import('../components/perfil/perfil.module').then(
+            (h) => h.PerfilModule
+          )
       }
     ],
   },

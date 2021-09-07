@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { User } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -10,13 +12,17 @@ export class HeaderComponent implements OnInit {
 
   @Output() toggleSideBarForMe: EventEmitter<boolean> = new EventEmitter();
   hide = false;
-  userName = 'Sebastián Demasi';
-  constructor(private router: Router,
+  loggedUserName: string;
+  userId: string;
+  constructor(
+    private router: Router,
+    private authService: AuthService
   ) {
   }
 
   ngOnInit(): void {
-
+    this.loggedUserName = this.authService.getLoggedUser();
+    this.userId = this.authService.getUserId();
   }
 
   toggleSideBar() {
@@ -28,6 +34,13 @@ export class HeaderComponent implements OnInit {
     }, 300);
   }
 
+  logout() {
+    this.authService.logout();
+  }
+
+  getfullName() {
+    return `${this.loggedUserName}` || '';
+  }
 
   change() {
     this.toggleSideBarForMe.emit(false);
@@ -35,5 +48,6 @@ export class HeaderComponent implements OnInit {
   }
 
   myData() {
+    this.router.navigate(['perfil/ver', this.userId])
   }
 }
