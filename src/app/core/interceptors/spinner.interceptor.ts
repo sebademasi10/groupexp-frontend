@@ -10,7 +10,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class SpinnerInterceptor implements HttpInterceptor {
 
   private static requestSent = 0;
-  private segundosEspera = 2;
+  private segundosEspera = 2000;
   private spinnerPrimario;
 
   constructor(private spinner: NgxSpinnerService) {

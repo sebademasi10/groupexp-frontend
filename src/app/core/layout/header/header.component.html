@@ -15,7 +15,7 @@
           <li>
             <button mat-button [matMenuTriggerFor]="menu" class="btn btn-personal-menu">
               <mat-icon>person_outline</mat-icon>
-              {{ getfullName() }}
+              {{ loggedUserName }}
             </button>
             <mat-menu #menu="matMenu">
               <button mat-menu-item class="btn" id="btnMisDatos" (click)="myData()">

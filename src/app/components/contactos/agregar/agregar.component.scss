@@ -14,3 +14,21 @@ table {
 .padding-bottom {
     padding-bottom: 4vh;
 }
+@media only screen and (max-width: 768px) and (max-height: 882px) {
+    table {
+        width: 80vw;
+    }
+    .header-align-right {
+        display: flex;
+        padding: 21px 0;
+        justify-content: flex-end;
+    }
+
+    .example-card {
+        width: 100vw;
+    }
+
+    .padding-bottom {
+        padding-bottom: 4vh;
+    }
+}

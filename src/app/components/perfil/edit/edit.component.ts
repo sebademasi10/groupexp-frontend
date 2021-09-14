@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -20,7 +21,8 @@ export class EditComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private snackService: SnackBarService,
-    private userService: UserService
+    private userService: UserService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -37,7 +39,8 @@ export class EditComponent implements OnInit {
 
     this.userService.update(this.route.snapshot.params['id'], this.user).subscribe(() => {
       this.snackService.openSnackBar('¡Usuario actualizado con éxito!', true);
-      this.router.navigate(['/perfil/ver', this.route.snapshot.params['id']])
+      this.authService.getLoggedUser();
+      this.router.navigate(['/perfil/ver', this.route.snapshot.params['id']]);
     })
   }
 
