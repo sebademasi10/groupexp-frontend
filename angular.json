@@ -11,7 +11,9 @@
           "skipTests": true
         },
         "@schematics/angular:class": {
-          "skipTests": true
+          "skipTests": true,
+          "type": "model",
+          "path": "src/app/models"
         },
         "@schematics/angular:directive": {
           "skipTests": true
@@ -30,6 +32,10 @@
         },
         "@schematics/angular:application": {
           "strict": true
+        },
+        "@schematics/angular:enum": {
+          "type": "enum",
+          "path": "src/app/enums"
         }
       },
       "root": "",
@@ -97,6 +103,10 @@
             "development": {
               "browserTarget": "frontend:build:development"
             }
+          },
+          "options": {
+            "open": true,
+            "progress": true
           },
           "defaultConfiguration": "development"
         },
