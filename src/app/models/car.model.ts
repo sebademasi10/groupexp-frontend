@@ -1,13 +1,13 @@
-export class Bicycle {
-    expLevel: number;
+export class Car {
     brand: string;
     model: string;
-    wheelBase: number;
+    expLevel: number;
+    motorCcs: number;
 
     constructor() {
         this.brand = undefined;
         this.model = undefined;
         this.expLevel = undefined;
-        this.wheelBase = undefined;
+        this.motorCcs = undefined;
     }
 }
