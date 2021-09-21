@@ -22,7 +22,7 @@ export class ContactosComponent implements OnInit {
   public contactsAmount: number;
   private _userId: string;
 
-  displayedColumns: string[] = ['nombreApellido', 'email', 'acciones'];
+  displayedColumns: string[] = ['nombreApellido', 'acciones'];
 
   myControl = new FormControl();
   users: User[];
