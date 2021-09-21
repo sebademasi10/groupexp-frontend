@@ -6,11 +6,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { ContactosRoutingModule } from './contactos-routing.module';
 
-import { AgregarComponent } from './agregar/agregar.component';
+import { ContactosComponent } from './contactos.component';
 
 @NgModule({
   declarations: [
-    AgregarComponent
+    ContactosComponent
   ],
   imports: [
     CommonModule,

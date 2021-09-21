@@ -7,15 +7,14 @@ import { map, startWith } from 'rxjs/operators';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { ContactosService } from 'src/app/services/contactos.service';
-import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
   selector: 'app-agregar',
-  templateUrl: './agregar.component.html',
-  styleUrls: ['./agregar.component.scss']
+  templateUrl: './contactos.component.html',
+  styleUrls: ['./contactos.component.scss']
 })
-export class AgregarComponent implements OnInit {
+export class ContactosComponent implements OnInit {
 
   selectedOption: string;
 

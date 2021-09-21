@@ -32,20 +32,9 @@ export class SidebarComponent implements OnInit {
       {
         id: 1,
         nombre: "Contactos",
-        path: null,
+        path: "/contactos",
         icon: "person",
-        subMenu: [
-          {
-            id: 2,
-            nombre: "Agregar",
-            path: "/contactos/agregar",
-            icon: "group_add",
-            subMenu: [
-
-            ],
-            activo: true,
-          },
-        ],
+        subMenu: null,
         activo: true,
       },
       {
