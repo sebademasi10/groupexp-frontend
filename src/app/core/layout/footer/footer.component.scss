@@ -10,7 +10,7 @@ footer {
 .row-footer {
   border-radius: 0;
   background-color: #babbbc;
-  height: 10vh !important;
+  height: 3vh !important;
   align-content: center !important;
 }
 
@@ -19,8 +19,7 @@ footer {
   height: 40px;
 }
 
-
-@media (min-width: 1200px){
+@media (min-width: 1200px) {
   .image-responsive {
     display: block;
     height: 65px;
@@ -28,7 +27,7 @@ footer {
 }
 
 .row::after {
-  content: '';
+  content: "";
   clear: both;
   display: table;
 }
