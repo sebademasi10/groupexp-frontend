@@ -3,7 +3,7 @@
     <div>
         <mat-card class="example-card">
             <h1><strong>Registarse</strong></h1>
-            <form class="example-form text-align-center" [formGroup]="registerForm">
+            <form class="example-form text-align-center" [formGroup]="registerForm" (ngSubmit)="register()">
                 <p>
                     <mat-form-field class="example-full-width" appearance="fill">
                         <mat-label>Nombre/s</mat-label>
@@ -42,7 +42,7 @@
                         <input type="password" matInput formControlName="passwordRepeat">
                     </mat-form-field>
                 </p>
-                <button type="button" (click)="register()" mat-raised-button class="btn-primary">
+                <button type="submit" mat-raised-button class="btn-primary">
                     <mat-icon>app_registration</mat-icon> Registrarse
                 </button>
                 <p>¿Ya tiene una cuenta? <a href="/#/login">Inicie sesión</a></p>

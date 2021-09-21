@@ -13,7 +13,7 @@ export class AuthService {
 
   _controllerName = 'auth';
   private currentSession: Session = null;
-  public sessionChanged = new Subject<Session>();
+  public loggedUserNameChanged = new Subject<string>();
   public userId = '';
   public loggedUserName = '';
 
@@ -42,6 +42,7 @@ export class AuthService {
       const data = this.jwt.decodeToken(token);
       this.loggedUserName = `${data['name']} ${data['surname']}`;
     }
+    this.loggedUserNameChanged.next(this.loggedUserName);
     return this.loggedUserName;
   }
 

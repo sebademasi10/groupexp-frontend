@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { AuthGuard } from '../shared/guard/auth.guard';
 import { MaterialModule } from '../shared/material.module';
 import { ApiUrlInterceptor } from './interceptors/api-url-base.interceptor';
+import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
 import { FooterComponent } from './layout/footer/footer.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { LayoutComponent } from './layout/layout/layout.component';
@@ -37,6 +38,11 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
       provide: HTTP_INTERCEPTORS,
       multi: true,
       useClass: ApiUrlInterceptor
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      multi: true,
+      useClass: SpinnerInterceptor
     },
   ]
 })

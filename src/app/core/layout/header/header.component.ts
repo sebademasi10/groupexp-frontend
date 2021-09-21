@@ -23,6 +23,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.loggedUserName = this.authService.getLoggedUser();
     this.userId = this.authService.getUserId();
+    this.authService.loggedUserNameChanged.subscribe(name => this.loggedUserName = name)
   }
 
   toggleSideBar() {
