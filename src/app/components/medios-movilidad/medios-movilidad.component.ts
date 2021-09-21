@@ -5,9 +5,10 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MatDialog } from "@angular/material/dialog";
 import { MediosMovilidad } from 'src/app/models/medios-movilidad.model';
-import { MediosMovilidadService } from 'src/app/services/medios-movilidad.service';
 import { BicycleModalComponent } from 'src/app/shared/modals/bicycle-modal/bicycle-modal.component';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
+import { ActivatedRoute } from '@angular/router';
+import { ResolversEnum } from 'src/app/enums/enums/resolvers.enum';
 
 
 @Component({
@@ -20,42 +21,29 @@ export class MediosMovilidadComponent implements OnInit {
   selectedOption: string;
   mediosMovilidad: MediosMovilidad[];
 
-  public dataSource = [
-    {
-      nombre: 'Caminata',
-    },
-    {
-      nombre: 'Bicicleta',
-    },
-  ];
+  public dataSource: MediosMovilidad[];
 
   displayedColumns: string[] = ['medioMovilidad', 'acciones'];
 
   myControl = new FormControl();
-  options: string[] = ['Automóvil', 'Bicicleta', 'Skate', 'Rollers'];
+  options: string[];
   filteredOptions: Observable<string[]>;
 
   constructor(
-    private mediosMovilidadService: MediosMovilidadService,
     private snackService: SnackBarService,
     public matDialog: MatDialog,
+    private activatedRoute: ActivatedRoute
   ) {
 
   }
 
   ngOnInit() {
+    this.options = this.activatedRoute.snapshot.data[ResolversEnum.MEDIOS_MOVILIDAD].meansOfTransportation;
+    console.log(this.options);
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
     );
-    this.get()
-  }
-
-  get() {
-    this.mediosMovilidadService.get().subscribe(mediosMovilidad => {
-      this.mediosMovilidad = mediosMovilidad
-      console.log(mediosMovilidad);
-    })
   }
 
   openDialog() {
@@ -71,7 +59,7 @@ export class MediosMovilidadComponent implements OnInit {
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    return this.options.filter((option: any) => option.name.toLowerCase().includes(filterValue));
   }
 
   onSelectionChange(option: MatAutocompleteSelectedEvent) {
@@ -80,12 +68,7 @@ export class MediosMovilidadComponent implements OnInit {
   }
 
   agregarContacto() {
-    let [nombre, apellido] = this.selectedOption.split(' ');
-    console.log(nombre, apellido);
-    this.dataSource.push({
-      nombre: nombre,
-    })
-    this.dataSource = [...this.dataSource];
+
   }
 
 }
