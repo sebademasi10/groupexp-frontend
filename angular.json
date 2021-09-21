@@ -105,8 +105,7 @@
             }
           },
           "options": {
-            "open": true,
-            "progress": true
+            "open": true
           },
           "defaultConfiguration": "development"
         },
