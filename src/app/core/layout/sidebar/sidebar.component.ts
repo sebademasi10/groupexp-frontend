@@ -40,20 +40,9 @@ export class SidebarComponent implements OnInit {
       {
         id: 1,
         nombre: "Medios de movilidad",
-        path: null,
+        path: "/medios-movilidad",
         icon: "directions_car",
-        subMenu: [
-          {
-            id: 2,
-            nombre: "Agregar",
-            path: "/medios-movilidad/agregar",
-            icon: "add_circle_outline",
-            subMenu: [
-
-            ],
-            activo: true,
-          },
-        ],
+        subMenu: null,
         activo: true,
       },
     ]

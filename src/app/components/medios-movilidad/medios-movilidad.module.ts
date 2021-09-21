@@ -6,10 +6,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { MediosMovilidadRoutingModule } from './medios-movilidad-routing.module';
 
-import { AgregarComponent } from './agregar/agregar.component';
+import { MediosMovilidadComponent } from './medios-movilidad.component';
 @NgModule({
   declarations: [
-    AgregarComponent
+    MediosMovilidadComponent
   ],
   imports: [
     CommonModule,

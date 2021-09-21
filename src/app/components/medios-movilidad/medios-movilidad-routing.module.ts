@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AgregarComponent } from './agregar/agregar.component';
+import { MediosMovilidadComponent } from './medios-movilidad.component';
 
 const routes: Routes = [
   {
-    path: 'agregar',
-    component: AgregarComponent
+    path: 'medios-movilidad',
+    component: MediosMovilidadComponent
   }
 ];
 
