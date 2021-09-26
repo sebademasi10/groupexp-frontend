@@ -5,10 +5,10 @@
             <form class="example-form">
                 <mat-form-field class="example-full-width" appearance="fill">
                     <input type="text" matInput placeholder="Nombre" [formControl]="myControl" [matAutocomplete]="auto">
-                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn"
                         (optionSelected)="onSelectionChange($event)">
                         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                            {{option}}
+                            {{option.name}}
                         </mat-option>
                     </mat-autocomplete>
                 </mat-form-field>
@@ -49,5 +49,4 @@
             </table>
         </mat-card>
     </div>
-
 </div>

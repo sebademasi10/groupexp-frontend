@@ -4,7 +4,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MatDialog } from "@angular/material/dialog";
-import { MediosMovilidad } from 'src/app/models/medios-movilidad.model';
+import { MedioMovilidad } from 'src/app/models/medio-movilidad.model';
 import { BicycleModalComponent } from 'src/app/shared/modals/bicycle-modal/bicycle-modal.component';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
 import { ActivatedRoute } from '@angular/router';
@@ -19,15 +19,15 @@ import { ResolversEnum } from 'src/app/enums/enums/resolvers.enum';
 export class MediosMovilidadComponent implements OnInit {
 
   selectedOption: string;
-  mediosMovilidad: MediosMovilidad[];
+  mediosMovilidad: MedioMovilidad[];
 
-  public dataSource: MediosMovilidad[];
+  public dataSource: MedioMovilidad[];
 
   displayedColumns: string[] = ['medioMovilidad', 'acciones'];
 
   myControl = new FormControl();
-  options: string[];
-  filteredOptions: Observable<string[]>;
+  options: MedioMovilidad[];
+  filteredOptions: Observable<MedioMovilidad[]>;
 
   constructor(
     private snackService: SnackBarService,
@@ -42,8 +42,13 @@ export class MediosMovilidadComponent implements OnInit {
     console.log(this.options);
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
-      map(value => this._filter(value))
+      map(value => typeof value === 'string' ? value : value.name),
+      map(name => name ? this._filter(name) : this.options.slice())
     );
+  }
+
+  displayFn(user: MedioMovilidad): string {
+    return user && user.name ? user.name : '';
   }
 
   openDialog() {
@@ -56,7 +61,7 @@ export class MediosMovilidadComponent implements OnInit {
     })
   }
 
-  private _filter(value: string): string[] {
+  private _filter(value: string): MedioMovilidad[] {
     const filterValue = value.toLowerCase();
 
     return this.options.filter((option: any) => option.name.toLowerCase().includes(filterValue));
