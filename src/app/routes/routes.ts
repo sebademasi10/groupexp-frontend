@@ -47,6 +47,13 @@ export const routes: Routes = [
           import('../components/perfil/perfil.module').then(
             (h) => h.PerfilModule
           )
+      },
+      {
+        path: 'actividad',
+        loadChildren: () =>
+          import('../components/actividad/actividad.module').then(
+            (h) => h.ActividadModule
+          )
       }
     ],
   },

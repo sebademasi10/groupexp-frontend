@@ -17,6 +17,8 @@ import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSliderModule } from "@angular/material/slider";
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 
 @NgModule({
@@ -40,7 +42,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSnackBarModule,
     MatTooltipModule,
     MatDialogModule,
-
+    MatSliderModule,
+    NgxMaterialTimepickerModule
   ],
   exports: [
     MatDatepickerModule,
@@ -60,7 +63,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSnackBarModule,
     MatTooltipModule,
     MatDialogModule,
-
+    MatSliderModule,
+    NgxMaterialTimepickerModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-AR' },

@@ -47,8 +47,8 @@ export class MediosMovilidadComponent implements OnInit {
     );
   }
 
-  displayFn(user: MedioMovilidad): string {
-    return user && user.name ? user.name : '';
+  displayFn(meanOfTransportation: MedioMovilidad): string {
+    return meanOfTransportation && meanOfTransportation.name ? meanOfTransportation.name : '';
   }
 
   openDialog() {

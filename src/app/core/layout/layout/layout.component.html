@@ -6,11 +6,17 @@
     </mat-drawer>
     <mat-drawer-content class="padding-bottom-20">
         <router-outlet></router-outlet>
-        <button
-            href="https://api.whatsapp.com/send?phone=51955081075&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202."
-            class="float btn-primary" target="_blank">
+        <button [matMenuTriggerFor]="menu" class="float btn-primary" target="_blank">
             <mat-icon class="my-float">add</mat-icon>
         </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item routerLink="/actividad/organizar">
+                <mat-icon>add</mat-icon>Organizar
+            </button>
+            <button mat-menu-item routerLink="/actividad/participar">
+                <mat-icon>group_add</mat-icon>Participar
+            </button>
+        </mat-menu>
     </mat-drawer-content>
 </mat-drawer-container>
 

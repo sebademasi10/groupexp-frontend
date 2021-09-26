@@ -1,0 +1,81 @@
+<div class="row justify-content-center padding-top-15 padding-left-50 example-card padding-bottom">
+    <div class="row">
+        <h1>Organizar Actividad</h1>
+        <mat-card class="example-card">
+            <form class="example-form" [formGroup]="activityForm" (ngSubmit)="newActivity()">
+                <mat-form-field appearance="outline">
+                    <mat-label>Título de actividad</mat-label>
+                    <input id="txtActivityTitle" type="text" matInput formControlName="title">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Medio de movilidad</mat-label>
+                    <input type="text" matInput formControlName="meanOfTransportation" [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"
+                        (optionSelected)="onSelectionChange($event)">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                            {{option.name}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field>
+                            <mat-label>Fecha de actividad</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="activityDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <mat-form-field>
+                            <mat-label>Hora de inicio</mat-label>
+                            <input matInput placeholder="24hr format" aria-label="24hr format"
+                                [ngxTimepicker]="startTime" [format]="24" readonly formControlName="startTime">
+                            <ngx-material-timepicker #startTime></ngx-material-timepicker>
+                        </mat-form-field>
+
+                    </div>
+                    <div class="col">
+                        <mat-form-field>
+                            <mat-label>Hora de fin</mat-label>
+                            <input matInput placeholder="24hr format" aria-label="24hr format" [ngxTimepicker]="endTime"
+                                [format]="24" readonly formControlName="endTime">
+                            <ngx-material-timepicker #endTime></ngx-material-timepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col age-field">
+                        <mat-form-field>
+                            <mat-label>Edad mínima</mat-label>
+                            <mat-slider formControlName="maxAge" min="0" max="120" thumbLabel color="primary" step="1"
+                                formControlName="minAge" (blur)="logValue()" aria-label="units" class="slider">
+                            </mat-slider>
+                            <input type="number" matInput hidden formControlName="minAge">
+                        </mat-form-field>
+                    </div>
+                    <div class="col age-field">
+                        <mat-form-field>
+                            <mat-label>Edad máxima</mat-label>
+                            <mat-slider formControlName="maxAge" min="0" max="120" thumbLabel color="primary" step="1"
+                                formControlName="maxAge" (blur)="logValue()" aria-label="units" class="slider">
+                            </mat-slider>
+                            <input type="number" matInput hidden formControlName="minAge">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <mat-form-field>
+                        <mat-label>Descripción</mat-label>
+                        <textarea matInput cols="20" rows="10" formControlName="description"></textarea>
+                    </mat-form-field>
+                </div>
+
+                <button type="submit" mat-button>Aceptar</button>
+            </form>
+        </mat-card>
+    </div>
+</div>
