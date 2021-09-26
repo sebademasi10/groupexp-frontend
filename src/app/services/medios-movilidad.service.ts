@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MediosMovilidad } from '../models/medios-movilidad.model';
+import { MedioMovilidad } from '../models/medio-movilidad.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class MediosMovilidadService {
     private http: HttpClient
   ) { }
 
-  get(): Observable<MediosMovilidad[]> {
-    return this.http.get<MediosMovilidad[]>(this._controllerName);
+  get(): Observable<MedioMovilidad[]> {
+    return this.http.get<MedioMovilidad[]>(this._controllerName);
   }
 }

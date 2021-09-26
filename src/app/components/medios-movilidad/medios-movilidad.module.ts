@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MediosMovilidadRoutingModule } from './medios-movilidad-routing.module';
 
 import { MediosMovilidadComponent } from './medios-movilidad.component';
+
 @NgModule({
   declarations: [
     MediosMovilidadComponent
