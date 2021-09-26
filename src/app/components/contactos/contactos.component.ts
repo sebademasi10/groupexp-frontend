@@ -4,6 +4,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { ResolversEnum } from 'src/app/enums/enums/resolvers.enum';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { ContactosService } from 'src/app/services/contactos.service';
@@ -22,7 +23,7 @@ export class ContactosComponent implements OnInit {
   public contactsAmount: number;
   private _userId: string;
 
-  displayedColumns: string[] = ['nombreApellido', 'email', 'acciones'];
+  displayedColumns: string[] = ['nombreApellido', 'acciones'];
 
   myControl = new FormControl();
   users: User[];
@@ -38,8 +39,8 @@ export class ContactosComponent implements OnInit {
 
   ngOnInit() {
     this._userId = this.route.snapshot.params['id'];
-    this.users = this.route.snapshot.data['UsersResolver'].users;
-    this.contacts = this.route.snapshot.data['ContactsResolver'].contacts.filter((contact) => contact !== null);
+    this.users = this.route.snapshot.data[ResolversEnum.USUARIOS].users;
+    this.contacts = this.route.snapshot.data[ResolversEnum.CONTACTOS].contacts.filter((contact) => contact !== null);
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))

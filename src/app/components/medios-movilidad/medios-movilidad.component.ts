@@ -4,10 +4,11 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { MatDialog } from "@angular/material/dialog";
-import { MediosMovilidad } from 'src/app/models/medios-movilidad.model';
-import { MediosMovilidadService } from 'src/app/services/medios-movilidad.service';
+import { MedioMovilidad } from 'src/app/models/medio-movilidad.model';
 import { BicycleModalComponent } from 'src/app/shared/modals/bicycle-modal/bicycle-modal.component';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
+import { ActivatedRoute } from '@angular/router';
+import { ResolversEnum } from 'src/app/enums/enums/resolvers.enum';
 
 
 @Component({
@@ -18,44 +19,36 @@ import { SnackBarService } from 'src/app/services/snack-bar.service';
 export class MediosMovilidadComponent implements OnInit {
 
   selectedOption: string;
-  mediosMovilidad: MediosMovilidad[];
+  mediosMovilidad: MedioMovilidad[];
 
-  public dataSource = [
-    {
-      nombre: 'Caminata',
-    },
-    {
-      nombre: 'Bicicleta',
-    },
-  ];
+  public dataSource: MedioMovilidad[];
 
   displayedColumns: string[] = ['medioMovilidad', 'acciones'];
 
   myControl = new FormControl();
-  options: string[] = ['Automóvil', 'Bicicleta', 'Skate', 'Rollers'];
-  filteredOptions: Observable<string[]>;
+  options: MedioMovilidad[];
+  filteredOptions: Observable<MedioMovilidad[]>;
 
   constructor(
-    private mediosMovilidadService: MediosMovilidadService,
     private snackService: SnackBarService,
     public matDialog: MatDialog,
+    private activatedRoute: ActivatedRoute
   ) {
 
   }
 
   ngOnInit() {
+    this.options = this.activatedRoute.snapshot.data[ResolversEnum.MEDIOS_MOVILIDAD].meansOfTransportation;
+    console.log(this.options);
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
-      map(value => this._filter(value))
+      map(value => typeof value === 'string' ? value : value.name),
+      map(name => name ? this._filter(name) : this.options.slice())
     );
-    this.get()
   }
 
-  get() {
-    this.mediosMovilidadService.get().subscribe(mediosMovilidad => {
-      this.mediosMovilidad = mediosMovilidad
-      console.log(mediosMovilidad);
-    })
+  displayFn(user: MedioMovilidad): string {
+    return user && user.name ? user.name : '';
   }
 
   openDialog() {
@@ -68,10 +61,10 @@ export class MediosMovilidadComponent implements OnInit {
     })
   }
 
-  private _filter(value: string): string[] {
+  private _filter(value: string): MedioMovilidad[] {
     const filterValue = value.toLowerCase();
 
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    return this.options.filter((option: any) => option.name.toLowerCase().includes(filterValue));
   }
 
   onSelectionChange(option: MatAutocompleteSelectedEvent) {
@@ -80,12 +73,7 @@ export class MediosMovilidadComponent implements OnInit {
   }
 
   agregarContacto() {
-    let [nombre, apellido] = this.selectedOption.split(' ');
-    console.log(nombre, apellido);
-    this.dataSource.push({
-      nombre: nombre,
-    })
-    this.dataSource = [...this.dataSource];
+
   }
 
 }

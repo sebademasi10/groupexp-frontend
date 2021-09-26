@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ResolversEnum } from 'src/app/enums/enums/resolvers.enum';
 import { User } from 'src/app/models/user.model';
 
 @Component({
@@ -17,7 +18,7 @@ export class ViewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.user = this.route.snapshot.data['UserResolver'].user;
+    this.user = this.route.snapshot.data[ResolversEnum.USUARIO].user;
   }
 
   editarPerfil() {
