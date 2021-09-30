@@ -61,7 +61,8 @@ export class OrganizarComponent implements OnInit {
       meanOfTransportation: [this.meansOfTransportation],
       minAge: [18],
       maxAge: [18],
-      activityDate: [new Date()],
+      startDate: [new Date()],
+      endDate: [new Date()],
       startTime: ['00:00'],
       endTime: ['00:00'],
       description: []

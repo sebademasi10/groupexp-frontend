@@ -6,7 +6,8 @@ export class Activity {
     meanOfTransportation: MedioMovilidad;
     minAge: number;
     maxAge: number;
-    activityDate: Date;
+    startDate: Date;
+    endDate: Date;
     startTime: Time;
     endTime: Time;
     description: string;
@@ -16,7 +17,8 @@ export class Activity {
         this.meanOfTransportation = undefined;
         this.minAge = undefined;
         this.maxAge = undefined;
-        this.activityDate = undefined;
+        this.startDate = undefined;
+        this.startDate = undefined;
         this.startTime = undefined;
         this.endTime = undefined;
         this.description = undefined;
