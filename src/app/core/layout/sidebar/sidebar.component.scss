@@ -28,9 +28,12 @@ a {
   right: 15px;
   height: 1px;
   width: calc(100% - 30px);
-  background-color: rgba(180, 180, 180, .3);
+  background-color: rgba(180, 180, 180, 0.3);
 }
 
+.grand-parent {
+  height: 8vh !important;
+}
 
 .menu-category {
   position: relative;
@@ -55,7 +58,6 @@ a {
   margin-bottom: 30px;
 }
 
-
 .menu-link {
   height: 56px;
   padding: 0 12px;
@@ -64,10 +66,16 @@ a {
   display: flex;
   -webkit-box-align: center;
   align-items: center;
-  -webkit-transition: .2s linear;
-  transition: .2s linear;
+  -webkit-transition: 0.2s linear;
+  transition: 0.2s linear;
 }
 
+.home-button {
+  opacity: 0;
+  display: none;
+  font-weight: bold;
+  font-size: 3vh;
+}
 
 .example-container {
   height: 500px;
@@ -122,7 +130,6 @@ a {
 .subMenuActivo {
   font-weight: bold;
 }
-
 
 .full-width {
   outline: none !important;
