@@ -15,7 +15,7 @@ export class MapsService {
 
   public getLoader() {
     return new Loader({
-      apiKey: "AIzaSyDdI-tTzdW4gTA34vzW-t4CMPtu6W0g6wg",
+      apiKey: "AIzaSyC-8mU1nhu6OkXtggKptk7QxCBWYQgTvYI",
       version: "weekly"
     })
   }
