@@ -51,7 +51,7 @@
                         <mat-form-field>
                             <mat-label>Edad mínima</mat-label>
                             <mat-slider formControlName="maxAge" min="0" max="120" thumbLabel color="primary" step="1"
-                                formControlName="minAge" (blur)="logValue()" aria-label="units" class="slider">
+                                formControlName="minAge" aria-label="units" class="slider">
                             </mat-slider>
                             <input type="number" matInput hidden formControlName="minAge">
                         </mat-form-field>
@@ -60,7 +60,7 @@
                         <mat-form-field>
                             <mat-label>Edad máxima</mat-label>
                             <mat-slider formControlName="maxAge" min="0" max="120" thumbLabel color="primary" step="1"
-                                formControlName="maxAge" (blur)="logValue()" aria-label="units" class="slider">
+                                formControlName="maxAge" aria-label="units" class="slider">
                             </mat-slider>
                             <input type="number" matInput hidden formControlName="minAge">
                         </mat-form-field>
@@ -72,6 +72,9 @@
                         <mat-label>Descripción</mat-label>
                         <textarea matInput cols="20" rows="10" formControlName="description"></textarea>
                     </mat-form-field>
+                </div>
+                <div #map class="">
+                    <google-map *ngIf="mapApiLoaded | async"></google-map>
                 </div>
 
                 <button type="submit" mat-button>Aceptar</button>

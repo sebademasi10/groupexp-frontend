@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ResolversEnum } from 'src/app/enums/enums/resolvers.enum';
+import { MapsService } from 'src/app/maps.service';
 import { MedioMovilidad } from 'src/app/models/medio-movilidad.model';
 
 @Component({
@@ -12,16 +13,19 @@ import { MedioMovilidad } from 'src/app/models/medio-movilidad.model';
   templateUrl: './organizar.component.html',
   styleUrls: ['./organizar.component.scss']
 })
-export class OrganizarComponent implements OnInit {
+export class OrganizarComponent implements OnInit, AfterViewInit {
 
+  @ViewChild('map')
+  private map: Element;
   public activityForm: FormGroup;
   public meansOfTransportation: MedioMovilidad[];
   public filteredOptions: Observable<MedioMovilidad[]>;
   selectedOption: MedioMovilidad;
+  public mapApiLoaded: Observable<boolean>;
 
   constructor(
     private formBuilder: FormBuilder,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
@@ -32,7 +36,24 @@ export class OrganizarComponent implements OnInit {
       map(value => typeof value === 'string' ? value : value.name),
       map(name => name ? this._filter(name) : this.meansOfTransportation.slice())
     );
-    this.logValue()
+  }
+
+  ngAfterViewInit() {
+    MapsService.getInstance()
+      .getLoader()
+      .load()
+      .then(() => {
+        new google.maps.Map(this.map, {
+          center: { lat: -34.397, lng: 150.644 },
+          zoom: 8,
+        });
+        this.mapApiLoaded = of(true);
+      })
+      .catch((err) => {
+        console.error(err);
+        this.mapApiLoaded = of(false);
+      }
+      )
   }
 
   public displayFn(meanOfTransportation: MedioMovilidad): string {
@@ -52,9 +73,6 @@ export class OrganizarComponent implements OnInit {
     console.log(this.activityForm.value)
   }
 
-  logValue() {
-    console.log(this.activityForm.value);
-  }
   private _createForm() {
     this.activityForm = this.formBuilder.group({
       title: [],
