@@ -21,8 +21,16 @@
                 <div class="row">
                     <div class="col">
                         <mat-form-field>
-                            <mat-label>Fecha de actividad</mat-label>
-                            <input matInput [matDatepicker]="picker" formControlName="activityDate">
+                            <mat-label>Fecha de inicio</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="startDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <mat-form-field>
+                            <mat-label>Fecha de fin</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="endDate">
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
@@ -70,11 +78,15 @@
                 <div class="row">
                     <mat-form-field>
                         <mat-label>Descripción</mat-label>
-                        <textarea matInput cols="20" rows="10" formControlName="description"></textarea>
+                        <textarea matInput cols="20" rows="4" formControlName="description"></textarea>
                     </mat-form-field>
                 </div>
-                <div #map class="">
-                    <google-map *ngIf="mapApiLoaded | async"></google-map>
+                <div>
+                    <google-map height="30vh" width="100%" *ngIf="mapApiLoaded | async" [center]="center"
+                        (mapClick)="addMarker($event)">
+                        <map-marker *ngFor="let markerPosition of markerPositions" [position]="markerPosition"
+                            [options]="markerOptions"></map-marker>
+                    </google-map>
                 </div>
 
                 <button type="submit" mat-button>Aceptar</button>

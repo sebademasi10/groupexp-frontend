@@ -15,13 +15,28 @@ import { MedioMovilidad } from 'src/app/models/medio-movilidad.model';
 })
 export class OrganizarComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('map')
-  private map: Element;
   public activityForm: FormGroup;
   public meansOfTransportation: MedioMovilidad[];
   public filteredOptions: Observable<MedioMovilidad[]>;
-  selectedOption: MedioMovilidad;
+  public selectedOption: MedioMovilidad;
   public mapApiLoaded: Observable<boolean>;
+
+  public center: google.maps.LatLngLiteral = { lat: -31.417, lng: -64.183 };
+  public zoom = 8
+  public markerOptions: google.maps.MarkerOptions = { draggable: false };
+  public markerPositions: google.maps.LatLngLiteral[] = [];
+
+  addMarker(event: google.maps.MapMouseEvent) {
+    this.markerPositions.push(event.latLng.toJSON());
+  };
+
+  moveMap(event: google.maps.MapMouseEvent) {
+    this.center = (event.latLng.toJSON());
+  }
+
+  move(event: google.maps.MapMouseEvent) {
+    this.center = event.latLng.toJSON();
+  }
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,10 +58,6 @@ export class OrganizarComponent implements OnInit, AfterViewInit {
       .getLoader()
       .load()
       .then(() => {
-        new google.maps.Map(this.map, {
-          center: { lat: -34.397, lng: 150.644 },
-          zoom: 8,
-        });
         this.mapApiLoaded = of(true);
       })
       .catch((err) => {
