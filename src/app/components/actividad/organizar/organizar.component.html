@@ -22,17 +22,17 @@
                     <div class="col">
                         <mat-form-field>
                             <mat-label>Fecha de inicio</mat-label>
-                            <input matInput [matDatepicker]="picker" formControlName="startDate">
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
+                            <input matInput [matDatepicker]="startDatePicker" formControlName="startDate">
+                            <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+                            <mat-datepicker #startDatePicker></mat-datepicker>
                         </mat-form-field>
                     </div>
                     <div class="col">
                         <mat-form-field>
                             <mat-label>Fecha de fin</mat-label>
-                            <input matInput [matDatepicker]="picker" formControlName="endDate">
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
+                            <input matInput [matDatepicker]="endDatePicker" formControlName="endDate">
+                            <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                            <mat-datepicker #endDatePicker></mat-datepicker>
                         </mat-form-field>
                     </div>
                     <div class="col">
@@ -57,7 +57,7 @@
                 <div class="row">
                     <div class="col age-field">
                         <mat-form-field>
-                            <mat-label>Edad mínima</mat-label>
+                            <mat-label>Edad mínima (años)</mat-label>
                             <mat-slider formControlName="maxAge" min="0" max="120" thumbLabel color="primary" step="1"
                                 formControlName="minAge" aria-label="units" class="slider">
                             </mat-slider>
@@ -66,7 +66,7 @@
                     </div>
                     <div class="col age-field">
                         <mat-form-field>
-                            <mat-label>Edad máxima</mat-label>
+                            <mat-label>Edad máxima (años)</mat-label>
                             <mat-slider formControlName="maxAge" min="0" max="120" thumbLabel color="primary" step="1"
                                 formControlName="maxAge" aria-label="units" class="slider">
                             </mat-slider>
