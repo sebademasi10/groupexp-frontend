@@ -86,6 +86,8 @@
                         (mapClick)="addMarker($event)">
                         <map-marker *ngFor="let markerPosition of markerPositions" [position]="markerPosition"
                             [options]="markerOptions"></map-marker>
+                        <map-directions-renderer *ngIf="(directionsResults$ | async) as directionsResults"
+                            [directions]="directionsResults" [options]="directionsOptions"></map-directions-renderer>
                     </google-map>
                 </div>
 

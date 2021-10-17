@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MapDirectionsService } from '@angular/google-maps';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
@@ -21,6 +22,11 @@ export class OrganizarComponent implements OnInit, AfterViewInit {
   public selectedOption: MedioMovilidad;
   public mapApiLoaded: Observable<boolean>;
 
+  // MAPS
+  public directionsResults$: Observable<google.maps.DirectionsResult | undefined>
+  public directionsOptions: google.maps.DirectionsRendererOptions = {
+    draggable: true
+  }
   public center: google.maps.LatLngLiteral = { lat: -31.417, lng: -64.183 };
   public zoom = 8
   public markerOptions: google.maps.MarkerOptions = { draggable: false };
@@ -29,7 +35,8 @@ export class OrganizarComponent implements OnInit, AfterViewInit {
   constructor
     (
       private formBuilder: FormBuilder,
-      private activatedRoute: ActivatedRoute
+      private activatedRoute: ActivatedRoute,
+      private mapsDirectionsService: MapDirectionsService
     ) { }
 
   ngOnInit(): void {
@@ -75,6 +82,14 @@ export class OrganizarComponent implements OnInit, AfterViewInit {
     return this.meansOfTransportation.filter((option: any) => option.name.toLowerCase().includes(filterValue));
   }
 
+  private _createDirectionsRequest(): google.maps.DirectionsRequest {
+    return {
+      origin: this.markerPositions[0],
+      destination: this.markerPositions[1],
+      travelMode: google.maps.TravelMode.DRIVING
+    }
+  }
+
   public displayFn(meanOfTransportation: MedioMovilidad): string {
     return meanOfTransportation && meanOfTransportation.name ? meanOfTransportation.name : '';
   }
@@ -93,7 +108,17 @@ export class OrganizarComponent implements OnInit, AfterViewInit {
   }
 
   public addMarker(event: google.maps.MapMouseEvent) {
-    this.markerPositions.push(event.latLng.toJSON());
+
+    if (this.markerPositions.length < 2) {
+      this.markerPositions.push(event.latLng.toJSON());
+      if (this.markerPositions.length === 2) {
+        const directionsRequest = this._createDirectionsRequest();
+        this.directionsResults$ = this.mapsDirectionsService
+          .route(directionsRequest)
+          .pipe(map(response => response.result))
+      }
+    }
+
   };
 
   public moveMap(event: google.maps.MapMouseEvent) {
