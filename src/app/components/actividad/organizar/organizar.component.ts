@@ -26,22 +26,11 @@ export class OrganizarComponent implements OnInit, AfterViewInit {
   public markerOptions: google.maps.MarkerOptions = { draggable: false };
   public markerPositions: google.maps.LatLngLiteral[] = [];
 
-  addMarker(event: google.maps.MapMouseEvent) {
-    this.markerPositions.push(event.latLng.toJSON());
-  };
-
-  moveMap(event: google.maps.MapMouseEvent) {
-    this.center = (event.latLng.toJSON());
-  }
-
-  move(event: google.maps.MapMouseEvent) {
-    this.center = event.latLng.toJSON();
-  }
-
-  constructor(
-    private formBuilder: FormBuilder,
-    private activatedRoute: ActivatedRoute,
-  ) { }
+  constructor
+    (
+      private formBuilder: FormBuilder,
+      private activatedRoute: ActivatedRoute
+    ) { }
 
   ngOnInit(): void {
     this.meansOfTransportation = this.activatedRoute.snapshot.data[ResolversEnum.MEDIOS_MOVILIDAD].meansOfTransportation;
@@ -63,25 +52,7 @@ export class OrganizarComponent implements OnInit, AfterViewInit {
       .catch((err) => {
         console.error(err);
         this.mapApiLoaded = of(false);
-      }
-      )
-  }
-
-  public displayFn(meanOfTransportation: MedioMovilidad): string {
-    return meanOfTransportation && meanOfTransportation.name ? meanOfTransportation.name : '';
-  }
-
-  public formatLabel(value: number) {
-    return `${value} años`;
-  }
-
-  public onSelectionChange(option: MatAutocompleteSelectedEvent) {
-    this.selectedOption = option.option.value;
-    console.log(this.selectedOption);
-  }
-
-  public newActivity() {
-    console.log(this.activityForm.value)
+      })
   }
 
   private _createForm() {
@@ -103,6 +74,36 @@ export class OrganizarComponent implements OnInit, AfterViewInit {
 
     return this.meansOfTransportation.filter((option: any) => option.name.toLowerCase().includes(filterValue));
   }
+
+  public displayFn(meanOfTransportation: MedioMovilidad): string {
+    return meanOfTransportation && meanOfTransportation.name ? meanOfTransportation.name : '';
+  }
+
+  public formatLabel(value: number) {
+    return `${value} años`;
+  }
+
+  public onSelectionChange(option: MatAutocompleteSelectedEvent) {
+    this.selectedOption = option.option.value;
+    console.log(this.selectedOption);
+  }
+
+  public newActivity() {
+    console.log(this.activityForm.value)
+  }
+
+  public addMarker(event: google.maps.MapMouseEvent) {
+    this.markerPositions.push(event.latLng.toJSON());
+  };
+
+  public moveMap(event: google.maps.MapMouseEvent) {
+    this.center = (event.latLng.toJSON());
+  }
+
+  public move(event: google.maps.MapMouseEvent) {
+    this.center = event.latLng.toJSON();
+  }
+
 
 
 
