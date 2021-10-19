@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MapDirectionsService } from '@angular/google-maps';
+import { MapDirectionsService, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
@@ -23,6 +23,7 @@ export class OrganizarComponent implements OnInit, AfterViewInit {
   public mapApiLoaded: Observable<boolean>;
 
   // MAPS
+  @ViewChild(MapInfoWindow) infoWindow: MapInfoWindow;
   public directionsResults$: Observable<google.maps.DirectionsResult | undefined>
   public directionsOptions: google.maps.DirectionsRendererOptions = {
     draggable: true
@@ -120,6 +121,10 @@ export class OrganizarComponent implements OnInit, AfterViewInit {
     }
 
   };
+
+  public openInfoWindow(marker: MapMarker) {
+    this.infoWindow.open(marker);
+  }
 
   public moveMap(event: google.maps.MapMouseEvent) {
     this.center = (event.latLng.toJSON());
