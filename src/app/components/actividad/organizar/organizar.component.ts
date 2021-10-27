@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MapDirectionsService, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { ActivatedRoute } from '@angular/router';
@@ -7,7 +7,9 @@ import { Observable, of } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ResolversEnum } from 'src/app/enums/enums/resolvers.enum';
 import { MapsService } from 'src/app/maps.service';
+import { Activity } from 'src/app/models/activity.model';
 import { MedioMovilidad } from 'src/app/models/medio-movilidad.model';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 @Component({
   selector: 'app-organizar',
@@ -15,6 +17,8 @@ import { MedioMovilidad } from 'src/app/models/medio-movilidad.model';
   styleUrls: ['./organizar.component.scss']
 })
 export class OrganizarComponent implements OnInit, AfterViewInit {
+
+  private _activity: Activity;
 
   public activityForm: FormGroup;
   public meansOfTransportation: MedioMovilidad[];
@@ -33,11 +37,13 @@ export class OrganizarComponent implements OnInit, AfterViewInit {
   public markerOptions: google.maps.MarkerOptions = { draggable: false };
   public markerPositions: google.maps.LatLngLiteral[] = [];
 
+
   constructor
     (
       private formBuilder: FormBuilder,
       private activatedRoute: ActivatedRoute,
-      private mapsDirectionsService: MapDirectionsService
+      private mapsDirectionsService: MapDirectionsService,
+      private snackBarService: SnackBarService
     ) { }
 
   ngOnInit(): void {
@@ -65,14 +71,14 @@ export class OrganizarComponent implements OnInit, AfterViewInit {
 
   private _createForm() {
     this.activityForm = this.formBuilder.group({
-      title: [],
-      meanOfTransportation: [this.meansOfTransportation],
-      minAge: [18],
-      maxAge: [18],
-      startDate: [new Date()],
-      endDate: [new Date()],
-      startTime: ['00:00'],
-      endTime: ['00:00'],
+      title: ["", Validators.required],
+      meanOfTransportation: [this.meansOfTransportation, Validators.required],
+      minAge: [18, Validators.required],
+      maxAge: [18, Validators.required],
+      startDate: [new Date(), Validators.required],
+      endDate: [new Date(), Validators.required],
+      startTime: ['00:00', Validators.required],
+      endTime: ['00:00', Validators.required],
       description: []
     })
   }
@@ -105,7 +111,16 @@ export class OrganizarComponent implements OnInit, AfterViewInit {
   }
 
   public newActivity() {
-    console.log(this.activityForm.value)
+
+    if (this.activityForm.invalid || this.markerPositions.length < 2) {
+      return this.snackBarService.openSnackBar("Por favor complete los campos requeridos y seleccione 2 puntos del mapa", false)
+    }
+    this._activity = this.activityForm.value;
+    this._activity.fromCoordinates = this.markerPositions[0];
+    this._activity.toCoordinates = this.markerPositions[1];
+
+    console.log(this.activityForm.value);
+    console.log('Coordenadas', this.markerPositions);
   }
 
   public addMarker(event: google.maps.MapMouseEvent) {
