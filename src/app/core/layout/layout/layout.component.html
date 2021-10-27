@@ -6,17 +6,9 @@
     </mat-drawer>
     <mat-drawer-content class="padding-bottom-20">
         <router-outlet></router-outlet>
-        <button [matMenuTriggerFor]="menu" class="float btn-primary" target="_blank">
+        <button routerLink="/actividad/organizar" class="float btn-primary" target="_blank">
             <mat-icon class="my-float">add</mat-icon>
         </button>
-        <mat-menu #menu="matMenu">
-            <button mat-menu-item routerLink="/actividad/organizar">
-                <mat-icon>add</mat-icon>Organizar
-            </button>
-            <button mat-menu-item routerLink="/actividad/participar">
-                <mat-icon>group_add</mat-icon>Participar
-            </button>
-        </mat-menu>
     </mat-drawer-content>
 </mat-drawer-container>
 
