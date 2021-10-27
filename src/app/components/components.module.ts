@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { ContactosModule } from './contactos/contactos.module';
 import { MediosMovilidadModule } from './medios-movilidad/medios-movilidad.module';
+import { ComponentsRoutingModule } from './components-routing.module';
 
 
 
@@ -13,7 +14,8 @@ import { MediosMovilidadModule } from './medios-movilidad/medios-movilidad.modul
   imports: [
     CommonModule,
     ContactosModule,
-    MediosMovilidadModule
+    MediosMovilidadModule,
+    ComponentsRoutingModule
   ]
 })
 export class ComponentsModule { }
