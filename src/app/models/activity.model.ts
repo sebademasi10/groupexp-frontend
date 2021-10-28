@@ -3,7 +3,7 @@ import { MedioMovilidad } from "./medio-movilidad.model";
 
 export class Activity {
     title: string;
-    meanOfTransportation: MedioMovilidad;
+    meanOfTransportation: MedioMovilidad | string;
     fromCoordinates: google.maps.LatLngLiteral;
     toCoordinates: google.maps.LatLngLiteral;
     minAge: number;

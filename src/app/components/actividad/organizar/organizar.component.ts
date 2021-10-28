@@ -2,13 +2,14 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MapDirectionsService, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ResolversEnum } from 'src/app/enums/enums/resolvers.enum';
 import { MapsService } from 'src/app/maps.service';
 import { Activity } from 'src/app/models/activity.model';
 import { MedioMovilidad } from 'src/app/models/medio-movilidad.model';
+import { ActividadService } from 'src/app/services/actividad.service';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 @Component({
@@ -41,9 +42,11 @@ export class OrganizarComponent implements OnInit, AfterViewInit {
   constructor
     (
       private formBuilder: FormBuilder,
+      private router: Router,
       private activatedRoute: ActivatedRoute,
       private mapsDirectionsService: MapDirectionsService,
-      private snackBarService: SnackBarService
+      private snackBarService: SnackBarService,
+      private activitiesService: ActividadService
     ) { }
 
   ngOnInit(): void {
@@ -79,7 +82,7 @@ export class OrganizarComponent implements OnInit, AfterViewInit {
       endDate: [new Date(), Validators.required],
       startTime: ['00:00', Validators.required],
       endTime: ['00:00', Validators.required],
-      description: []
+      description: ["", Validators.required]
     })
   }
 
@@ -111,16 +114,20 @@ export class OrganizarComponent implements OnInit, AfterViewInit {
   }
 
   public newActivity() {
-
     if (this.activityForm.invalid || this.markerPositions.length < 2) {
       return this.snackBarService.openSnackBar("Por favor complete los campos requeridos y seleccione 2 puntos del mapa", false)
     }
     this._activity = this.activityForm.value;
+    this._activity.meanOfTransportation = this.activityForm.controls['meanOfTransportation'].value.name;
     this._activity.fromCoordinates = this.markerPositions[0];
     this._activity.toCoordinates = this.markerPositions[1];
-
     console.log(this.activityForm.value);
-    console.log('Coordenadas', this.markerPositions);
+    this.activitiesService.save(this._activity).subscribe((activityTitle: string) => {
+      console.log('actividad', activityTitle);
+      this.snackBarService.openSnackBarTimeout(`Actividad "${activityTitle}" creada con éxito`, true, 3000);
+      // TODO: Navegar a detalle de actividad
+      this.router.navigate(['home'])
+    });
   }
 
   public addMarker(event: google.maps.MapMouseEvent) {

@@ -5,11 +5,12 @@
             <form class="example-form" [formGroup]="activityForm" (ngSubmit)="newActivity()">
                 <mat-form-field appearance="outline">
                     <mat-label>Título de actividad</mat-label>
-                    <input id="txtActivityTitle" type="text" matInput formControlName="title">
+                    <input id="txtActivityTitle" type="text" matInput required formControlName="title">
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label>Medio de movilidad</mat-label>
-                    <input type="text" matInput formControlName="meanOfTransportation" [matAutocomplete]="auto">
+                    <input type="text" matInput required formControlName="meanOfTransportation"
+                        [matAutocomplete]="auto">
                     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"
                         (optionSelected)="onSelectionChange($event)">
                         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
@@ -22,7 +23,7 @@
                     <div class="col">
                         <mat-form-field>
                             <mat-label>Fecha de inicio</mat-label>
-                            <input matInput [matDatepicker]="startDatePicker" formControlName="startDate">
+                            <input matInput required [matDatepicker]="startDatePicker" formControlName="startDate">
                             <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
                             <mat-datepicker #startDatePicker></mat-datepicker>
                         </mat-form-field>
@@ -30,7 +31,7 @@
                     <div class="col">
                         <mat-form-field>
                             <mat-label>Fecha de fin</mat-label>
-                            <input matInput [matDatepicker]="endDatePicker" formControlName="endDate">
+                            <input matInput required [matDatepicker]="endDatePicker" formControlName="endDate">
                             <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
                             <mat-datepicker #endDatePicker></mat-datepicker>
                         </mat-form-field>
@@ -38,7 +39,7 @@
                     <div class="col">
                         <mat-form-field>
                             <mat-label>Hora de inicio</mat-label>
-                            <input matInput placeholder="24hr format" aria-label="24hr format"
+                            <input matInput required placeholder="24hr format" aria-label="24hr format"
                                 [ngxTimepicker]="startTime" [format]="24" readonly formControlName="startTime">
                             <ngx-material-timepicker #startTime></ngx-material-timepicker>
                         </mat-form-field>
@@ -47,8 +48,8 @@
                     <div class="col">
                         <mat-form-field>
                             <mat-label>Hora de fin</mat-label>
-                            <input matInput placeholder="24hr format" aria-label="24hr format" [ngxTimepicker]="endTime"
-                                [format]="24" readonly formControlName="endTime">
+                            <input matInput required placeholder="24hr format" aria-label="24hr format"
+                                [ngxTimepicker]="endTime" [format]="24" readonly formControlName="endTime">
                             <ngx-material-timepicker #endTime></ngx-material-timepicker>
                         </mat-form-field>
                     </div>
@@ -61,7 +62,7 @@
                             <mat-slider formControlName="maxAge" min="0" max="120" thumbLabel color="primary" step="1"
                                 formControlName="minAge" aria-label="units" class="slider">
                             </mat-slider>
-                            <input type="number" matInput hidden formControlName="minAge">
+                            <input type="number" matInput required hidden formControlName="minAge">
                         </mat-form-field>
                     </div>
                     <div class="col age-field">
@@ -70,7 +71,7 @@
                             <mat-slider formControlName="maxAge" min="0" max="120" thumbLabel color="primary" step="1"
                                 formControlName="maxAge" aria-label="units" class="slider">
                             </mat-slider>
-                            <input type="number" matInput hidden formControlName="minAge">
+                            <input type="number" matInput required hidden formControlName="minAge">
                         </mat-form-field>
                     </div>
                 </div>
@@ -78,7 +79,7 @@
                 <div class="row">
                     <mat-form-field>
                         <mat-label>Descripción</mat-label>
-                        <textarea matInput cols="20" rows="4" formControlName="description"></textarea>
+                        <textarea matInput required cols="20" rows="4" formControlName="description"></textarea>
                     </mat-form-field>
                 </div>
                 <div>
