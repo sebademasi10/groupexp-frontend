@@ -39,7 +39,6 @@ export class MediosMovilidadComponent implements OnInit {
 
   ngOnInit() {
     this.options = this.activatedRoute.snapshot.data[ResolversEnum.MEDIOS_MOVILIDAD].meansOfTransportation;
-    console.log(this.options);
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => typeof value === 'string' ? value : value.name),

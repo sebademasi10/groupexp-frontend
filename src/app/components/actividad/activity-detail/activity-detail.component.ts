@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MapDirectionsService, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,11 +13,11 @@ import { ActividadService } from 'src/app/services/actividad.service';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 @Component({
-  selector: 'app-organizar',
-  templateUrl: './organizar.component.html',
-  styleUrls: ['./organizar.component.scss']
+  selector: 'app-activity-detail',
+  templateUrl: './activity-detail.component.html',
+  styleUrls: ['./activity-detail.component.scss']
 })
-export class OrganizarComponent implements OnInit, AfterViewInit {
+export class ActivityDetailComponent implements OnInit {
 
   private _activity: Activity;
 
@@ -51,6 +51,7 @@ export class OrganizarComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.meansOfTransportation = this.activatedRoute.snapshot.data[ResolversEnum.MEDIOS_MOVILIDAD].meansOfTransportation;
+    this._activity = this.activatedRoute.snapshot.data[ResolversEnum.ACTIVIDAD];
     this._createForm();
     this.filteredOptions = this.activityForm.controls['meanOfTransportation'].valueChanges.pipe(
       startWith(''),
@@ -74,15 +75,15 @@ export class OrganizarComponent implements OnInit, AfterViewInit {
 
   private _createForm() {
     this.activityForm = this.formBuilder.group({
-      title: ["", Validators.required],
-      meanOfTransportation: [this.meansOfTransportation, Validators.required],
-      minAge: [18, Validators.required],
-      maxAge: [18, Validators.required],
-      startDate: [new Date(), Validators.required],
-      endDate: [new Date(), Validators.required],
-      startTime: ['00:00', Validators.required],
-      endTime: ['00:00', Validators.required],
-      description: ["", Validators.required]
+      title: [this._activity.title],
+      meanOfTransportation: [this._activity.meanOfTransportation],
+      minAge: [this._activity.minAge],
+      maxAge: [this._activity.maxAge],
+      startDate: [new Date(this._activity.startDate)],
+      endDate: [new Date(this._activity.endDate)],
+      startTime: [this._activity.startTime],
+      endTime: [this._activity.endTime],
+      description: [this._activity.description]
     })
   }
 
@@ -152,8 +153,5 @@ export class OrganizarComponent implements OnInit, AfterViewInit {
   public move(event: google.maps.MapMouseEvent) {
     this.center = event.latLng.toJSON();
   }
-
-
-
 
 }

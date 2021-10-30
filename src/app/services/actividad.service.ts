@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Activity } from '../models/activity.model';
 
@@ -15,6 +16,10 @@ export class ActividadService {
     return this.httpClient.get(this._controllerName).pipe(
       map((data: any) => data.activities)
     );
+  }
+
+  public get(uid: string): Observable<Activity> {
+    return this.httpClient.get<Activity>(`${this._controllerName}/${uid}`);
   }
 
   public save(activity: Activity) {

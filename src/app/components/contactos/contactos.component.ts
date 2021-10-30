@@ -45,10 +45,6 @@ export class ContactosComponent implements OnInit {
       startWith(''),
       map(value => this._filter(value))
     );
-
-
-    console.log(this.users)
-
   }
 
   private _filter(name: string): User[] {

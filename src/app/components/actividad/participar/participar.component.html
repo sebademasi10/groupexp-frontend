@@ -9,6 +9,6 @@
         {{activity.description}}
     </mat-card-content>
     <mat-card-actions>
-        <button mat-raised-button color="primary">Participar</button>
+        <button mat-raised-button color="primary" (click)="navigate(activity.uid)">Participar</button>
     </mat-card-actions>
 </mat-card>

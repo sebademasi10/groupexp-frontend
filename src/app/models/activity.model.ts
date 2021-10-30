@@ -2,6 +2,7 @@ import { Time } from "@angular/common";
 import { MedioMovilidad } from "./medio-movilidad.model";
 
 export class Activity {
+    uid: string;
     title: string;
     meanOfTransportation: MedioMovilidad | string;
     fromCoordinates: google.maps.LatLngLiteral;

@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Activity } from 'src/app/models/activity.model';
 import { ActividadService } from 'src/app/services/actividad.service';
@@ -14,7 +15,8 @@ export class ParticiparComponent implements OnInit, OnDestroy {
   public activities: Activity[];
 
   constructor(
-    private activitiesService: ActividadService
+    private activitiesService: ActividadService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -25,5 +27,9 @@ export class ParticiparComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this._activitiesSubscription.unsubscribe();
+  }
+
+  navigate(uid: string) {
+    this.router.navigate(['actividad/ver', uid]);
   }
 }
