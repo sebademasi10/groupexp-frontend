@@ -12,7 +12,9 @@ export class ActividadService {
   constructor(private httpClient: HttpClient) { }
 
   public getAll() {
-    return this.httpClient.get<Activity[]>(this._controllerName);
+    return this.httpClient.get(this._controllerName).pipe(
+      map((data: any) => data.activities)
+    );
   }
 
   public save(activity: Activity) {

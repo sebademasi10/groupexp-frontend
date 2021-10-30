@@ -11,13 +11,15 @@ import { ActividadService } from 'src/app/services/actividad.service';
 export class ParticiparComponent implements OnInit, OnDestroy {
 
   private _activitiesSubscription: Subscription;
+  public activities: Activity[];
+
   constructor(
     private activitiesService: ActividadService
   ) { }
 
   ngOnInit(): void {
     this._activitiesSubscription = this.activitiesService.getAll().subscribe((activities: Activity[]) => {
-      console.log(activities);
+      this.activities = activities;
     })
   }
 
