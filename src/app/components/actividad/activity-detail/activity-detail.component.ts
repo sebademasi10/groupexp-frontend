@@ -85,6 +85,7 @@ export class ActivityDetailComponent implements OnInit {
       endTime: [this._activity.endTime],
       description: [this._activity.description]
     })
+    this.activityForm.disable();
   }
 
   private _filter(value: string): MedioMovilidad[] {

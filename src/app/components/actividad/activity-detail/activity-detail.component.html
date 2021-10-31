@@ -3,98 +3,91 @@
         <h1>Detalle de actividad</h1>
         <mat-card class="example-card">
             <form class="example-form" [formGroup]="activityForm" (ngSubmit)="newActivity()">
-                <fieldset disabled="disabled">
 
-                    <mat-form-field appearance="outline">
-                        <mat-label>Título de actividad</mat-label>
-                        <input id="txtActivityTitle" type="text" matInput required formControlName="title">
-                    </mat-form-field>
-                    <mat-form-field>
-                        <mat-label>Medio de movilidad</mat-label>
-                        <input type="text" matInput required formControlName="meanOfTransportation">
-                    </mat-form-field>
 
-                    <div class="row">
-                        <div class="col">
-                            <mat-form-field>
-                                <mat-label>Fecha de inicio</mat-label>
-                                <input matInput required [matDatepicker]="startDatePicker" formControlName="startDate">
-                                <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
-                                <mat-datepicker #startDatePicker></mat-datepicker>
-                            </mat-form-field>
-                        </div>
-                        <div class="col">
-                            <mat-form-field>
-                                <mat-label>Fecha de fin</mat-label>
-                                <input matInput required [matDatepicker]="endDatePicker" formControlName="endDate">
-                                <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
-                                <mat-datepicker #endDatePicker></mat-datepicker>
-                            </mat-form-field>
-                        </div>
-                        <div class="col">
-                            <mat-form-field>
-                                <mat-label>Hora de inicio</mat-label>
-                                <input matInput required placeholder="24hr format" aria-label="24hr format"
-                                    [ngxTimepicker]="startTime" [format]="24" readonly formControlName="startTime">
-                                <ngx-material-timepicker #startTime></ngx-material-timepicker>
-                            </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Título de actividad</mat-label>
+                    <input id="txtActivityTitle" type="text" matInput required formControlName="title">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Medio de movilidad</mat-label>
+                    <input type="text" matInput required formControlName="meanOfTransportation">
+                </mat-form-field>
 
-                        </div>
-                        <div class="col">
-                            <mat-form-field>
-                                <mat-label>Hora de fin</mat-label>
-                                <input matInput required placeholder="24hr format" aria-label="24hr format"
-                                    [ngxTimepicker]="endTime" [format]="24" readonly formControlName="endTime">
-                                <ngx-material-timepicker #endTime></ngx-material-timepicker>
-                            </mat-form-field>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col age-field">
-                            <mat-form-field>
-                                <mat-label>Edad mínima (años)</mat-label>
-                                <mat-slider formControlName="maxAge" min="0" max="120" thumbLabel color="primary"
-                                    step="1" formControlName="minAge" aria-label="units" class="slider">
-                                </mat-slider>
-                                <input type="number" matInput required hidden formControlName="minAge">
-                            </mat-form-field>
-                        </div>
-                        <div class="col age-field">
-                            <mat-form-field>
-                                <mat-label>Edad máxima (años)</mat-label>
-                                <mat-slider formControlName="maxAge" min="0" max="120" thumbLabel color="primary"
-                                    step="1" formControlName="maxAge" aria-label="units" class="slider">
-                                </mat-slider>
-                                <input type="number" matInput required hidden formControlName="minAge">
-                            </mat-form-field>
-                        </div>
-                    </div>
-
-                    <div class="row">
+                <div class="row">
+                    <div class="col">
                         <mat-form-field>
-                            <mat-label>Descripción</mat-label>
-                            <textarea matInput required cols="20" rows="4" formControlName="description"></textarea>
+                            <mat-label>Fecha de inicio</mat-label>
+                            <input matInput required [matDatepicker]="startDatePicker" formControlName="startDate">
+                            <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+                            <mat-datepicker #startDatePicker></mat-datepicker>
                         </mat-form-field>
                     </div>
-                    <div>
-                        <google-map height="30vh" width="100%" *ngIf="mapApiLoaded | async" [center]="center"
-                            (mapClick)="addMarker($event)">
-                            <map-marker #marker="mapMarker" *ngFor="let markerPosition of markerPositions"
-                                [position]="markerPosition" [options]="markerOptions"
-                                (mapClick)="openInfoWindow(marker)">
-                            </map-marker>
-                            <map-directions-renderer *ngIf="(directionsResults$ | async) as directionsResults"
-                                [directions]="directionsResults" [options]="directionsOptions">
-                            </map-directions-renderer>
-                            <map-kml-layer>
-                            </map-kml-layer>
-                            <map-info-window></map-info-window>
-                        </google-map>
+                    <div class="col">
+                        <mat-form-field>
+                            <mat-label>Fecha de fin</mat-label>
+                            <input matInput required [matDatepicker]="endDatePicker" formControlName="endDate">
+                            <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                            <mat-datepicker #endDatePicker></mat-datepicker>
+                        </mat-form-field>
                     </div>
+                    <div class="col">
+                        <mat-form-field>
+                            <mat-label>Hora de inicio</mat-label>
+                            <input matInput required placeholder="24hr format" aria-label="24hr format"
+                                [ngxTimepicker]="startTime" [format]="24" readonly formControlName="startTime">
+                            <ngx-material-timepicker #startTime></ngx-material-timepicker>
+                        </mat-form-field>
 
-                    <button type="submit" mat-button>Aceptar</button>
-                </fieldset>
+                    </div>
+                    <div class="col">
+                        <mat-form-field>
+                            <mat-label>Hora de fin</mat-label>
+                            <input matInput required placeholder="24hr format" aria-label="24hr format"
+                                [ngxTimepicker]="endTime" [format]="24" readonly formControlName="endTime">
+                            <ngx-material-timepicker #endTime></ngx-material-timepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col age-field">
+                        <mat-form-field>
+                            <mat-label>Edad mínima (años)</mat-label>
+                            <input type="number" matInput required formControlName="minAge">
+                        </mat-form-field>
+                    </div>
+                    <div class="col age-field">
+                        <mat-form-field>
+                            <mat-label>Edad máxima (años)</mat-label>
+                            <input type="number" matInput required formControlName="maxAge">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <mat-form-field>
+                        <mat-label>Descripción</mat-label>
+                        <textarea matInput required cols="20" rows="4" formControlName="description"></textarea>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <google-map height="30vh" width="100%" *ngIf="mapApiLoaded | async" [center]="center"
+                        (mapClick)="addMarker($event)">
+                        <map-marker #marker="mapMarker" *ngFor="let markerPosition of markerPositions"
+                            [position]="markerPosition" [options]="markerOptions" (mapClick)="openInfoWindow(marker)">
+                        </map-marker>
+                        <map-directions-renderer *ngIf="(directionsResults$ | async) as directionsResults"
+                            [directions]="directionsResults" [options]="directionsOptions">
+                        </map-directions-renderer>
+                        <map-kml-layer>
+                        </map-kml-layer>
+                        <map-info-window></map-info-window>
+                    </google-map>
+                </div>
+
+                <button type="submit" mat-button>Aceptar</button>
+
             </form>
         </mat-card>
     </div>
