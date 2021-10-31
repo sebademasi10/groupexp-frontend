@@ -1,7 +1,7 @@
 <mat-card *ngFor="let activity of activities">
     <mat-card-header>
         <mat-card-title>
-            <mat-icon>directions_bike</mat-icon>
+            <mat-icon>{{ICONS[activity.meanOfTransportation.toString()]}}</mat-icon>
             {{activity.title}}
         </mat-card-title>
     </mat-card-header>
