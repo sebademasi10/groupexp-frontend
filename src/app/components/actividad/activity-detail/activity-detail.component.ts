@@ -31,7 +31,7 @@ export class ActivityDetailComponent implements OnInit {
   @ViewChild(MapInfoWindow) infoWindow: MapInfoWindow;
   public directionsResults$: Observable<google.maps.DirectionsResult | undefined>
   public directionsOptions: google.maps.DirectionsRendererOptions = {
-    draggable: true
+    draggable: false
   }
   public center: google.maps.LatLngLiteral = { lat: -31.417, lng: -64.183 };
   public zoom = 8
@@ -52,6 +52,9 @@ export class ActivityDetailComponent implements OnInit {
   ngOnInit(): void {
     this.meansOfTransportation = this.activatedRoute.snapshot.data[ResolversEnum.MEDIOS_MOVILIDAD].meansOfTransportation;
     this._activity = this.activatedRoute.snapshot.data[ResolversEnum.ACTIVIDAD];
+    this.markerPositions.push(this._activity.fromCoordinates);
+    this.markerPositions.push(this._activity.toCoordinates);
+
     this._createForm();
     this.filteredOptions = this.activityForm.controls['meanOfTransportation'].valueChanges.pipe(
       startWith(''),
@@ -65,7 +68,11 @@ export class ActivityDetailComponent implements OnInit {
       .getLoader()
       .load()
       .then(() => {
+        const directionsRequest = this._createDirectionsRequest();
         this.mapApiLoaded = of(true);
+        this.directionsResults$ = this.mapsDirectionsService
+          .route(directionsRequest)
+          .pipe(map(response => response.result))
       })
       .catch((err) => {
         console.error(err);
@@ -98,7 +105,7 @@ export class ActivityDetailComponent implements OnInit {
     return {
       origin: this.markerPositions[0],
       destination: this.markerPositions[1],
-      travelMode: google.maps.TravelMode.DRIVING
+      travelMode: google.maps.TravelMode.WALKING
     }
   }
 
@@ -129,19 +136,6 @@ export class ActivityDetailComponent implements OnInit {
     });
   }
 
-  public addMarker(event: google.maps.MapMouseEvent) {
-
-    if (this.markerPositions.length < 2) {
-      this.markerPositions.push(event.latLng.toJSON());
-      if (this.markerPositions.length === 2) {
-        const directionsRequest = this._createDirectionsRequest();
-        this.directionsResults$ = this.mapsDirectionsService
-          .route(directionsRequest)
-          .pipe(map(response => response.result))
-      }
-    }
-
-  };
 
   public openInfoWindow(marker: MapMarker) {
     this.infoWindow.open(marker);

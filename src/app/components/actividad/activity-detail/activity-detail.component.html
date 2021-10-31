@@ -72,8 +72,7 @@
                     </mat-form-field>
                 </div>
                 <div>
-                    <google-map height="30vh" width="100%" *ngIf="mapApiLoaded | async" [center]="center"
-                        (mapClick)="addMarker($event)">
+                    <google-map height="30vh" width="100%" *ngIf="mapApiLoaded | async" [center]="center">
                         <map-marker #marker="mapMarker" *ngFor="let markerPosition of markerPositions"
                             [position]="markerPosition" [options]="markerOptions" (mapClick)="openInfoWindow(marker)">
                         </map-marker>
