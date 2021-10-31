@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { LoginComponent } from '../auth/login/login.component';
 import { LayoutComponent } from '../core/layout/layout/layout.component';
 import { AuthGuard } from '../shared/guard/auth.guard';
 
@@ -56,6 +57,10 @@ export const routes: Routes = [
           )
       }
     ],
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   // Not found
   { path: '**', redirectTo: 'home' },
