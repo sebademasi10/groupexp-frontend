@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ResolversEnum } from 'src/app/enums/enums/resolvers.enum';
+import { MeansOfTransportations } from 'src/app/enums/means-of-transportations.enum';
 import { MapsService } from 'src/app/maps.service';
 import { Activity } from 'src/app/models/activity.model';
 import { MedioMovilidad } from 'src/app/models/medio-movilidad.model';
@@ -24,7 +25,7 @@ export class OrganizarComponent implements OnInit, AfterViewInit {
   public activityForm: FormGroup;
   public meansOfTransportation: MedioMovilidad[];
   public filteredOptions: Observable<MedioMovilidad[]>;
-  public selectedOption: MedioMovilidad;
+  public meanOfTransportation: MedioMovilidad;
   public mapApiLoaded: Observable<boolean>;
 
   // MAPS
@@ -93,10 +94,12 @@ export class OrganizarComponent implements OnInit, AfterViewInit {
   }
 
   private _createDirectionsRequest(): google.maps.DirectionsRequest {
+    const travelMode = this._getTravelMode();
+    console.log(travelMode);
     return {
       origin: this.markerPositions[0],
       destination: this.markerPositions[1],
-      travelMode: google.maps.TravelMode.DRIVING
+      travelMode
     }
   }
 
@@ -109,7 +112,8 @@ export class OrganizarComponent implements OnInit, AfterViewInit {
   }
 
   public onSelectionChange(option: MatAutocompleteSelectedEvent) {
-    this.selectedOption = option.option.value;
+    this.meanOfTransportation = option.option.value;
+    console.log(this.meanOfTransportation);
   }
 
   public newActivity() {
@@ -153,7 +157,22 @@ export class OrganizarComponent implements OnInit, AfterViewInit {
     this.center = event.latLng.toJSON();
   }
 
-
-
-
+  private _getTravelMode(): google.maps.TravelMode {
+    let travelMode: google.maps.TravelMode;
+    switch (this.meanOfTransportation.name) {
+      case MeansOfTransportations.CAMINANDO:
+      case MeansOfTransportations.CORRER:
+      case MeansOfTransportations.ROLLERS:
+      case MeansOfTransportations.BICICLETA:
+        travelMode = google.maps.TravelMode.WALKING;
+        break;
+      case MeansOfTransportations.MOTO:
+      case MeansOfTransportations.AUTO:
+        travelMode = google.maps.TravelMode.DRIVING;
+        break;
+      default:
+    }
+    return travelMode;
+  }
 }
+
