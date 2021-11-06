@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +14,10 @@ import { AuthModule } from './auth/auth.module';
 import { AppComponent } from './app.component';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { registerLocaleData } from '@angular/common';
+import localeEsAr from '@angular/common/locales/es-AR'
+
+registerLocaleData(localeEsAr, 'es-AR')
 
 @NgModule({
   declarations: [
@@ -31,6 +35,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
     AuthModule
   ],
   providers: [
+    { provide: LOCALE_ID, useValue: 'es-AR' },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }

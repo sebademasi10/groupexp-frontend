@@ -5,10 +5,17 @@
             {{activity.title}}
         </mat-card-title>
         <mat-card-subtitle>
-            <mat-icon>person</mat-icon>{{activity.creators}}
+            <mat-icon>person</mat-icon> {{activity.creators}}
+        </mat-card-subtitle>
+        <mat-card-subtitle class="when">
+            <div class="icon-time">
+                <mat-icon>event</mat-icon> {{activity.startDate | date}}
+            </div>
+            <div class="icon-time">
+                <mat-icon>schedule</mat-icon> {{activity.startTime}}
+            </div>
         </mat-card-subtitle>
         <mat-card-subtitle>
-            <mat-icon>event</mat-icon>{{activity.startDate | date: "locale: "}}
         </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>

@@ -7,3 +7,14 @@ mat-card-actions {
     flex-direction: row;
     justify-content: flex-end;
 }
+
+mat-card-subtitle.when {
+    display: flex;
+    justify-content: space-between;
+}
+
+.icon-time {
+    display: flex;
+    align-content: space-around;
+    align-items: center;
+}
