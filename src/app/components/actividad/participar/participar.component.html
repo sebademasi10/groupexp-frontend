@@ -4,6 +4,12 @@
             <mat-icon>{{ICONS[activity.meanOfTransportation.toString()]}}</mat-icon>
             {{activity.title}}
         </mat-card-title>
+        <mat-card-subtitle>
+            <mat-icon>person</mat-icon>{{activity.creators}}
+        </mat-card-subtitle>
+        <mat-card-subtitle>
+            <mat-icon>calendar</mat-icon>{{activity.startDate | date}}
+        </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
         {{activity.description}}
