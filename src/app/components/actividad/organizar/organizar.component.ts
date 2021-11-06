@@ -11,6 +11,7 @@ import { MapsService } from 'src/app/maps.service';
 import { Activity } from 'src/app/models/activity.model';
 import { MedioMovilidad } from 'src/app/models/medio-movilidad.model';
 import { ActividadService } from 'src/app/services/actividad.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 @Component({
@@ -49,7 +50,8 @@ export class OrganizarComponent implements OnInit, AfterViewInit, OnDestroy {
       private activatedRoute: ActivatedRoute,
       private mapsDirectionsService: MapDirectionsService,
       private snackBarService: SnackBarService,
-      private activitiesService: ActividadService
+      private activitiesService: ActividadService,
+      private authService: AuthService
     ) { }
   ngOnDestroy(): void {
     this.directionsResultsSubsciption$.unsubscribe();
@@ -126,6 +128,7 @@ export class OrganizarComponent implements OnInit, AfterViewInit, OnDestroy {
       return this.snackBarService.openSnackBar("Por favor complete los campos requeridos y seleccione 2 puntos del mapa", false)
     }
     this._activity = this.activityForm.value;
+    this._activity.creators = this.authService.getLoggedUser();
     this._activity.meanOfTransportation = this.activityForm.controls['meanOfTransportation'].value.name;
     this._activity.fromCoordinates = this.markerPositions[0];
     this._activity.toCoordinates = this.markerPositions[1];
