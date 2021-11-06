@@ -35,7 +35,7 @@ export class OrganizarComponent implements OnInit, AfterViewInit, OnDestroy {
     draggable: true
   }
   public center: google.maps.LatLngLiteral = { lat: -31.417, lng: -64.183 };
-  public zoom = 8
+  public zoom = 4
   public markerOptions: google.maps.MarkerOptions = { draggable: false };
   public markerPositions: google.maps.LatLngLiteral[] = [];
   directionsResultsSubsciption$: Subscription;
