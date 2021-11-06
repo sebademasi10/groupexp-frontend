@@ -84,7 +84,7 @@
                 </div>
                 <div>
                     <google-map height="30vh" width="100%" *ngIf="mapApiLoaded | async" [center]="center"
-                        (mapClick)="addMarker($event)">
+                        (mapClick)="addMarker($event)" [zoom]="zoom">
                         <button mat-icon-button matTooltip="Quitar marcadores" (click)="clearMarkers()">
                             <mat-icon>place</mat-icon>
                             <mat-icon color="accent">clear</mat-icon>
