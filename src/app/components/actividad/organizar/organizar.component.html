@@ -85,15 +85,15 @@
                 <div>
                     <google-map height="30vh" width="100%" *ngIf="mapApiLoaded | async" [center]="center"
                         (mapClick)="addMarker($event)">
-                        <button mat-icon-button matTooltip="Quitar marcadores" (click)="markerPositions = []">
+                        <button mat-icon-button matTooltip="Quitar marcadores" (click)="clearMarkers()">
                             <mat-icon>place</mat-icon>
                             <mat-icon color="accent">clear</mat-icon>
                         </button>
                         <map-marker #marker="mapMarker" *ngFor="let markerPosition of markerPositions"
                             [position]="markerPosition" [options]="markerOptions" (mapClick)="openInfoWindow(marker)">
                         </map-marker>
-                        <map-directions-renderer *ngIf="(directionsResults$ | async) as directionsResults"
-                            [directions]="directionsResults" [options]="directionsOptions"></map-directions-renderer>
+                        <map-directions-renderer *ngIf="directionsResults" [directions]="directionsResults"
+                            [options]="directionsOptions"></map-directions-renderer>
                         <map-kml-layer>
                         </map-kml-layer>
                         <map-info-window></map-info-window>

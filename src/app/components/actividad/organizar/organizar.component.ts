@@ -1,9 +1,9 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MapDirectionsService, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subscriber, Subscription } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ResolversEnum } from 'src/app/enums/enums/resolvers.enum';
 import { MeansOfTransportations } from 'src/app/enums/means-of-transportations.enum';
@@ -18,7 +18,7 @@ import { SnackBarService } from 'src/app/services/snack-bar.service';
   templateUrl: './organizar.component.html',
   styleUrls: ['./organizar.component.scss']
 })
-export class OrganizarComponent implements OnInit, AfterViewInit {
+export class OrganizarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private _activity: Activity;
 
@@ -38,6 +38,8 @@ export class OrganizarComponent implements OnInit, AfterViewInit {
   public zoom = 8
   public markerOptions: google.maps.MarkerOptions = { draggable: false };
   public markerPositions: google.maps.LatLngLiteral[] = [];
+  directionsResultsSubsciption$: Subscription;
+  directionsResults: any;
 
 
   constructor
@@ -49,6 +51,9 @@ export class OrganizarComponent implements OnInit, AfterViewInit {
       private snackBarService: SnackBarService,
       private activitiesService: ActividadService
     ) { }
+  ngOnDestroy(): void {
+    this.directionsResultsSubsciption$.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.meansOfTransportation = this.activatedRoute.snapshot.data[ResolversEnum.MEDIOS_MOVILIDAD].meansOfTransportation;
@@ -139,7 +144,13 @@ export class OrganizarComponent implements OnInit, AfterViewInit {
         const directionsRequest = this._createDirectionsRequest();
         this.directionsResults$ = this.mapsDirectionsService
           .route(directionsRequest)
-          .pipe(map(response => response.result))
+          .pipe(map(response => response.result));
+        this.directionsResultsSubsciption$ = this.directionsResults$.subscribe(
+          (data) => {
+            this.directionsResults = data;
+            this.snackBarService.openSnackBarTimeout("La ruta se calcula en función del medio de movilidad elegido", true, 5000)
+          }
+        )
       }
     }
 
@@ -157,7 +168,13 @@ export class OrganizarComponent implements OnInit, AfterViewInit {
     this.center = event.latLng.toJSON();
   }
 
+  public clearMarkers() {
+    this.markerPositions = [];
+    this.directionsResults = undefined;
+  }
+
   private _getTravelMode(): google.maps.TravelMode {
+    if (!this.meanOfTransportation) return google.maps.TravelMode.WALKING;
     let travelMode: google.maps.TravelMode;
     switch (this.meanOfTransportation.name) {
       case MeansOfTransportations.CAMINANDO:
