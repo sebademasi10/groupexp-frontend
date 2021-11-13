@@ -10,9 +10,9 @@ import { SnackBarService } from 'src/app/services/snack-bar.service';
 import { ActivatedRoute } from '@angular/router';
 import { ResolversEnum } from 'src/app/enums/enums/resolvers.enum';
 import { MeansOfTransportations } from 'src/app/enums/means-of-transportations.enum';
-import { CarComponent } from 'src/app/shared/modals/car/car.component';
-import { MotorcycleComponent } from 'src/app/shared/modals/motorcycle/motorcycle.component';
-import { RollersComponent } from 'src/app/shared/modals/rollers/rollers.component';
+import { CarModalComponent } from 'src/app/shared/modals/car-modal/car-modal.component';
+import { MotorcycleModalComponent } from 'src/app/shared/modals/motorcycle-modal/motorcycle-modal.component';
+import { RollersModalComponent } from 'src/app/shared/modals/rollers-modal/rollers-modal.component';
 
 
 @Component({
@@ -58,8 +58,7 @@ export class MediosMovilidadComponent implements OnInit {
 
     const modalType = this.getModalType();
     const dialogRef = this.matDialog.open(modalType, {
-      width: '95vw',
-      height: '90vh'
+      width: '99vw',
     });
 
 
@@ -72,13 +71,13 @@ export class MediosMovilidadComponent implements OnInit {
     let modalType = BicycleModalComponent;
     switch (this.meanOfTransportation) {
       case MeansOfTransportations.AUTO:
-        modalType = CarComponent;
+        modalType = CarModalComponent;
         break;
       case MeansOfTransportations.MOTO:
-        modalType = MotorcycleComponent;
+        modalType = MotorcycleModalComponent;
         break;
       case MeansOfTransportations.ROLLERS:
-        modalType = RollersComponent;
+        modalType = RollersModalComponent;
         break;
       default:
         break;

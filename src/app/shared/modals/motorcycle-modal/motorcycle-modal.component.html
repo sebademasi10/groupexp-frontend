@@ -1,0 +1,24 @@
+<h1>Agregar motocicleta</h1>
+<form class="example-form text-align-center">
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Marca</mat-label>
+        <input type="text" matInput formControlName="brand">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Modelo</mat-label>
+        <input type="text" matInput formControlName="model">
+    </mat-form-field>
+    <!-- <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Nivel de Experiencia</mat-label>
+        <input type="text" matInput formControlName="expLevel">
+    </mat-form-field> -->
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Cilindrada</mat-label>
+        <input type="text" matInput formControlName="motorCcs">
+        <span matSuffix>CC</span>
+    </mat-form-field>
+    <button type="submit" mat-raised-button class="btn-primary">
+        <mat-icon>update</mat-icon> Actualizar
+    </button>
+
+</form>

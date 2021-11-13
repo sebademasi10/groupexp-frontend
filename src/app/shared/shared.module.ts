@@ -2,19 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BicycleModalComponent } from './modals/bicycle-modal/bicycle-modal.component';
 import { MaterialModule } from './material.module';
-import { CarComponent } from './modals/car/car.component';
-import { MotorcycleComponent } from './modals/motorcycle/motorcycle.component';
-import { RollersComponent } from './modals/rollers/rollers.component';
-
+import { RollersModalComponent } from './modals/rollers-modal/rollers-modal.component';
+import { MotorcycleModalComponent } from './modals/motorcycle-modal/motorcycle-modal.component';
+import { CarModalComponent } from './modals/car-modal/car-modal.component';
 
 
 @NgModule({
   declarations: [
-
     BicycleModalComponent,
-      CarComponent,
-      MotorcycleComponent,
-      RollersComponent
+    RollersModalComponent,
+    MotorcycleModalComponent,
+    CarModalComponent,
   ],
   imports: [
     CommonModule,

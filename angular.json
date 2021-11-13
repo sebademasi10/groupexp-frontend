@@ -10,7 +10,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "path": "src/app/components",
+          "path": "src/app",
           "style": "scss",
           "skipTests": true
         },
