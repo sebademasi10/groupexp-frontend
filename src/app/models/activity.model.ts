@@ -14,5 +14,6 @@ export class Activity {
     startTime: Time;
     endTime: Time;
     description: string;
-    creators: any;
+    creators: string[];
+    participants: string[];
 }

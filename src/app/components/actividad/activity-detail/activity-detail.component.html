@@ -84,9 +84,13 @@
                         <map-info-window></map-info-window>
                     </google-map>
                 </div>
-
-                <button type="submit" mat-button>Aceptar</button>
-
+                <mat-card-title class="mt-3">Participantes</mat-card-title>
+                <mat-list>
+                    <mat-list-item *ngFor="let participant of activity.participants">
+                        <mat-icon>person</mat-icon> {{participant}}
+                    </mat-list-item>
+                </mat-list>
+                <button mat-flat-button color="primary" (click)="participate()" type="button">Participar</button>
             </form>
         </mat-card>
     </div>

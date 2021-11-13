@@ -10,6 +10,7 @@ import { MapsService } from 'src/app/maps.service';
 import { Activity } from 'src/app/models/activity.model';
 import { MedioMovilidad } from 'src/app/models/medio-movilidad.model';
 import { ActividadService } from 'src/app/services/actividad.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 @Component({
@@ -19,7 +20,7 @@ import { SnackBarService } from 'src/app/services/snack-bar.service';
 })
 export class ActivityDetailComponent implements OnInit {
 
-  private _activity: Activity;
+  public activity: Activity;
 
   public activityForm: FormGroup;
   public meansOfTransportation: MedioMovilidad[];
@@ -46,14 +47,15 @@ export class ActivityDetailComponent implements OnInit {
       private activatedRoute: ActivatedRoute,
       private mapsDirectionsService: MapDirectionsService,
       private snackBarService: SnackBarService,
-      private activitiesService: ActividadService
+      private activitiesService: ActividadService,
+      private authService: AuthService
     ) { }
 
   ngOnInit(): void {
     this.meansOfTransportation = this.activatedRoute.snapshot.data[ResolversEnum.MEDIOS_MOVILIDAD].meansOfTransportation;
-    this._activity = this.activatedRoute.snapshot.data[ResolversEnum.ACTIVIDAD];
-    this.markerPositions.push(this._activity.fromCoordinates);
-    this.markerPositions.push(this._activity.toCoordinates);
+    this.activity = this.activatedRoute.snapshot.data[ResolversEnum.ACTIVIDAD];
+    this.markerPositions.push(this.activity.fromCoordinates);
+    this.markerPositions.push(this.activity.toCoordinates);
 
     this._createForm();
     this.filteredOptions = this.activityForm.controls['meanOfTransportation'].valueChanges.pipe(
@@ -82,15 +84,15 @@ export class ActivityDetailComponent implements OnInit {
 
   private _createForm() {
     this.activityForm = this.formBuilder.group({
-      title: [this._activity.title],
-      meanOfTransportation: [this._activity.meanOfTransportation],
-      minAge: [this._activity.minAge],
-      maxAge: [this._activity.maxAge],
-      startDate: [new Date(this._activity.startDate)],
-      endDate: [new Date(this._activity.endDate)],
-      startTime: [this._activity.startTime],
-      endTime: [this._activity.endTime],
-      description: [this._activity.description]
+      title: [this.activity.title],
+      meanOfTransportation: [this.activity.meanOfTransportation],
+      minAge: [this.activity.minAge],
+      maxAge: [this.activity.maxAge],
+      startDate: [new Date(this.activity.startDate)],
+      endDate: [new Date(this.activity.endDate)],
+      startTime: [this.activity.startTime],
+      endTime: [this.activity.endTime],
+      description: [this.activity.description]
     })
     this.activityForm.disable();
   }
@@ -125,17 +127,16 @@ export class ActivityDetailComponent implements OnInit {
     if (this.activityForm.invalid || this.markerPositions.length < 2) {
       return this.snackBarService.openSnackBar("Por favor complete los campos requeridos y seleccione 2 puntos del mapa", false)
     }
-    this._activity = this.activityForm.value;
-    this._activity.meanOfTransportation = this.activityForm.controls['meanOfTransportation'].value.name;
-    this._activity.fromCoordinates = this.markerPositions[0];
-    this._activity.toCoordinates = this.markerPositions[1];
-    this.activitiesService.save(this._activity).subscribe((activityTitle: string) => {
+    this.activity = this.activityForm.value;
+    this.activity.meanOfTransportation = this.activityForm.controls['meanOfTransportation'].value.name;
+    this.activity.fromCoordinates = this.markerPositions[0];
+    this.activity.toCoordinates = this.markerPositions[1];
+    this.activitiesService.save(this.activity).subscribe((activityTitle: string) => {
       this.snackBarService.openSnackBarTimeout(`Actividad "${activityTitle}" creada con éxito`, true, 3000);
       // TODO: Navegar a detalle de actividad
       this.router.navigate(['home'])
     });
   }
-
 
   public openInfoWindow(marker: MapMarker) {
     this.infoWindow.open(marker);
@@ -147,6 +148,16 @@ export class ActivityDetailComponent implements OnInit {
 
   public move(event: google.maps.MapMouseEvent) {
     this.center = event.latLng.toJSON();
+  }
+
+  public participate() {
+    const userName = this.authService.getLoggedUser();
+    let payload = JSON.parse(JSON.stringify(this.activity));
+    payload.participants.push(userName);
+    this.activitiesService.update(payload).subscribe((response: any) => {
+      this.activity = response;
+      this.snackBarService.openSnackBar("Listo, ya estás participando!", true);
+    })
   }
 
 }

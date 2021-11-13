@@ -128,7 +128,7 @@ export class OrganizarComponent implements OnInit, AfterViewInit, OnDestroy {
       return this.snackBarService.openSnackBar("Por favor complete los campos requeridos y seleccione 2 puntos del mapa", false)
     }
     this._activity = this.activityForm.value;
-    this._activity.creators = this.authService.getLoggedUser();
+    this._activity.creators.push(this.authService.getLoggedUser());
     this._activity.meanOfTransportation = this.activityForm.controls['meanOfTransportation'].value.name;
     this._activity.fromCoordinates = this.markerPositions[0];
     this._activity.toCoordinates = this.markerPositions[1];

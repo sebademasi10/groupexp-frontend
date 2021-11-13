@@ -43,7 +43,8 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
     MatTooltipModule,
     MatDialogModule,
     MatSliderModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    MatListModule
   ],
   exports: [
     MatDatepickerModule,
@@ -64,7 +65,8 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
     MatTooltipModule,
     MatDialogModule,
     MatSliderModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    MatListModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-AR' },

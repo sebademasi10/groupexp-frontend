@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -26,5 +26,9 @@ export class ActividadService {
     return this.httpClient.post<Activity>(`${this._controllerName}`, activity).pipe(
       map(activity => activity.title)
     );
+  }
+  public update(_activity: Activity): Observable<any> {
+    const uid = _activity.uid;
+    return this.httpClient.patch(`${this._controllerName}/${uid}`, _activity);
   }
 }
