@@ -93,7 +93,11 @@
                     </mat-list-item>
                 </mat-list>
             </div>
-            <button mat-flat-button color="primary" (click)="participate()" type="button">Participar</button>
+            <button mat-flat-button color="primary" [disabled]="activity.participants.includes(loggedUserName)"
+                (click)="participate()">
+                <mat-icon>{{activity.participants.includes(loggedUserName)?'check':'add'}}</mat-icon>
+                {{activity.participants.includes(loggedUserName)?'Participando':'Participar'}}
+            </button>
         </form>
     </mat-card>
 </div>

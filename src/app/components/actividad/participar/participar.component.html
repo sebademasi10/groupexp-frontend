@@ -3,7 +3,7 @@
     <h2><a routerLink="/actividad/organizar">Organicemos una!</a></h2>
 </div>
 
-<mat-card *ngFor="let activity of activities">
+<mat-card *ngFor="let activity of activities" (click)="navigate(activity.uid)">
     <mat-card-header>
         <mat-card-title>
             <mat-icon>{{ICONS[activity.meanOfTransportation.toString()]}}</mat-icon>
@@ -27,10 +27,13 @@
         {{activity.description}}
     </mat-card-content>
     <mat-card-actions>
-        <button mat-raised-button color="primary" [disabled]="activity.participants.includes(loggedUserName)"
-            (click)="navigate(activity.uid)">
+        <button *ngIf="!activity.creators.includes(loggedUserName)" mat-raised-button color="primary"
+            [disabled]="activity.participants.includes(loggedUserName)" (click)="navigate(activity.uid)">
             <mat-icon>{{activity.participants.includes(loggedUserName)?'check':'add'}}</mat-icon>
             {{activity.participants.includes(loggedUserName)?'Participando':'Participar'}}
+        </button>
+        <button mat-raised-button color="primary" *ngIf="activity.creators.includes(loggedUserName)">
+            <mat-icon>edit</mat-icon> Editar
         </button>
     </mat-card-actions>
 </mat-card>

@@ -38,6 +38,7 @@ export class ActivityDetailComponent implements OnInit {
   public zoom = 8
   public markerOptions: google.maps.MarkerOptions = { draggable: false };
   public markerPositions: google.maps.LatLngLiteral[] = [];
+  public loggedUserName: string;
 
 
   constructor
@@ -49,7 +50,9 @@ export class ActivityDetailComponent implements OnInit {
       private snackBarService: SnackBarService,
       private activitiesService: ActividadService,
       private authService: AuthService
-    ) { }
+    ) {
+    this.loggedUserName = authService.getLoggedUser();
+  }
 
   ngOnInit(): void {
     this.meansOfTransportation = this.activatedRoute.snapshot.data[ResolversEnum.MEDIOS_MOVILIDAD].meansOfTransportation;

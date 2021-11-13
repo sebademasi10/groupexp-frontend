@@ -53,6 +53,7 @@ export class SidebarComponent implements OnInit {
   }
 
   navigate(path: string) {
+    this.toggleSideBarForMe.emit(true);
     if (path && path != '/') {
       this.router.navigate([`${path}`]);
     }
