@@ -7,10 +7,12 @@ table {
     justify-content: flex-end;
 }
 
-.example-card {
-    max-width: 85vw;
-}
-
 .padding-bottom {
     padding-bottom: 4vh;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

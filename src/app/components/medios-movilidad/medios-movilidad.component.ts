@@ -9,6 +9,10 @@ import { BicycleModalComponent } from 'src/app/shared/modals/bicycle-modal/bicyc
 import { SnackBarService } from 'src/app/services/snack-bar.service';
 import { ActivatedRoute } from '@angular/router';
 import { ResolversEnum } from 'src/app/enums/enums/resolvers.enum';
+import { MeansOfTransportations } from 'src/app/enums/means-of-transportations.enum';
+import { CarComponent } from 'src/app/shared/modals/car/car.component';
+import { MotorcycleComponent } from 'src/app/shared/modals/motorcycle/motorcycle.component';
+import { RollersComponent } from 'src/app/shared/modals/rollers/rollers.component';
 
 
 @Component({
@@ -18,7 +22,7 @@ import { ResolversEnum } from 'src/app/enums/enums/resolvers.enum';
 })
 export class MediosMovilidadComponent implements OnInit {
 
-  selectedOption: string;
+  meanOfTransportation: string;
   mediosMovilidad: MedioMovilidad[];
 
   public dataSource: MedioMovilidad[];
@@ -51,13 +55,35 @@ export class MediosMovilidadComponent implements OnInit {
   }
 
   openDialog() {
-    const dialogRef = this.matDialog.open(BicycleModalComponent, {
-      width: '60vw',
-      height: '80vh'
+
+    const modalType = this.getModalType();
+    const dialogRef = this.matDialog.open(modalType, {
+      width: '95vw',
+      height: '90vh'
     });
+
+
     dialogRef.afterClosed().subscribe(() => {
       this.snackService.openSnackBar('Actualizado con éxito', true);
     })
+  }
+
+  getModalType() {
+    let modalType = BicycleModalComponent;
+    switch (this.meanOfTransportation) {
+      case MeansOfTransportations.AUTO:
+        modalType = CarComponent;
+        break;
+      case MeansOfTransportations.MOTO:
+        modalType = MotorcycleComponent;
+        break;
+      case MeansOfTransportations.ROLLERS:
+        modalType = RollersComponent;
+        break;
+      default:
+        break;
+    }
+    return modalType;
   }
 
   private _filter(value: string): MedioMovilidad[] {
@@ -66,8 +92,9 @@ export class MediosMovilidadComponent implements OnInit {
     return this.options.filter((option: any) => option.name.toLowerCase().includes(filterValue));
   }
 
-  onSelectionChange(option: MatAutocompleteSelectedEvent) {
-    this.selectedOption = option.option.value;
+  onSelectionChange($selected: MatAutocompleteSelectedEvent) {
+    console.log('opt', $selected.option.value);
+    this.meanOfTransportation = $selected.option.value.name;
     this.openDialog()
   }
 
