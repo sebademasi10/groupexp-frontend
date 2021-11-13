@@ -27,6 +27,10 @@
         {{activity.description}}
     </mat-card-content>
     <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="navigate(activity.uid)">Participar</button>
+        <button mat-raised-button color="primary" [disabled]="activity.participants.includes(loggedUserName)"
+            (click)="navigate(activity.uid)">
+            <mat-icon>{{activity.participants.includes(loggedUserName)?'check':'add'}}</mat-icon>
+            {{activity.participants.includes(loggedUserName)?'Participando':'Participar'}}
+        </button>
     </mat-card-actions>
 </mat-card>

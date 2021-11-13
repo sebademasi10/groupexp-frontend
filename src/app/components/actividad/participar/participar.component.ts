@@ -4,6 +4,7 @@ import { of, Subscription } from 'rxjs';
 import { ICONBYMEANS } from 'src/app/enums/icon-by-means.enum';
 import { Activity } from 'src/app/models/activity.model';
 import { ActividadService } from 'src/app/services/actividad.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-participar',
@@ -16,11 +17,15 @@ export class ParticiparComponent implements OnInit, OnDestroy {
   public activities: Activity[];
   public ICONS = ICONBYMEANS;
   public activitiesLoaded$ = of(true);
+  public loggedUserName: string;
 
   constructor(
     private activitiesService: ActividadService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private authService: AuthService
+  ) {
+    this.loggedUserName = authService.getLoggedUser();
+  }
 
   ngOnInit(): void {
 
