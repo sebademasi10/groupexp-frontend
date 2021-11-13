@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { of, Subscription } from 'rxjs';
 import { ICONBYMEANS } from 'src/app/enums/icon-by-means.enum';
 import { Activity } from 'src/app/models/activity.model';
 import { ActividadService } from 'src/app/services/actividad.service';
