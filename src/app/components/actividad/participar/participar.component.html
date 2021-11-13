@@ -1,4 +1,4 @@
-<div class="m-5 empty" *ngIf="!!activities">
+<div class="m-5" *ngIf="activitiesLoaded$ | async">
     <h1>Ups, no hay actividades disponibles</h1>
     <h2><a routerLink="/actividad/organizar">Organicemos una!</a></h2>
 </div>

@@ -90,7 +90,8 @@ export class OrganizarComponent implements OnInit, AfterViewInit, OnDestroy {
       endDate: [new Date(), Validators.required],
       startTime: ['00:00', Validators.required],
       endTime: ['00:00', Validators.required],
-      description: ["", Validators.required]
+      description: ["", Validators.required],
+      creators: [[]]
     })
   }
 

@@ -15,6 +15,7 @@ export class ParticiparComponent implements OnInit, OnDestroy {
   private _activitiesSubscription: Subscription;
   public activities: Activity[];
   public ICONS = ICONBYMEANS;
+  public activitiesLoaded$ = of(true);
 
   constructor(
     private activitiesService: ActividadService,
@@ -22,8 +23,10 @@ export class ParticiparComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+
     this._activitiesSubscription = this.activitiesService.getAll().subscribe((activities: Activity[]) => {
       this.activities = activities;
+      this.activitiesLoaded$ = of(activities.length === 0);
     })
   }
 
