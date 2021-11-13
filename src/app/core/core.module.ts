@@ -11,6 +11,7 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { LayoutComponent } from './layout/layout/layout.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
+import { SidenavListComponent } from './layout/sidenav-list/sidenav-list.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
     FooterComponent,
     HeaderComponent,
     SidebarComponent,
-    LayoutComponent
+    LayoutComponent,
+    SidenavListComponent
   ],
   exports: [
     FooterComponent,

@@ -19,7 +19,6 @@ export class SidenavListComponent implements OnInit {
 
   ngOnInit(): void {
     this.session = this.authService.getSession();
-    this.setSubscribers();
   }
 
   public onSidenavClose = () => {
@@ -28,13 +27,5 @@ export class SidenavListComponent implements OnInit {
 
   closeSession(): void {
     this.authService.logout();
-  }
-
-  private setSubscribers(): void {
-    this.authService.sessionChanged.subscribe((s) => {
-      if (s) {
-        this.session = s;
-      }
-    });
   }
 }

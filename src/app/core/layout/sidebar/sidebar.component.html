@@ -1,14 +1,6 @@
 <div class="sidenavContainer" (mouseenter)="onSinenavToggle()" (mouseleave)="onSinenavToggle()"
   [@onSideNavChange]="sideNavState ? 'open' : 'close'">
   <mat-nav-list *ngIf="!showFiller">
-    <mat-list-item class="grand-parent">
-      <mat-icon>home
-      </mat-icon>
-      <span class="full-width home-button" *ngIf="isExpanded || isShowing" [@animateText]="linkText ? 'show' : 'hide'"
-        [@animateTextTraslate]="linkText ? 'in' : 'void'">
-        <a routerLink="">Inicio</a>
-      </span>
-    </mat-list-item>
     <div class="parent" *ngFor="let item of menuItems">
       <mat-list-item (click)="activarItem(item)" class="parent">
         <mat-icon>{{item.icon ? item.icon : 'gavel'}}

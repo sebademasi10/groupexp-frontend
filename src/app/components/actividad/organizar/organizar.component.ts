@@ -54,7 +54,7 @@ export class OrganizarComponent implements OnInit, AfterViewInit, OnDestroy {
       private authService: AuthService
     ) { }
   ngOnDestroy(): void {
-    this.directionsResultsSubsciption$.unsubscribe();
+    this.directionsResultsSubsciption$?.unsubscribe();
   }
 
   ngOnInit(): void {
