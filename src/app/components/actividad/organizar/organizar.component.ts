@@ -102,7 +102,6 @@ export class OrganizarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private _createDirectionsRequest(): google.maps.DirectionsRequest {
     const travelMode = this._getTravelMode();
-    console.log(travelMode);
     return {
       origin: this.markerPositions[0],
       destination: this.markerPositions[1],
@@ -120,7 +119,6 @@ export class OrganizarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public onSelectionChange(option: MatAutocompleteSelectedEvent) {
     this.meanOfTransportation = option.option.value;
-    console.log(this.meanOfTransportation);
   }
 
   public newActivity() {
