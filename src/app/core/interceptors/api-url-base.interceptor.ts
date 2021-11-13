@@ -10,7 +10,7 @@ export class ApiUrlInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const request = req.clone({
-      url: `${environment.apiUrl}/api/${req.url}`
+      url: `${environment.apiUrl}/api${req.url}`
     });
     return next.handle(request);
 

@@ -43,7 +43,11 @@ export class RegisterComponent implements OnInit {
       .subscribe(data => {
         this.snackService.openSnackBar('¡Usuario creado con éxito!', true);
         this.router.navigateByUrl('/');
-      })
+      },
+        (error: any) => {
+          this.snackService.openSnackBarTimeout(`${error.error.errors[0].msg}`, false, 5000)
+        }
+      )
   }
 
 }
