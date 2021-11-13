@@ -18,3 +18,9 @@ mat-card-subtitle.when {
     align-content: space-around;
     align-items: center;
 }
+
+.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

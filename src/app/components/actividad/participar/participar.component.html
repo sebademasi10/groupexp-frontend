@@ -1,3 +1,8 @@
+<div class="m-5 empty" *ngIf="!!activities">
+    <h1>Ups, no hay actividades disponibles</h1>
+    <h2><a routerLink="/actividad/organizar">Organicemos una!</a></h2>
+</div>
+
 <mat-card *ngFor="let activity of activities">
     <mat-card-header>
         <mat-card-title>
