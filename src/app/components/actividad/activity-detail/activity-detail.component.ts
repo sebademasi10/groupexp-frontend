@@ -157,9 +157,10 @@ export class ActivityDetailComponent implements OnInit {
     const userName = this.authService.getLoggedUser();
     let payload = JSON.parse(JSON.stringify(this.activity));
     payload.participants.push(userName);
-    this.activitiesService.update(payload).subscribe((response: any) => {
+    this.activitiesService.save(payload).subscribe((response: any) => {
       this.activity = response;
       this.snackBarService.openSnackBar("Listo, ya estás participando!", true);
+      this.router.navigate(['home']);
     })
   }
 

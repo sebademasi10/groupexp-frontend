@@ -85,7 +85,7 @@
                 </mat-form-field>
             </div>
 
-            <div *ngIf="activity.participants.length">
+            <div *ngIf="activity.participants?.length">
                 <mat-card-title class="mt-3">Participantes</mat-card-title>
                 <mat-list>
                     <mat-list-item *ngFor="let participant of activity.participants">
@@ -93,10 +93,10 @@
                     </mat-list-item>
                 </mat-list>
             </div>
-            <button mat-flat-button color="primary" [disabled]="activity.participants.includes(loggedUserName)"
-                (click)="participate()">
-                <mat-icon>{{activity.participants.includes(loggedUserName)?'check':'add'}}</mat-icon>
-                {{activity.participants.includes(loggedUserName)?'Participando':'Participar'}}
+            <button type="button" mat-flat-button color="primary"
+                [disabled]="activity.participants?.includes(loggedUserName)" (click)="participate()">
+                <mat-icon>{{activity.participants?.includes(loggedUserName)?'check':'add'}}</mat-icon>
+                {{activity.participants?.includes(loggedUserName)?'Participando':'Participar'}}
             </button>
         </form>
     </mat-card>
