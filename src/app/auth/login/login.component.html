@@ -13,7 +13,10 @@
                 <p>
                     <mat-form-field class="example-full-width" appearance="fill">
                         <mat-label>Contraseña</mat-label>
-                        <input type="password" matInput formControlName="password">
+                        <input [type]="inputType" matInput formControlName="password">
+                        <span matSuffix>
+                            <mat-icon (click)="toggleInputType()">visibility</mat-icon>
+                        </span>
                     </mat-form-field>
                 </p>
                 <mat-card-actions>

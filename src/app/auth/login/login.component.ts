@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
 
 
   loginForm: FormGroup;
-  private isLogged: boolean;
+  public inputType = "password";
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -44,6 +44,10 @@ export class LoginComponent implements OnInit {
         }
       )
 
+  }
+
+  toggleInputType() {
+    this.inputType === 'password' ? this.inputType = 'text' : this.inputType = 'password';
   }
 
 }
