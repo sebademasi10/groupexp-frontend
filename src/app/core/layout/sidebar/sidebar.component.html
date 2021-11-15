@@ -1,11 +1,10 @@
-<div class="sidenavContainer" [@onSideNavChange]="sideNavState ? 'open' : 'close'">
+<div class="sidenavContainer" [@onSideNavChange]="'open'">
   <mat-nav-list *ngIf="!showFiller">
     <div class="parent" *ngFor="let item of menuItems">
       <mat-list-item (click)="navigate(item.path)" class="parent">
         <mat-icon>{{item.icon ? item.icon : 'gavel'}}
         </mat-icon>
-        <span class="full-width" *ngIf="isExpanded || isShowing" (click)="navigate(item.path)"
-          [@animateText]="linkText ? 'show' : 'hide'" [@animateTextTraslate]="linkText ? 'in' : 'void'">
+        <span class="full-width">
           {{capitalize(item.nombre)}}
         </span>
         <mat-icon class="menu-button" [ngClass]="{'rotated' : item.activo}"
