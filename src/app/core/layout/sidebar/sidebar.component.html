@@ -1,8 +1,7 @@
-<div class="sidenavContainer" (mouseenter)="onSinenavToggle()" (mouseleave)="onSinenavToggle()"
-  [@onSideNavChange]="sideNavState ? 'open' : 'close'">
+<div class="sidenavContainer" [@onSideNavChange]="sideNavState ? 'open' : 'close'">
   <mat-nav-list *ngIf="!showFiller">
     <div class="parent" *ngFor="let item of menuItems">
-      <mat-list-item (click)="activarItem(item)" class="parent">
+      <mat-list-item (click)="navigate(item.path)" class="parent">
         <mat-icon>{{item.icon ? item.icon : 'gavel'}}
         </mat-icon>
         <span class="full-width" *ngIf="isExpanded || isShowing" (click)="navigate(item.path)"

@@ -30,7 +30,9 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.authService.login(this.loginForm.value)
+    let loginData = this.loginForm.value;
+    loginData.email = loginData.email.toLowerCase().replace(/ /g, '');
+    this.authService.login(loginData)
       .subscribe(data => {
         localStorage.setItem('token', data['token'])
         this.router.navigateByUrl('/');
