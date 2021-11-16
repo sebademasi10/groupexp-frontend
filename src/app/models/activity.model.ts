@@ -16,4 +16,6 @@ export class Activity {
     description: string;
     creators: string[];
     participants: string[];
+    isOwner: boolean;
+    isActive: boolean;
 }

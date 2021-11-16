@@ -15,7 +15,10 @@ const routes: Routes = [
   {
     path: 'organizar',
     component: OrganizarComponent,
-    resolve: { MediosMovilidadResolver }
+    resolve: { MediosMovilidadResolver },
+    data: {
+      isOrganizar: true
+    }
   },
   {
     path: 'ver/:uid',

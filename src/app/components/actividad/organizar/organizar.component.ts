@@ -123,9 +123,9 @@ export class OrganizarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public newActivity() {
-    if (this.activityForm.invalid || this.markerPositions.length < 2) {
-      return this.snackBarService.openSnackBar("Por favor complete los campos requeridos y seleccione 2 puntos del mapa", false)
-    }
+    if (this.activityForm.invalid || this.markerPositions.length < 2) return this.snackBarService.openSnackBar("Por favor complete los campos requeridos y seleccione 2 puntos del mapa", false)
+    if (!this.validateDateRange()) return this.snackBarService.openSnackBar("La fecha de fin debe ser mayor a la de inicio", false);
+    if (!this.currentDate()) return this.snackBarService.openSnackBar("La fecha debe ser igual o posterior a la actual", false);
     this._activity = this.activityForm.value;
     this._activity.creators.push(this.authService.getLoggedUser());
     this._activity.meanOfTransportation = this.activityForm.controls['meanOfTransportation'].value.name;
@@ -136,6 +136,7 @@ export class OrganizarComponent implements OnInit, AfterViewInit, OnDestroy {
       // TODO: Navegar a detalle de actividad
       this.router.navigate(['home'])
     });
+
   }
 
   public addMarker(event: google.maps.MapMouseEvent) {
@@ -193,5 +194,13 @@ export class OrganizarComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     return travelMode;
   }
+  validateDateRange() {
+    return this.activityForm.controls.startDate.value < this.activityForm.controls.endDate.value;
+  }
+
+  currentDate() {
+    return this.activityForm.controls.startDate.value > new Date()
+  }
 }
+
 

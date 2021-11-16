@@ -31,7 +31,23 @@ export class ParticiparComponent implements OnInit, OnDestroy {
 
     this._activitiesSubscription = this.activitiesService.getAll().subscribe((activities: Activity[]) => {
       this.activities = activities;
+      this.sortActivities();
       this.activitiesLoaded$ = of(activities.length === 0);
+      this.checkOwner();
+      this.checkExipired();
+    })
+  }
+  checkExipired() {
+    this.activities.forEach(activity => {
+      activity.isActive = new Date(activity.startDate) > new Date();
+    })
+  }
+  sortActivities() {
+    this.activities.sort((a: Activity, b: Activity) => a.startDate < b.startDate ? -1 : 1)
+  }
+  checkOwner() {
+    this.activities.forEach(activity => {
+      activity.isOwner = activity.creators.includes(this.loggedUserName)
     })
   }
 

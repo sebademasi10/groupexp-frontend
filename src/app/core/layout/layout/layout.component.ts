@@ -22,5 +22,5 @@ export class LayoutComponent implements OnInit {
       this.sideBarOpen = event;
     }
   }
- 
+
 }
