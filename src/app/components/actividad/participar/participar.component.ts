@@ -51,6 +51,11 @@ export class ParticiparComponent implements OnInit, OnDestroy {
     })
   }
 
+  eliminar(uid: string) {
+    this.activitiesService.delete(uid).subscribe(
+      () => { window.location.reload() }
+    )
+  }
   ngOnDestroy(): void {
     this._activitiesSubscription.unsubscribe();
   }

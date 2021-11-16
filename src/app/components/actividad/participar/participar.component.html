@@ -4,8 +4,8 @@
 </div>
 
 <ng-container *ngFor="let activity of activities">
-    <mat-card *ngIf="activity.isActive" (click)="navigate(activity.uid)">
-        <mat-card-header>
+    <mat-card *ngIf="activity.isActive">
+        <mat-card-header (click)="navigate(activity.uid)">
             <mat-card-title>
                 <mat-icon>{{ICONS[activity.meanOfTransportation.toString()]}}</mat-icon>
                 {{activity.title}}
@@ -28,7 +28,7 @@
             {{activity.description}}
         </mat-card-content>
         <mat-card-actions [ngStyle]="{'justify-content': activity.isOwner? 'space-between':'flex-end'}">
-            <button mat-icon-button color="warn" *ngIf="activity.isOwner">
+            <button mat-icon-button (click)="eliminar(activity.uid)" color="warn" *ngIf="activity.isOwner">
                 <mat-icon>delete</mat-icon>
             </button>
             <button *ngIf="!activity.creators.includes(loggedUserName)" mat-raised-button color="primary"

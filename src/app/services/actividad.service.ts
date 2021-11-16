@@ -9,6 +9,7 @@ import { Activity } from '../models/activity.model';
 })
 export class ActividadService {
 
+
   private readonly _controllerName = 'activities';
   constructor(private httpClient: HttpClient) { }
 
@@ -30,5 +31,9 @@ export class ActividadService {
   public update(_activity: Activity): Observable<any> {
     const uid = _activity.uid;
     return this.httpClient.patch(`${this._controllerName}/${uid}`, _activity);
+  }
+
+  delete(uid: string): Observable<any> {
+    return this.httpClient.delete(`${this._controllerName}/${uid}`);
   }
 }
