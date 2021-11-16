@@ -59,7 +59,7 @@ export class ActivityDetailComponent implements OnInit {
     this.activity = this.activatedRoute.snapshot.data[ResolversEnum.ACTIVIDAD];
     this.markerPositions.push(this.activity.fromCoordinates);
     this.markerPositions.push(this.activity.toCoordinates);
-
+    this.activity.isOwner = this.activity.creators.includes(this.loggedUserName)
     this._createForm();
     this.filteredOptions = this.activityForm.controls['meanOfTransportation'].valueChanges.pipe(
       startWith(''),
@@ -97,7 +97,19 @@ export class ActivityDetailComponent implements OnInit {
       endTime: [this.activity.endTime],
       description: [this.activity.description]
     })
+
     this.activityForm.disable();
+    if (this.activity.isOwner) {
+      this.activityForm.controls.title.enable();
+      this.activityForm.controls.description.enable();
+      this.activityForm.controls.startDate.enable();
+      this.activityForm.controls.endDate.enable();
+    }
+  }
+
+  public clearMarkers() {
+    this.markerPositions = [];
+    this.directionsResults$ = undefined;
   }
 
   private _filter(value: string): MedioMovilidad[] {
@@ -164,4 +176,13 @@ export class ActivityDetailComponent implements OnInit {
     })
   }
 
+  edit() {
+    let activity = this.activityForm.value;
+    activity.uid = this.activity.uid;
+    this.activitiesService.update(activity).subscribe((response: any) => {
+      this.activity = response;
+      this.snackBarService.openSnackBar("Edición exitosa!", true);
+      this.router.navigate(['home']);
+    })
+  }
 }

@@ -33,7 +33,7 @@ export class OrganizarComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MapInfoWindow) infoWindow: MapInfoWindow;
   public directionsResults$: Observable<google.maps.DirectionsResult | undefined>
   public directionsOptions: google.maps.DirectionsRendererOptions = {
-    draggable: true
+    draggable: false
   }
   public center: google.maps.LatLngLiteral = { lat: -31.417, lng: -64.183 };
   public zoom = 13

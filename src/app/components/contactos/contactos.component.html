@@ -1,5 +1,5 @@
 <div class="row justify-content-center padding-top-15 padding-left-50 example-card padding-bottom">
-    <h1>Agregar contacto</h1>
+    <h1>Agregar usuario frecuente</h1>
     <mat-card class="example-card">
         <form class="example-form">
             <mat-form-field class="example-full-width" appearance="fill">
@@ -18,7 +18,7 @@
     </mat-card>
 
 
-    <h2>Mis contactos</h2>
+    <h2>Mis usuarios frecuentes</h2>
     <mat-card class="example-card">
 
         <table mat-table [dataSource]="contacts" class="mat-elevation-z8">
@@ -30,13 +30,13 @@
             <ng-container matColumnDef="acciones">
                 <th mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let element" class="header-align-right">
-                    <button matTooltip="Editar" mat-icon-button>
+                    <!-- <button matTooltip="Editar" mat-icon-button>
                         <mat-icon>edit</mat-icon>
                     </button>
                     <button matTooltip="Ver" mat-icon-button>
                         <mat-icon>visibility</mat-icon>
-                    </button>
-                    <button matTooltip="Eliminar" mat-icon-button>
+                    </button> -->
+                    <button matTooltip="Eliminar" mat-icon-button (click)="remove(element)">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </td>

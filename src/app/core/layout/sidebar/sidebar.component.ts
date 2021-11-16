@@ -31,7 +31,7 @@ export class SidebarComponent implements OnInit {
     this.menuItems = [
       {
         id: 1,
-        nombre: "Contactos",
+        nombre: "Usuarios frecuentes",
         path: "/contactos",
         icon: "person",
         subMenu: null,

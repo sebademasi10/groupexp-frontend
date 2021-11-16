@@ -36,7 +36,8 @@
                 <mat-icon>{{activity.participants.includes(loggedUserName)?'check':'add'}}</mat-icon>
                 {{activity.participants.includes(loggedUserName)?'Participando':'Participar'}}
             </button>
-            <button mat-raised-button color="primary" *ngIf="activity.creators.includes(loggedUserName)">
+            <button mat-raised-button color="primary" (click)="navigate(activity.uid)"
+                *ngIf="activity.creators.includes(loggedUserName)">
                 <mat-icon>edit</mat-icon> Editar
             </button>
         </mat-card-actions>

@@ -62,7 +62,18 @@ export class ContactosComponent implements OnInit {
   agregarContacto() {
     this.contactosService.add(this.authService.getUserId(), this.selectedOption).subscribe(() => {
       this.getContacts()
+      window.location.reload();
     })
+  }
+
+  remove(element) {
+    let contacts = [];
+    this.contacts.forEach((contact) => {
+      if (contact.email !== element.email) {
+        contacts.push(contact);
+      }
+    });
+    this.contacts = contacts;
   }
 
   getContacts() {
