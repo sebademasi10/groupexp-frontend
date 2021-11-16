@@ -39,7 +39,7 @@ export class ParticiparComponent implements OnInit, OnDestroy {
   }
   checkExipired() {
     this.activities.forEach(activity => {
-      activity.isActive = new Date(activity.startDate) > new Date();
+      activity.isActive = new Date(activity.startDate).toLocaleDateString() >= new Date().toLocaleDateString();
     })
   }
   sortActivities() {

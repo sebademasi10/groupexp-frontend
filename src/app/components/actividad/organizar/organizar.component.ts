@@ -195,11 +195,12 @@ export class OrganizarComponent implements OnInit, AfterViewInit, OnDestroy {
     return travelMode;
   }
   validateDateRange() {
-    return this.activityForm.controls.startDate.value < this.activityForm.controls.endDate.value;
+    return this.activityForm.controls.startDate.value <= this.activityForm.controls.endDate.value;
   }
 
   currentDate() {
-    return this.activityForm.controls.startDate.value > new Date()
+    console.log('asd', this.activityForm.controls.startDate.value.toLocaleDateString(), new Date().toLocaleDateString());
+    return this.activityForm.controls.startDate.value.toLocaleDateString() >= new Date().toLocaleDateString()
   }
 }
 
