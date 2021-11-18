@@ -36,4 +36,8 @@ export class ActividadService {
   delete(uid: string): Observable<any> {
     return this.httpClient.delete(`${this._controllerName}/${uid}`);
   }
+
+  disparticipate(uid: string) {
+    // return this.httpClient.
+  }
 }

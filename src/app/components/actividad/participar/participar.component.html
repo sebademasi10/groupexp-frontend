@@ -32,9 +32,9 @@
                 <mat-icon>delete</mat-icon>
             </button>
             <button *ngIf="!activity.creators.includes(loggedUserName)" mat-raised-button color="primary"
-                [disabled]="activity.participants.includes(loggedUserName)" (click)="navigate(activity.uid)">
-                <mat-icon>{{activity.participants.includes(loggedUserName)?'check':'add'}}</mat-icon>
-                {{activity.participants.includes(loggedUserName)?'Participando':'Participar'}}
+                [disabled]="checkParticipant(activity)" (click)="navigate(activity.uid)">
+                <mat-icon>{{checkParticipant(activity)?'check':'add'}}</mat-icon>
+                {{checkParticipant(activity)?'Participando':'Participar'}}
             </button>
             <button mat-raised-button color="primary" (click)="navigate(activity.uid)"
                 *ngIf="activity.creators.includes(loggedUserName)">

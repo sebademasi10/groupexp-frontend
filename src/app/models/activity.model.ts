@@ -1,5 +1,6 @@
 import { Time } from "@angular/common";
 import { MedioMovilidad } from "./medio-movilidad.model";
+import { User } from "./user.model";
 
 export class Activity {
     uid: string;
@@ -15,7 +16,7 @@ export class Activity {
     endTime: Time;
     description: string;
     creators: string[];
-    participants: string[];
+    participants: User[];
     isOwner: boolean;
     isActive: boolean;
 }

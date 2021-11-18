@@ -97,10 +97,11 @@
                     </mat-list-item>
                 </mat-list>
             </div>
-            <button type="button" mat-flat-button color="primary" *ngIf="!activity.creators?.includes(loggedUserName)"
-                [disabled]="activity.participants?.includes(loggedUserName)" (click)="participate()">
-                <mat-icon>{{activity.participants?.includes(loggedUserName)?'check':'add'}}</mat-icon>
-                {{activity.participants?.includes(loggedUserName)?'Participando':'Participar'}}
+            <button type="button" mat-flat-button color="warn" *ngIf="isParticipant" (click)="disparticipate()">
+                <mat-icon>undo</mat-icon> Anular participación
+            </button>
+            <button type="button" mat-flat-button color="primary" *ngIf="!isParticipant" (click)="participate()">
+                <mat-icon>add</mat-icon> Participar
             </button>
             <button mat-flat-button color="primary" type="button" *ngIf="activity.creators?.includes(loggedUserName)"
                 (click)="edit()">

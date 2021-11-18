@@ -40,6 +40,10 @@ export class ActivityDetailComponent implements OnInit {
   public markerOptions: google.maps.MarkerOptions = { draggable: false };
   public markerPositions: google.maps.LatLngLiteral[] = [];
   public loggedUserName: string;
+  public uid: string;
+  public isParticipant: boolean;
+  public loggedUser: any;
+  public loggedUserFullName: string;
 
 
   constructor
@@ -52,12 +56,15 @@ export class ActivityDetailComponent implements OnInit {
       private activitiesService: ActividadService,
       private authService: AuthService
     ) {
-    this.loggedUserName = authService.getLoggedUser();
+    this.loggedUser = authService.getLoggedUser();
+    this.loggedUserFullName = `${this.loggedUser.name} ${this.loggedUser.surname}`
+    this.uid = authService.getUserId();
   }
 
   ngOnInit(): void {
     this.meansOfTransportation = this.activatedRoute.snapshot.data[ResolversEnum.MEDIOS_MOVILIDAD].meansOfTransportation;
     this.activity = this.activatedRoute.snapshot.data[ResolversEnum.ACTIVIDAD];
+    this.isParticipant = this.checkParticipant()
     this.markerPositions.push(this.activity.fromCoordinates);
     this.markerPositions.push(this.activity.toCoordinates);
     this.activity.isOwner = this.activity.creators.includes(this.loggedUserName)
@@ -84,6 +91,16 @@ export class ActivityDetailComponent implements OnInit {
         console.error(err);
         this.mapApiLoaded = of(false);
       })
+  }
+
+  public checkParticipant() {
+    const [loggedUserName, loggedUserSurname] = this.loggedUserName.split(' ');
+    const participant = this.activity.participants.find((participant) => {
+      console.log('part', participant);
+      return participant.name === loggedUserName && participant.surname === loggedUserSurname;
+    });
+
+    return !participant;
   }
 
   private _createForm() {
@@ -187,14 +204,20 @@ export class ActivityDetailComponent implements OnInit {
   }
 
   public participate() {
-    const userName = this.authService.getLoggedUser();
     let payload = JSON.parse(JSON.stringify(this.activity));
-    payload.participants.push(userName);
+    const user = this.authService.getLoggedUser()
+    payload.participants.push(user);
     this.activitiesService.save(payload).subscribe((response: any) => {
       this.activity = response;
       this.snackBarService.openSnackBar("Listo, ya estás participando!", true);
       this.router.navigate(['home']);
     })
+  }
+
+  disparticipate() {
+    // this.activitiesService.disparticipate(this.uid).subscribe((data: any) => {
+    //   console.log(data)
+    // })
   }
 
   edit() {

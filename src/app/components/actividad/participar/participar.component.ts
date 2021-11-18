@@ -51,6 +51,15 @@ export class ParticiparComponent implements OnInit, OnDestroy {
     })
   }
 
+  public checkParticipant(activity: Activity) {
+    const [loggedUserName, loggedUserSurname] = this.loggedUserName.split(' ');
+    const participant = activity.participants.find((participant) => {
+      return participant.name === loggedUserName && participant.surname === loggedUserSurname;
+    });
+
+    return !participant;
+  }
+
   eliminar(uid: string) {
     this.activitiesService.delete(uid).subscribe(
       () => { window.location.reload() }
