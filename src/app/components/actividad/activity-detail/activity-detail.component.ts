@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ResolversEnum } from 'src/app/enums/enums/resolvers.enum';
+import { MeansOfTransportations } from 'src/app/enums/means-of-transportations.enum';
 import { MapsService } from 'src/app/maps.service';
 import { Activity } from 'src/app/models/activity.model';
 import { MedioMovilidad } from 'src/app/models/medio-movilidad.model';
@@ -119,11 +120,31 @@ export class ActivityDetailComponent implements OnInit {
   }
 
   private _createDirectionsRequest(): google.maps.DirectionsRequest {
+    const travelMode = this._getTravelMode()
     return {
       origin: this.markerPositions[0],
       destination: this.markerPositions[1],
-      travelMode: google.maps.TravelMode.WALKING
+      travelMode
     }
+  }
+
+  private _getTravelMode(): google.maps.TravelMode {
+    if (!this.activity.meanOfTransportation) return google.maps.TravelMode.WALKING;
+    let travelMode: google.maps.TravelMode;
+    switch (this.activity.meanOfTransportation) {
+      case MeansOfTransportations.CAMINANDO:
+      case MeansOfTransportations.CORRER:
+      case MeansOfTransportations.ROLLERS:
+      case MeansOfTransportations.BICICLETA:
+        travelMode = google.maps.TravelMode.WALKING;
+        break;
+      case MeansOfTransportations.MOTO:
+      case MeansOfTransportations.AUTO:
+        travelMode = google.maps.TravelMode.DRIVING;
+        break;
+      default:
+    }
+    return travelMode;
   }
 
   public displayFn(meanOfTransportation: MedioMovilidad): string {
