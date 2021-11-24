@@ -94,13 +94,12 @@ export class ActivityDetailComponent implements OnInit {
   }
 
   public checkParticipant() {
-    const [loggedUserName, loggedUserSurname] = this.loggedUserName.split(' ');
     const participant = this.activity.participants.find((participant) => {
       console.log('part', participant);
-      return participant.name === loggedUserName && participant.surname === loggedUserSurname;
+      return participant.name === this.loggedUser.name && participant.surname === this.loggedUser.surname;
     });
 
-    return !participant;
+    return participant !== undefined;
   }
 
   private _createForm() {

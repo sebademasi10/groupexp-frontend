@@ -4,7 +4,7 @@
 </div>
 
 <ng-container *ngFor="let activity of activities">
-    <mat-card *ngIf="activity.isActive">
+    <mat-card>
         <mat-card-header (click)="navigate(activity.uid)">
             <mat-card-title>
                 <mat-icon>{{ICONS[activity.meanOfTransportation.toString()]}}</mat-icon>
