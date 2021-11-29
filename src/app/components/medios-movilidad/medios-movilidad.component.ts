@@ -13,6 +13,8 @@ import { MeansOfTransportations } from 'src/app/enums/means-of-transportations.e
 import { CarModalComponent } from 'src/app/shared/modals/car-modal/car-modal.component';
 import { MotorcycleModalComponent } from 'src/app/shared/modals/motorcycle-modal/motorcycle-modal.component';
 import { RollersModalComponent } from 'src/app/shared/modals/rollers-modal/rollers-modal.component';
+import { WalkingModal } from 'src/app/shared/modals/walking/walking.modal';
+import { RunningModal } from 'src/app/shared/modals/running/running.modal';
 
 
 @Component({
@@ -79,6 +81,12 @@ export class MediosMovilidadComponent implements OnInit {
       case MeansOfTransportations.ROLLERS:
         modalType = RollersModalComponent;
         break;
+      case MeansOfTransportations.CAMINANDO:
+        modalType = WalkingModal;
+        break;
+      case MeansOfTransportations.CORRER:
+        modalType = RunningModal;
+        break
       default:
         break;
     }
