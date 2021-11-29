@@ -40,7 +40,7 @@ export class EditComponent implements OnInit {
 
     this.userService.update(this.route.snapshot.params['id'], this.user).subscribe(() => {
       this.snackService.openSnackBar('¡Usuario actualizado con éxito!', true);
-      this.authService.getLoggedUser();
+      this.authService.getLoggedUserName();
       this.router.navigate(['/perfil/ver', this.route.snapshot.params['id']]);
     })
   }

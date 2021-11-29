@@ -21,7 +21,7 @@ export class AuthService {
     private http: HttpClient,
     private jwt: JwtHelperService
   ) {
-    this.getLoggedUser();
+    this.getLoggedUserName();
   }
 
   getUserId() {
@@ -36,7 +36,7 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  getLoggedUser() {
+  getLoggedUserName() {
     const token = this.getToken();
     if (token) {
       const data = this.jwt.decodeToken(token);
@@ -44,6 +44,14 @@ export class AuthService {
     }
     this.loggedUserNameChanged.next(this.loggedUserName);
     return this.loggedUserName;
+  }
+
+  getLoggedUser() {
+    const token = this.getToken();
+    const tokenData = this.jwt.decodeToken(token);
+    const { iat, exp, ...user } = tokenData;
+
+    return user;
   }
 
   getSession(): Session {

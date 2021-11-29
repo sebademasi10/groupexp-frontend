@@ -10,6 +10,7 @@ import { MeansOfTransportations } from 'src/app/enums/means-of-transportations.e
 import { MapsService } from 'src/app/maps.service';
 import { Activity } from 'src/app/models/activity.model';
 import { MedioMovilidad } from 'src/app/models/medio-movilidad.model';
+import { User } from 'src/app/models/user.model';
 import { ActividadService } from 'src/app/services/actividad.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
@@ -127,7 +128,8 @@ export class OrganizarComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.validateDateRange()) return this.snackBarService.openSnackBar("La fecha de fin debe ser mayor a la de inicio", false);
     if (!this.currentDate()) return this.snackBarService.openSnackBar("La fecha debe ser igual o posterior a la actual", false);
     this._activity = this.activityForm.value;
-    this._activity.creators.push(this.authService.getLoggedUser());
+    const creator = this.authService.getLoggedUser();
+    this._activity.creators.push(creator);
     this._activity.meanOfTransportation = this.activityForm.controls['meanOfTransportation'].value.name;
     this._activity.fromCoordinates = this.markerPositions[0];
     this._activity.toCoordinates = this.markerPositions[1];

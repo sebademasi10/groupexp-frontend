@@ -56,7 +56,7 @@ export class ActivityDetailComponent implements OnInit {
       private activitiesService: ActividadService,
       private authService: AuthService
     ) {
-    this.loggedUser = authService.getLoggedUser();
+    this.loggedUser = authService.getLoggedUserName();
     this.loggedUserFullName = `${this.loggedUser.name} ${this.loggedUser.surname}`
     this.uid = authService.getUserId();
   }

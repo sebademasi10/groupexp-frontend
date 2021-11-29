@@ -24,7 +24,7 @@ export class ParticiparComponent implements OnInit, OnDestroy {
     private router: Router,
     private authService: AuthService
   ) {
-    this.loggedUserName = authService.getLoggedUser();
+    this.loggedUserName = authService.getLoggedUserName();
   }
 
   ngOnInit(): void {
@@ -53,7 +53,7 @@ export class ParticiparComponent implements OnInit, OnDestroy {
 
   public checkParticipant(activity: Activity) {
     const [loggedUserName, loggedUserSurname] = this.loggedUserName.split(' ');
-    const participant = activity.participants.find((participant) => {
+    const participant = !activity.participants.find((participant) => {
       return participant.name === loggedUserName && participant.surname === loggedUserSurname;
     });
 

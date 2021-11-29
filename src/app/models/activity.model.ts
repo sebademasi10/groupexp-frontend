@@ -15,7 +15,7 @@ export class Activity {
     startTime: Time;
     endTime: Time;
     description: string;
-    creators: string[];
+    creators: any;
     participants: User[];
     isOwner: boolean;
     isActive: boolean;
