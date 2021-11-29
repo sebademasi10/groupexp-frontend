@@ -63,7 +63,7 @@ export class MediosMovilidadComponent implements OnInit {
 
 
     dialogRef.afterClosed().subscribe(() => {
-      this.snackService.openSnackBar('Actualizado con éxito', true);
+      // this.snackService.openSnackBar('Actualizado con éxito', true);
     })
   }
 
