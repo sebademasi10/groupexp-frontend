@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -38,7 +38,8 @@ export class MediosMovilidadComponent implements OnInit {
   constructor(
     private snackService: SnackBarService,
     public matDialog: MatDialog,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private formBuilder: FormBuilder
   ) {
 
   }
@@ -59,9 +60,11 @@ export class MediosMovilidadComponent implements OnInit {
   openDialog() {
 
     const modalType = this.getModalType();
-    const dialogRef = this.matDialog.open(modalType, {
+    let dialogRef = this.matDialog.open(modalType, {
       width: '99vw',
     });
+
+    dialogRef.componentInstance.formBuilder = this.formBuilder;
 
 
     dialogRef.afterClosed().subscribe(() => {

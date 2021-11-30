@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { ExpLevelEnum } from 'src/app/enums/exp-level.enum';
 
 @Component({
@@ -8,6 +9,7 @@ import { ExpLevelEnum } from 'src/app/enums/exp-level.enum';
 })
 export class RunningModal implements OnInit {
 
+  public formBuilder: FormBuilder;
   public xpLevels = ExpLevelEnum;
   constructor() { }
 

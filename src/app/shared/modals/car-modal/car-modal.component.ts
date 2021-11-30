@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-car-modal',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarModalComponent implements OnInit {
 
+  public formBuilder: FormBuilder
   constructor() { }
 
   ngOnInit(): void {

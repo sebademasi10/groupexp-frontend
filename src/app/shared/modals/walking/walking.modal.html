@@ -2,7 +2,7 @@
 <form class="example-form text-align-center">
     <mat-form-field appearance="fill">
         <mat-label>Nivel de experiencia</mat-label>
-        <mat-select>
+        <mat-select formControlName="xpLevel" (selectionChange)="selectionChanged($event)">
             <mat-option *ngFor="let xpLevel of xpLevels | keyvalue" [value]="xpLevel.value">
                 {{xpLevel.key}}
             </mat-option>
