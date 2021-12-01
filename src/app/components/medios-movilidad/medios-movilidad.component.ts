@@ -15,6 +15,9 @@ import { MotorcycleModalComponent } from 'src/app/shared/modals/motorcycle-modal
 import { RollersModalComponent } from 'src/app/shared/modals/rollers-modal/rollers-modal.component';
 import { WalkingModal } from 'src/app/shared/modals/walking/walking.modal';
 import { RunningModal } from 'src/app/shared/modals/running/running.modal';
+import { AuthService } from 'src/app/services/auth.service';
+import { ExpLevelEnum } from 'src/app/enums/exp-level.enum';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -26,6 +29,7 @@ export class MediosMovilidadComponent implements OnInit {
 
   meanOfTransportation: string;
   mediosMovilidad: MedioMovilidad[];
+  xpLevels: ExpLevelEnum;
 
   public dataSource: MedioMovilidad[];
 
@@ -34,12 +38,13 @@ export class MediosMovilidadComponent implements OnInit {
   myControl = new FormControl();
   options: MedioMovilidad[];
   filteredOptions: Observable<MedioMovilidad[]>;
+  loggedUser: any;
 
   constructor(
-    private snackService: SnackBarService,
     public matDialog: MatDialog,
     private activatedRoute: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private authService: AuthService,
+    private userService: UserService
   ) {
 
   }
@@ -51,24 +56,32 @@ export class MediosMovilidadComponent implements OnInit {
       map(value => typeof value === 'string' ? value : value.name),
       map(name => name ? this._filter(name) : this.options.slice())
     );
+
+    this.loggedUser = this.authService.getLoggedUser();
+    console.log("mot", this.activatedRoute.snapshot.data[ResolversEnum.MEDIOS_MOVILIDAD])
   }
 
   displayFn(meanOfTransportation: MedioMovilidad): string {
     return meanOfTransportation && meanOfTransportation.name ? meanOfTransportation.name : '';
   }
 
-  openDialog() {
+  openDialog(uid: string) {
 
     const modalType = this.getModalType();
     let dialogRef = this.matDialog.open(modalType, {
       width: '99vw',
+      data: { uid }
     });
-
-    dialogRef.componentInstance.formBuilder = this.formBuilder;
 
 
     dialogRef.afterClosed().subscribe((value) => {
-      console.log(value)
+      const mot = this.activatedRoute.snapshot.data[ResolversEnum.MEDIOS_MOVILIDAD].meansOfTransportation.find((mot) => mot.uid === uid);
+      mot.xpLevel = value;
+      this.loggedUser.meansOfTransportation = [mot];
+      console.log('loggedUser', this.loggedUser);
+      this.userService.update(this.loggedUser.uid, this.loggedUser).subscribe((data) => {
+        console.log('data', data);
+      })
     })
   }
 
@@ -105,7 +118,7 @@ export class MediosMovilidadComponent implements OnInit {
   onSelectionChange($selected: MatAutocompleteSelectedEvent) {
     console.log('opt', $selected.option.value);
     this.meanOfTransportation = $selected.option.value.name;
-    this.openDialog()
+    this.openDialog($selected.option.value.uid)
   }
 
   agregarContacto() {

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MeanOfTransportation } from 'src/app/interfaces/mean-of-transportation';
 
 @Component({
   selector: 'app-bicycle-modal',
@@ -10,7 +11,10 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class BicycleModalComponent implements OnInit {
   formBuilder: FormBuilder;
 
-  constructor(public dialogRef: MatDialogRef<BicycleModalComponent>) { }
+  constructor(
+    public dialogRef: MatDialogRef<BicycleModalComponent>,
+    @Inject(MAT_DIALOG_DATA) data: MeanOfTransportation
+  ) { }
 
   ngOnInit(): void {
     setTimeout(() => {

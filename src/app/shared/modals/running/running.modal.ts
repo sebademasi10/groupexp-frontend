@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ExpLevelEnum } from 'src/app/enums/exp-level.enum';
+import { MeanOfTransportation } from 'src/app/interfaces/mean-of-transportation';
 
 @Component({
   selector: 'app-running',
@@ -12,7 +13,10 @@ export class RunningModal implements OnInit {
 
   public formBuilder: FormBuilder;
   public xpLevels = ExpLevelEnum;
-  constructor(public dialogRef: MatDialogRef<RunningModal>) { }
+  constructor(
+    public dialogRef: MatDialogRef<RunningModal>,
+    @Inject(MAT_DIALOG_DATA) data: MeanOfTransportation
+  ) { }
 
   ngOnInit(): void {
     setTimeout(() => {

@@ -7,6 +7,7 @@ import { MotorcycleModalComponent } from './modals/motorcycle-modal/motorcycle-m
 import { CarModalComponent } from './modals/car-modal/car-modal.component';
 import { RunningModal } from './modals/running/running.modal';
 import { WalkingModal } from './modals/walking/walking.modal';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { WalkingModal } from './modals/walking/walking.modal';
   ],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule
   ]
 })
 export class SharedModule { }

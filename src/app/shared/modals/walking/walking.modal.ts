@@ -1,7 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ExpLevelEnum } from 'src/app/enums/exp-level.enum';
+import { MeanOfTransportation } from 'src/app/interfaces/mean-of-transportation';
 
 @Component({
   selector: 'app-walking',
@@ -15,17 +16,22 @@ export class WalkingModal implements OnInit {
 
   public formBuilder: FormBuilder;
   public xpLevels = ExpLevelEnum;
-  public walkingForm: FormGroup;
-  constructor(public dialogRef: MatDialogRef<WalkingModal>) { }
+  public xpLevel: any;
+  constructor(
+    public dialogRef: MatDialogRef<WalkingModal>,
+    @Inject(MAT_DIALOG_DATA) data: MeanOfTransportation
+  ) { }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.dialogRef.close();
-    }, 2000);
+
   }
 
   selectionChanged(event) {
-    this.onFormValid.emit(event.value);
+    this.xpLevel = event.value;
+  }
+
+  save() {
+    this.dialogRef.close(this.xpLevel);
   }
 
 }
