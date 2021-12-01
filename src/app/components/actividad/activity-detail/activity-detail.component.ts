@@ -219,7 +219,7 @@ export class ActivityDetailComponent implements OnInit {
     // })
   }
 
-  edit() {
+  update() {
     let activity = this.activityForm.value;
     activity.uid = this.activity.uid;
     this.activitiesService.update(activity).subscribe((response: any) => {
