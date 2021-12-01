@@ -67,8 +67,8 @@ export class MediosMovilidadComponent implements OnInit {
     dialogRef.componentInstance.formBuilder = this.formBuilder;
 
 
-    dialogRef.afterClosed().subscribe(() => {
-      // this.snackService.openSnackBar('Actualizado con éxito', true);
+    dialogRef.afterClosed().subscribe((value) => {
+      console.log(value)
     })
   }
 

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { ExpLevelEnum } from 'src/app/enums/exp-level.enum';
 
 @Component({
@@ -9,20 +10,22 @@ import { ExpLevelEnum } from 'src/app/enums/exp-level.enum';
 })
 export class WalkingModal implements OnInit {
 
+  @Output()
+  onFormValid = new EventEmitter<FormGroup>()
+
   public formBuilder: FormBuilder;
   public xpLevels = ExpLevelEnum;
   public walkingForm: FormGroup;
-  constructor() { }
+  constructor(public dialogRef: MatDialogRef<WalkingModal>) { }
 
   ngOnInit(): void {
-    this.walkingForm = this.formBuilder.group({
-      xpLevel: [this.xpLevels]
-    })
+    setTimeout(() => {
+      this.dialogRef.close();
+    }, 2000);
   }
 
   selectionChanged(event) {
-    console.log('cambio', event);
-    console.log(this.walkingForm.controls.xpLevel.value);
+    this.onFormValid.emit(event.value);
   }
 
 }
