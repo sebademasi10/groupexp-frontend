@@ -96,7 +96,7 @@ export class ActivityDetailComponent implements OnInit {
   public checkParticipant() {
     const participant = this.activity.participants.find((participant) => {
       console.log('part', participant);
-      return participant.name === this.loggedUser.name && participant.surname === this.loggedUser.surname;
+      return participant.uid === this.uid;
     });
 
     return participant !== undefined;
@@ -214,9 +214,14 @@ export class ActivityDetailComponent implements OnInit {
   }
 
   disparticipate() {
-    // this.activitiesService.disparticipate(this.uid).subscribe((data: any) => {
-    //   console.log(data)
-    // })
+    const participantsUpdated = this.activity.participants.filter((participant) => {
+      return participant.uid !== this.uid;
+    });
+    this.activity.participants = participantsUpdated;
+    this.activitiesService.update(this.activity).subscribe((data) => {
+      this.snackBarService.openSnackBar("Perfecto, ya no estás participando", true);
+      this.router.navigate(['home']);
+    })
   }
 
   update() {
