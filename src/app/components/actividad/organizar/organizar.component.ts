@@ -201,7 +201,6 @@ export class OrganizarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   currentDate() {
-    console.log('asd', this.activityForm.controls.startDate.value.toLocaleDateString(), new Date().toLocaleDateString());
     return this.activityForm.controls.startDate.value.toLocaleDateString() >= new Date().toLocaleDateString()
   }
 }

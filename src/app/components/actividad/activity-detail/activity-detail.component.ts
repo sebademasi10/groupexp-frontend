@@ -95,7 +95,6 @@ export class ActivityDetailComponent implements OnInit {
 
   public checkParticipant() {
     const participant = this.activity.participants.find((participant) => {
-      console.log('part', participant);
       return participant.uid === this.uid;
     });
 

@@ -58,7 +58,6 @@ export class MediosMovilidadComponent implements OnInit {
     );
 
     this.loggedUser = this.authService.getLoggedUser();
-    console.log("mot", this.activatedRoute.snapshot.data[ResolversEnum.MEDIOS_MOVILIDAD])
   }
 
   displayFn(meanOfTransportation: MedioMovilidad): string {
@@ -78,9 +77,7 @@ export class MediosMovilidadComponent implements OnInit {
       const mot = this.activatedRoute.snapshot.data[ResolversEnum.MEDIOS_MOVILIDAD].meansOfTransportation.find((mot) => mot.uid === uid);
       mot.xpLevel = value;
       this.loggedUser.meansOfTransportation = [mot];
-      console.log('loggedUser', this.loggedUser);
       this.userService.update(this.loggedUser.uid, this.loggedUser).subscribe((data) => {
-        console.log('data', data);
       })
     })
   }
@@ -116,7 +113,6 @@ export class MediosMovilidadComponent implements OnInit {
   }
 
   onSelectionChange($selected: MatAutocompleteSelectedEvent) {
-    console.log('opt', $selected.option.value);
     this.meanOfTransportation = $selected.option.value.name;
     this.openDialog($selected.option.value.uid)
   }
