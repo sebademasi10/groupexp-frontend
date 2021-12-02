@@ -16,7 +16,7 @@
         </form>
     </mat-card>
 
-    <mat-card>
+    <mat-card *ngIf="loggedUser.meansOfTransportation.length">
         <mat-card-header>
             <mat-card-title>Mis medios de movilidad</mat-card-title>
         </mat-card-header>
