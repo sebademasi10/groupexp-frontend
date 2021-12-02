@@ -8,6 +8,7 @@ import { ResolversEnum } from 'src/app/enums/enums/resolvers.enum';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { ContactosService } from 'src/app/services/contactos.service';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 
 @Component({
@@ -32,7 +33,8 @@ export class ContactosComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private contactosService: ContactosService,
-    private authService: AuthService
+    private authService: AuthService,
+    private snackBarService: SnackBarService
   ) {
 
   }
@@ -64,15 +66,18 @@ export class ContactosComponent implements OnInit {
 
   agregarContacto() {
     this.contactosService.add(this.authService.getUserId(), this.selectedOption).subscribe((data: any) => {
-      this.contacts = data.contacts;
+      this.snackBarService.openSnackBar("Usuario frecuente agregado!", true);
+      this.contacts = data.user.contacts;
+      // setTimeout(() => {
+      //   location.reload()
+      // }, 500);
     })
   }
 
   remove(element) {
     const loggedUser = this.authService.getLoggedUser();
-    console.log('contact', loggedUser);
-    console.log('eliminar', element);
     this.contactosService.remove(loggedUser.uid, element.id).subscribe((data: any) => {
+      this.snackBarService.openSnackBar("Usuario frecuente eliminado!", true)
       this.contacts = data.contacts;
     })
   }

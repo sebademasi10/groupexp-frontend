@@ -18,9 +18,10 @@
     </mat-card>
 
 
-    <h2>Mis usuarios frecuentes</h2>
-    <mat-card class="example-card">
-
+    <mat-card class="example-card mt-2" *ngIf="contacts.length">
+        <mat-card-header>
+            <mat-card-title>Mis usuarios frecuentes</mat-card-title>
+        </mat-card-header>
         <table mat-table [dataSource]="contacts" class="mat-elevation-z8">
 
             <ng-container matColumnDef="nombreApellido">
