@@ -104,7 +104,7 @@
                 <mat-icon>add</mat-icon> Participar
             </button>
             <button mat-flat-button color="primary" type="button" *ngIf="activity.creators?.includes(loggedUserName)"
-                (click)="edit()">
+                (click)="update()">
                 <mat-icon>check</mat-icon> Finalizar edición
             </button>
         </form>
