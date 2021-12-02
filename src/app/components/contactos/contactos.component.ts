@@ -39,8 +39,11 @@ export class ContactosComponent implements OnInit {
 
   ngOnInit() {
     this._userId = this.route.snapshot.params['id'];
-    this.users = this.route.snapshot.data[ResolversEnum.USUARIOS].users;
-    this.contacts = this.route.snapshot.data[ResolversEnum.CONTACTOS].contacts.filter((contact) => contact !== null);
+    this.users = this.route.snapshot.data[ResolversEnum.USUARIOS].users.filter((user) => user.uid !== this.authService.getUserId());
+    this.contacts = this.route.snapshot.data[ResolversEnum.CONTACTOS].contacts;
+    // this.contacts = this.route.snapshot.data[ResolversEnum.CONTACTOS].contacts.filter((contact) => contact !== null);
+    //  let contacts = this.contactosService.get(this.authService.getLoggedUser().uid).subscribe(());
+    //  console.log('contacts', contacts);
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
@@ -60,24 +63,18 @@ export class ContactosComponent implements OnInit {
   }
 
   agregarContacto() {
-    this.contactosService.add(this.authService.getUserId(), this.selectedOption).subscribe(() => {
-      this.getContacts()
-      window.location.reload();
+    this.contactosService.add(this.authService.getUserId(), this.selectedOption).subscribe((data: any) => {
+      this.contacts = data.contacts;
     })
   }
 
   remove(element) {
-    let contacts = [];
-    this.contacts.forEach((contact) => {
-      if (contact.email !== element.email) {
-        contacts.push(contact);
-      }
-    });
-    this.contacts = contacts;
-  }
-
-  getContacts() {
-    this.contactosService.get(this._userId).subscribe((contactos: User[]) => this.contacts = contactos)
+    const loggedUser = this.authService.getLoggedUser();
+    console.log('contact', loggedUser);
+    console.log('eliminar', element);
+    this.contactosService.remove(loggedUser.uid, element.id).subscribe((data: any) => {
+      this.contacts = data.contacts;
+    })
   }
 
 }

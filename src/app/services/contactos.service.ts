@@ -20,5 +20,8 @@ export class ContactosService {
     return this.http.post(`${this._controllerName}/${userId}/contacts`, { email: emailToAdd })
   }
 
+  remove(uid: string, uidToRemove: string) {
+    return this.http.delete(`${this._controllerName}/${uid}/contacts/${uidToRemove}`)
+  }
 
 }
