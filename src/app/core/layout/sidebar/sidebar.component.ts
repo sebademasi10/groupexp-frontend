@@ -45,6 +45,14 @@ export class SidebarComponent implements OnInit {
         subMenu: null,
         activo: true,
       },
+      {
+        id: 1,
+        nombre: "Estadísticas",
+        path: "/actividad/estadisticas",
+        icon: "query_stats",
+        subMenu: null,
+        activo: true,
+      }
     ]
   }
 

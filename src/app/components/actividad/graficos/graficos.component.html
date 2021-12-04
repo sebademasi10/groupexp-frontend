@@ -1,0 +1,13 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Frecuencia de actividades</mat-card-title>
+        <mat-card-subtitle>Cantidad de actividades en cada día de la semana</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="chart">
+            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+                [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+            </canvas>
+        </div>
+    </mat-card-content>
+</mat-card>
