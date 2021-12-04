@@ -18,6 +18,7 @@ export class ParticiparComponent implements OnInit, OnDestroy {
   public ICONS = ICONBYMEANS;
   public activitiesLoaded$ = of(true);
   public loggedUserName: string;
+  uid: string;
 
   constructor(
     private activitiesService: ActividadService,
@@ -28,7 +29,7 @@ export class ParticiparComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
+    this.uid = this.authService.getUserId()
     this._activitiesSubscription = this.activitiesService.getAll().subscribe((activities: Activity[]) => {
       this.activities = activities;
       this.sortActivities();
@@ -52,12 +53,11 @@ export class ParticiparComponent implements OnInit, OnDestroy {
   }
 
   public checkParticipant(activity: Activity) {
-    const [loggedUserName, loggedUserSurname] = this.loggedUserName.split(' ');
-    const participant = !activity.participants.find((participant) => {
-      return participant.name === loggedUserName && participant.surname === loggedUserSurname;
+    const participant = activity.participants.find((participant) => {
+      return participant.uid === this.uid;
     });
 
-    return !participant;
+    return participant !== undefined;
   }
 
   eliminar(uid: string) {

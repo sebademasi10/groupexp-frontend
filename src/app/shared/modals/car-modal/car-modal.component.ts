@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -10,12 +10,19 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class CarModalComponent implements OnInit {
 
   public formBuilder: FormBuilder
+  form: FormGroup;
   constructor(public dialogRef: MatDialogRef<CarModalComponent>) { }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.dialogRef.close();
-    }, 2000);
+    this.form = this.formBuilder.group({
+      brand: [],
+      model: [],
+      motorCcs: [],
+    })
+  }
+
+  save() {
+    this.dialogRef.close(this.form.value);
   }
 
 }
