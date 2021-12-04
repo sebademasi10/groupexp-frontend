@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ExpLevelEnum } from 'src/app/enums/exp-level.enum';
 import { MeanOfTransportation } from 'src/app/interfaces/mean-of-transportation';
 
 @Component({
@@ -11,15 +12,20 @@ import { MeanOfTransportation } from 'src/app/interfaces/mean-of-transportation'
 export class BicycleModalComponent implements OnInit {
   formBuilder: FormBuilder;
 
-  constructor(
-    public dialogRef: MatDialogRef<BicycleModalComponent>,
-    @Inject(MAT_DIALOG_DATA) data: MeanOfTransportation
-  ) { }
+  public xpLevels = ExpLevelEnum;
+  form: FormGroup;
+  constructor(public dialogRef: MatDialogRef<BicycleModalComponent>,) { }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.dialogRef.close();
-    }, 2000);
+    this.form = this.formBuilder.group({
+      brand: [],
+      model: [],
+      wheelBase: [],
+      xpLevel: []
+    })
   }
 
+  save() {
+    this.dialogRef.close(this.form.value);
+  }
 }

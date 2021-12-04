@@ -8,14 +8,18 @@
         <mat-label>Modelo</mat-label>
         <input type="text" matInput formControlName="model">
     </mat-form-field>
-    <!-- <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Nivel de Experiencia</mat-label>
-        <input type="text" matInput formControlName="expLevel">
-    </mat-form-field> -->
     <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Cilindrada</mat-label>
         <input type="text" matInput formControlName="motorCcs">
         <span matSuffix>CC</span>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Nivel de experiencia</mat-label>
+        <mat-select formControlName="xpLevel">
+            <mat-option *ngFor="let xpLevel of xpLevels | keyvalue" [value]="xpLevel.value">
+                {{xpLevel.key}}
+            </mat-option>
+        </mat-select>
     </mat-form-field>
     <button type="submit" mat-raised-button color="primary">
         <mat-icon>save</mat-icon> Guardar

@@ -1,5 +1,5 @@
 <h1>Agregar motocicleta</h1>
-<form class="example-form text-align-center">
+<form class="example-form text-align-center" [formGroup]="form">
     <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Marca</mat-label>
         <input type="text" matInput formControlName="brand">
@@ -8,14 +8,18 @@
         <mat-label>Modelo</mat-label>
         <input type="text" matInput formControlName="model">
     </mat-form-field>
-    <!-- <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Nivel de Experiencia</mat-label>
-        <input type="text" matInput formControlName="expLevel">
-    </mat-form-field> -->
     <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Cilindrada</mat-label>
         <input type="text" matInput formControlName="motorCcs">
         <span matSuffix>CC</span>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Nivel de experiencia</mat-label>
+        <mat-select formControlName="xpLevel">
+            <mat-option *ngFor="let xpLevel of xpLevels | keyvalue" [value]="xpLevel.value">
+                {{xpLevel.key}}
+            </mat-option>
+        </mat-select>
     </mat-form-field>
     <button type="submit" mat-raised-button class="btn-primary" color="primary">
         <mat-icon>update</mat-icon> Guardar

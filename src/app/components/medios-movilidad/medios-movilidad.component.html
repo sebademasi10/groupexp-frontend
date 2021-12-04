@@ -24,7 +24,8 @@
 
             <ng-container matColumnDef="medioMovilidad">
                 <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let element"> {{element.name}} - {{element.xpLevel}}</td>
+                <td mat-cell *matCellDef="let element"> {{element.name}} - {{element.xpLevel == 1? 'Bajo':
+                    element.xpLevel == 2 ? 'Medio': 'Bajo'}}</td>
             </ng-container>
 
             <ng-container matColumnDef="acciones">

@@ -1,14 +1,14 @@
 <h1>A pie</h1>
-<form class="example-form text-align-center">
+<form class="example-form text-align-center" [formGroup]="form" (ngSubmit)="save()">
     <mat-form-field appearance="fill">
         <mat-label>Nivel de experiencia</mat-label>
-        <mat-select (selectionChange)="selectionChanged($event)">
+        <mat-select formControlName="xpLevel">
             <mat-option *ngFor="let xpLevel of xpLevels | keyvalue" [value]="xpLevel.value">
                 {{xpLevel.key}}
             </mat-option>
         </mat-select>
     </mat-form-field>
-    <button type="submit" mat-raised-button (click)="save()" class="btn-primary" color="primary">
+    <button type="submit" mat-raised-button class="btn-primary" color="primary">
         <mat-icon>update</mat-icon> Guardar
     </button>
 </form>

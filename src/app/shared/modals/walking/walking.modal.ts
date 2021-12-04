@@ -11,27 +11,22 @@ import { MeanOfTransportation } from 'src/app/interfaces/mean-of-transportation'
 })
 export class WalkingModal implements OnInit {
 
-  @Output()
-  onFormValid = new EventEmitter<FormGroup>()
-
   public formBuilder: FormBuilder;
   public xpLevels = ExpLevelEnum;
   public xpLevel: any;
+  public form: FormGroup;
   constructor(
     public dialogRef: MatDialogRef<WalkingModal>,
-    @Inject(MAT_DIALOG_DATA) data: MeanOfTransportation
   ) { }
 
   ngOnInit(): void {
-
-  }
-
-  selectionChanged(event) {
-    this.xpLevel = event.value;
+    this.form = this.formBuilder.group({
+      xpLevel: []
+    })
   }
 
   save() {
-    this.dialogRef.close(this.xpLevel);
+    this.dialogRef.close(this.form.value);
   }
 
 }

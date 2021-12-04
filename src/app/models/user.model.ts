@@ -10,7 +10,8 @@ export class User {
     img: string;
     role: string;
     active: boolean;
-    contacts: User[]
+    contacts: User[];
+    meansOfTransportation = []
 
     constructor(
         name?: string,

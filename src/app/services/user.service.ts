@@ -18,7 +18,7 @@ export class UserService {
   }
 
   update(userId: string, user: User): Observable<User> {
-    return this.http.patch<User>(`${this._controllerName}/${userId}`, user)
+    return this.http.post<User>(`${this._controllerName}/${userId}`, user)
   }
 
   validarToken(): Observable<boolean> {

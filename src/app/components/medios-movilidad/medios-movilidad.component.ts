@@ -57,8 +57,7 @@ export class MediosMovilidadComponent implements OnInit {
       map(value => typeof value === 'string' ? value : value.name),
       map(name => name ? this._filter(name) : this.options.slice())
     );
-
-    this.loggedUser = this.authService.getLoggedUser();
+    this.loggedUser = this.activatedRoute.snapshot.data[ResolversEnum.USUARIO].user;
   }
 
   displayFn(meanOfTransportation: MedioMovilidad): string {
@@ -77,17 +76,16 @@ export class MediosMovilidadComponent implements OnInit {
 
 
     dialogRef.afterClosed().subscribe((value) => {
-      const mot = this.activatedRoute.snapshot.data[ResolversEnum.MEDIOS_MOVILIDAD].meansOfTransportation.find((mot) => mot.uid === uid);
-      mot.xpLevel = value;
-      if (this.loggedUser.meansOfTransportation.length) {
-        this.loggedUser.meansOfTransportation.push(mot)
-      } else {
-        this.loggedUser.meansOfTransportation = [mot];
+      let mot = this.activatedRoute.snapshot.data[ResolversEnum.MEDIOS_MOVILIDAD].meansOfTransportation.find((mot) => mot.uid === uid);
+      mot.detail = value;
+      let userUpdated = JSON.parse(JSON.stringify(this.loggedUser));
+      userUpdated.meansOfTransportation.push(mot);
+      if (value) {
+        this.userService.update(this.loggedUser.uid, userUpdated).subscribe((data) => {
+          console.log('user update', data);
+          this.loggedUser = data;
+        })
       }
-      this.userService.update(this.loggedUser.uid, this.loggedUser).subscribe((data) => {
-        this.loggedUser = data;
-        // this.authService.refreshUser(this.loggedUser);
-      })
     })
   }
 
