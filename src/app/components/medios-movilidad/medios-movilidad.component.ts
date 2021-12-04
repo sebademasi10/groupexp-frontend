@@ -44,7 +44,8 @@ export class MediosMovilidadComponent implements OnInit {
     public matDialog: MatDialog,
     private activatedRoute: ActivatedRoute,
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    public formBuilder: FormBuilder
   ) {
 
   }
@@ -72,12 +73,20 @@ export class MediosMovilidadComponent implements OnInit {
       data: { uid }
     });
 
+    dialogRef.componentInstance.formBuilder = this.formBuilder;
+
 
     dialogRef.afterClosed().subscribe((value) => {
       const mot = this.activatedRoute.snapshot.data[ResolversEnum.MEDIOS_MOVILIDAD].meansOfTransportation.find((mot) => mot.uid === uid);
       mot.xpLevel = value;
-      this.loggedUser.meansOfTransportation = [mot];
+      if (this.loggedUser.meansOfTransportation.length) {
+        this.loggedUser.meansOfTransportation.push(mot)
+      } else {
+        this.loggedUser.meansOfTransportation = [mot];
+      }
       this.userService.update(this.loggedUser.uid, this.loggedUser).subscribe((data) => {
+        this.loggedUser = data;
+        // this.authService.refreshUser(this.loggedUser);
       })
     })
   }

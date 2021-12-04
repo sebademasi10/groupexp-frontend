@@ -46,6 +46,9 @@ export class AuthService {
     return this.loggedUserName;
   }
 
+  refreshUser(loggedUser: any) {
+    throw new Error('Method not implemented.');
+  }
   getLoggedUser() {
     const token = this.getToken();
     const tokenData = this.jwt.decodeToken(token);

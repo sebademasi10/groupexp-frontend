@@ -1,5 +1,5 @@
 <h1>Agregar automóvil</h1>
-<form class="example-form text-align-center">
+<form class="example-form text-align-center" [formGroup]="form" (ngSubmit)="save()">
     <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Marca</mat-label>
         <input type="text" matInput formControlName="brand">
