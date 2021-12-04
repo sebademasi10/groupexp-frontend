@@ -1,8 +1,8 @@
 <h1>A pie</h1>
-<form class="example-form text-align-center">
+<form class="example-form text-align-center" [formGroup]="form">
     <mat-form-field appearance="fill">
         <mat-label>Nivel de experiencia</mat-label>
-        <mat-select (selectionChange)="selectionChanged($event)">
+        <mat-select formControlName="xpLevel">
             <mat-option *ngFor="let xpLevel of xpLevels | keyvalue" [value]="xpLevel.value">
                 {{xpLevel.key}}
             </mat-option>

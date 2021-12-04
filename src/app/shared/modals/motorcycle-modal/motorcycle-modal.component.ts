@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { ExpLevelEnum } from 'src/app/enums/exp-level.enum';
 
 @Component({
   selector: 'app-motorcycle-modal',
@@ -9,13 +10,23 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class MotorcycleModalComponent implements OnInit {
 
-  public formBuilder: FormBuilder;
+  formBuilder: FormBuilder;
+
+  public xpLevels = ExpLevelEnum;
+  form: FormGroup;
   constructor(public dialogRef: MatDialogRef<MotorcycleModalComponent>) { }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.dialogRef.close();
-    }, 2000);
+    this.form = this.formBuilder.group({
+      brand: [],
+      model: [],
+      motorCcs: [],
+      xpLevel: [],
+    })
+  }
+
+  save() {
+    this.dialogRef.close(this.form.value);
   }
 
 }

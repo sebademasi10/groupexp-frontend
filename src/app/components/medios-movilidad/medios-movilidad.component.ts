@@ -77,8 +77,9 @@ export class MediosMovilidadComponent implements OnInit {
 
 
     dialogRef.afterClosed().subscribe((value) => {
+      console.log('emisión', value);
       const mot = this.activatedRoute.snapshot.data[ResolversEnum.MEDIOS_MOVILIDAD].meansOfTransportation.find((mot) => mot.uid === uid);
-      mot.xpLevel = value;
+      mot.detail = value;
       if (this.loggedUser.meansOfTransportation.length) {
         this.loggedUser.meansOfTransportation.push(mot)
       } else {
