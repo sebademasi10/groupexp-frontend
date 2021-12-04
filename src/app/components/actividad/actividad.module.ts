@@ -8,13 +8,15 @@ import { MaterialModule } from 'src/app/shared/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { ActivityDetailComponent } from './activity-detail/activity-detail.component';
+import { GraficosComponent } from './graficos/graficos.component';
 
 
 @NgModule({
   declarations: [
     ParticiparComponent,
     OrganizarComponent,
-    ActivityDetailComponent
+    ActivityDetailComponent,
+    GraficosComponent
   ],
   imports: [
     CommonModule,
