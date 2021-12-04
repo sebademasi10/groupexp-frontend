@@ -21,6 +21,9 @@ export class RollersModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
+      brand: [],
+      model: [],
+      wheelBase: [],
       xpLevel: []
     })
   }
