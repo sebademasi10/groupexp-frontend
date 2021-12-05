@@ -19,6 +19,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSliderModule } from "@angular/material/slider";
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+
 
 
 @NgModule({
@@ -44,7 +46,8 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
     MatDialogModule,
     MatSliderModule,
     NgxMaterialTimepickerModule,
-    MatListModule
+    MatListModule,
+    MatSlideToggleModule
   ],
   exports: [
     MatDatepickerModule,
@@ -66,7 +69,8 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
     MatDialogModule,
     MatSliderModule,
     NgxMaterialTimepickerModule,
-    MatListModule
+    MatListModule,
+    MatSlideToggleModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-AR' },

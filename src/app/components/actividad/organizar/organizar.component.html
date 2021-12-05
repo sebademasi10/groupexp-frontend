@@ -82,6 +82,25 @@
                     <textarea matInput required cols="20" rows="4" formControlName="description"></textarea>
                 </mat-form-field>
             </div>
+            <div class="row mb-2">
+                <div class="col">
+                    <mat-slide-toggle formControlName="inviteFrecUsers">
+                        Invitar usuarios frecuentes
+                    </mat-slide-toggle>
+                </div>
+                <div class="col">
+                    <button mat-button type="button" [matMenuTriggerFor]="menu">
+                        <mat-icon>
+                            help</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <div class="m-2">
+                            Cuando crees tu actividad, enviaremos un correo electrónico a tus usuarios frecuentes con un
+                            enlace a la misma para que puedan participar
+                        </div>
+                    </mat-menu>
+                </div>
+            </div>
             <div>
                 <google-map height="30vh" width="100%" *ngIf="mapApiLoaded | async" [center]="center"
                     (mapClick)="addMarker($event)" [zoom]="zoom">
