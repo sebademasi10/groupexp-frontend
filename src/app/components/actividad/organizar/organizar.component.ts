@@ -92,7 +92,8 @@ export class OrganizarComponent implements OnInit, AfterViewInit, OnDestroy {
       startTime: ['00:00', Validators.required],
       endTime: ['00:00', Validators.required],
       description: ["", Validators.required],
-      creators: [[]]
+      creators: [[]],
+      inviteFrecUsers: [false]
     })
   }
 
@@ -124,6 +125,7 @@ export class OrganizarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public newActivity() {
+    console.log('value', this.activityForm.value);
     if (this.activityForm.invalid || this.markerPositions.length < 2) return this.snackBarService.openSnackBar("Por favor complete los campos requeridos y seleccione 2 puntos del mapa", false)
     if (!this.validateDateRange()) return this.snackBarService.openSnackBar("La fecha de fin debe ser mayor a la de inicio", false);
     if (!this.currentDate()) return this.snackBarService.openSnackBar("La fecha debe ser igual o posterior a la actual", false);
