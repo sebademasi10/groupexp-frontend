@@ -48,7 +48,9 @@ export class ParticiparComponent implements OnInit, OnDestroy {
   }
   checkOwner() {
     this.activities.forEach(activity => {
-      activity.isOwner = activity.creators.includes(this.loggedUserName)
+      activity.isOwner = activity.creators.find((creator) => {
+        return creator.uid === this.uid;
+      }) !== undefined;
     })
   }
 

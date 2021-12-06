@@ -95,20 +95,15 @@
                     <h2>{{participant.name}} {{participant.surname}}</h2>
                     <mat-card-subtitle>{{participant.email}}</mat-card-subtitle>
                 </mat-card>
-                <!-- <mat-list>
-                    <mat-list-item *ngFor="let participant of activity.participants">
-                        <mat-icon>person</mat-icon> {{participant.name}} -<small> {{participant.email}}</small>
-                    </mat-list-item>
-                </mat-list> -->
             </div>
             <button type="button" mat-flat-button color="warn" *ngIf="isParticipant" (click)="disparticipate()">
                 <mat-icon>undo</mat-icon> Anular participación
             </button>
-            <button type="button" mat-flat-button color="primary" *ngIf="!isParticipant" (click)="participate()">
+            <button type="button" mat-flat-button color="primary" *ngIf="!isParticipant && !isOwner"
+                (click)="participate()">
                 <mat-icon>add</mat-icon> Participar
             </button>
-            <button mat-flat-button color="primary" type="button" *ngIf="activity.creators?.includes(loggedUserName)"
-                (click)="update()">
+            <button mat-flat-button color="primary" type="button" *ngIf="isOwner" (click)="update()">
                 <mat-icon>check</mat-icon> Finalizar edición
             </button>
         </form>

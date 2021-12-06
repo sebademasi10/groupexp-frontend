@@ -31,13 +31,12 @@
             <button mat-icon-button (click)="eliminar(activity.uid)" color="warn" *ngIf="activity.isOwner">
                 <mat-icon>delete</mat-icon>
             </button>
-            <button *ngIf="!activity.creators.includes(loggedUserName)" mat-raised-button color="primary"
-                [disabled]="checkParticipant(activity)" (click)="navigate(activity.uid)">
+            <button *ngIf="!activity.isOwner" mat-raised-button color="primary" [disabled]="checkParticipant(activity)"
+                (click)="navigate(activity.uid)">
                 <mat-icon>{{checkParticipant(activity)?'check':'add'}}</mat-icon>
                 {{checkParticipant(activity)?'Participando':'Participar'}}
             </button>
-            <button mat-raised-button color="primary" (click)="navigate(activity.uid)"
-                *ngIf="activity.creators.includes(loggedUserName)">
+            <button mat-raised-button color="primary" (click)="navigate(activity.uid)" *ngIf="activity.isOwner">
                 <mat-icon>edit</mat-icon> Editar
             </button>
         </mat-card-actions>
