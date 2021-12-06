@@ -7,19 +7,19 @@
                 <p>
                     <mat-form-field class="example-full-width" appearance="fill">
                         <mat-label>Nombre/s</mat-label>
-                        <input type="text" matInput formControlName="name">
+                        <input autocomplete="off" type="text" matInput formControlName="name">
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field class="example-full-width" appearance="fill">
                         <mat-label>Apellido/s</mat-label>
-                        <input type="text" matInput formControlName="surname">
+                        <input autocomplete="off" type="text" matInput formControlName="surname">
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field class="example-full-width" appearance="fill">
                         <mat-label>Fecha de nacimiento</mat-label>
-                        <input matInput [matDatepicker]="picker" formControlName="birthDate">
+                        <input autocomplete="off" matInput [matDatepicker]="picker" formControlName="birthDate">
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
@@ -27,19 +27,19 @@
                 <p>
                     <mat-form-field class="example-full-width" appearance="fill">
                         <mat-label>Correo electrónico</mat-label>
-                        <input type="text" matInput formControlName="email" autocapitalize="off">
+                        <input autocomplete="off" type="text" matInput formControlName="email" autocapitalize="off">
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field class="example-full-width" appearance="fill">
                         <mat-label>Contraseña</mat-label>
-                        <input type="password" matInput formControlName="password">
+                        <input autocomplete="off" type="password" matInput formControlName="password">
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field class="example-full-width" appearance="fill">
                         <mat-label>Repetir contraseña</mat-label>
-                        <input type="password" matInput formControlName="passwordRepeat">
+                        <input autocomplete="off" type="password" matInput formControlName="passwordRepeat">
                     </mat-form-field>
                 </p>
                 <button mat-raised-button class="btn-primary" color="primary">
