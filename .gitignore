@@ -46,4 +46,4 @@ testem.log
 Thumbs.db
 
 # Scripts 
-deploy.ps1
+push-new-branch.ps1
