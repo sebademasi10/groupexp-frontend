@@ -3,42 +3,95 @@
     <h2><a routerLink="/actividad/organizar">Organicemos una!</a></h2>
 </div>
 
-<ng-container *ngFor="let activity of activities">
-    <mat-card>
-        <mat-card-header (click)="navigate(activity.uid)">
-            <mat-card-title>
-                <mat-icon>{{ICONS[activity.meanOfTransportation.toString()]}}</mat-icon>
-                {{activity.title}}
-            </mat-card-title>
-            <mat-card-subtitle>
-                <mat-icon>person</mat-icon> {{activity.creators[0].name}} {{activity.creators[0].surname}}
-            </mat-card-subtitle>
-            <mat-card-subtitle class="when">
-                <div class="icon-time">
-                    <mat-icon>event</mat-icon> {{activity.startDate | date}}
-                </div>
-                <div class="icon-time">
-                    <mat-icon>schedule</mat-icon> {{activity.startTime}}
-                </div>
-            </mat-card-subtitle>
-            <mat-card-subtitle>
-            </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            {{activity.description}}
-        </mat-card-content>
-        <mat-card-actions [ngStyle]="{'justify-content': activity.isOwner? 'space-between':'flex-end'}">
-            <button mat-icon-button (click)="eliminar(activity.uid)" color="warn" *ngIf="activity.isOwner">
-                <mat-icon>delete</mat-icon>
-            </button>
-            <button *ngIf="!activity.isOwner" mat-raised-button color="primary" [disabled]="checkParticipant(activity)"
-                (click)="navigate(activity.uid)">
-                <mat-icon>{{checkParticipant(activity)?'check':'add'}}</mat-icon>
-                {{checkParticipant(activity)?'Participando':'Participar'}}
-            </button>
-            <button mat-raised-button color="primary" (click)="navigate(activity.uid)" *ngIf="activity.isOwner">
-                <mat-icon>edit</mat-icon> Editar
-            </button>
-        </mat-card-actions>
-    </mat-card>
+<ng-container *ngIf="showPanels">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Actividades según mis medios de movilidad</mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <ng-container *ngFor="let activity of myActivities">
+            <mat-card>
+                <mat-card-header (click)="navigate(activity.uid)">
+                    <mat-card-title>
+                        <mat-icon>{{ICONS[activity.meanOfTransportation.toString()]}}</mat-icon>
+                        {{activity.title}}
+                    </mat-card-title>
+                    <mat-card-subtitle>
+                        <mat-icon>person</mat-icon> {{activity.creators[0].name}} {{activity.creators[0].surname}}
+                    </mat-card-subtitle>
+                    <mat-card-subtitle class="when">
+                        <div class="icon-time">
+                            <mat-icon>event</mat-icon> {{activity.startDate | date}}
+                        </div>
+                        <div class="icon-time">
+                            <mat-icon>schedule</mat-icon> {{activity.startTime}}
+                        </div>
+                    </mat-card-subtitle>
+                    <mat-card-subtitle>
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    {{activity.description}}
+                </mat-card-content>
+                <mat-card-actions [ngStyle]="{'justify-content': activity.isOwner? 'space-between':'flex-end'}">
+                    <button mat-icon-button (click)="eliminar(activity.uid)" color="warn" *ngIf="activity.isOwner">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    <button *ngIf="!activity.isOwner" mat-raised-button color="primary"
+                        [disabled]="checkParticipant(activity)" (click)="navigate(activity.uid)">
+                        <mat-icon>{{checkParticipant(activity)?'check':'add'}}</mat-icon>
+                        {{checkParticipant(activity)?'Participando':'Participar'}}
+                    </button>
+                    <button mat-raised-button color="primary" (click)="navigate(activity.uid)" *ngIf="activity.isOwner">
+                        <mat-icon>edit</mat-icon> Editar
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </ng-container>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Otras actividades</mat-panel-title>
+        </mat-expansion-panel-header>
+        <ng-container *ngFor="let activity of otherActivities">
+            <mat-card>
+                <mat-card-header (click)="navigate(activity.uid)">
+                    <mat-card-title>
+                        <mat-icon>{{ICONS[activity.meanOfTransportation.toString()]}}</mat-icon>
+                        {{activity.title}}
+                    </mat-card-title>
+                    <mat-card-subtitle>
+                        <mat-icon>person</mat-icon> {{activity.creators[0].name}} {{activity.creators[0].surname}}
+                    </mat-card-subtitle>
+                    <mat-card-subtitle class="when">
+                        <div class="icon-time">
+                            <mat-icon>event</mat-icon> {{activity.startDate | date}}
+                        </div>
+                        <div class="icon-time">
+                            <mat-icon>schedule</mat-icon> {{activity.startTime}}
+                        </div>
+                    </mat-card-subtitle>
+                    <mat-card-subtitle>
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    {{activity.description}}
+                </mat-card-content>
+                <mat-card-actions [ngStyle]="{'justify-content': activity.isOwner? 'space-between':'flex-end'}">
+                    <button mat-icon-button (click)="eliminar(activity.uid)" color="warn" *ngIf="activity.isOwner">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    <button *ngIf="!activity.isOwner" mat-raised-button color="primary"
+                        [disabled]="checkParticipant(activity)" (click)="navigate(activity.uid)">
+                        <mat-icon>{{checkParticipant(activity)?'check':'add'}}</mat-icon>
+                        {{checkParticipant(activity)?'Participando':'Participar'}}
+                    </button>
+                    <button mat-raised-button color="primary" (click)="navigate(activity.uid)" *ngIf="activity.isOwner">
+                        <mat-icon>edit</mat-icon> Editar
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </ng-container>
+    </mat-expansion-panel>
 </ng-container>
