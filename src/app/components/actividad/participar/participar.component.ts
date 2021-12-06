@@ -42,14 +42,10 @@ export class ParticiparComponent implements OnInit, OnDestroy {
     this.uid = this.authService.getUserId();
     this.userService.getUser(this.uid).subscribe((user: any) => {
       this.loggedUser = user.user;
-      console.log('usuario', this.loggedUser);
       this._activitiesSubscription = this.activitiesService.getAll().subscribe((activities: Activity[]) => {
         this.activities = activities;
-        console.log('actividades', this.activities);
         this.myActivities = this.getMyActivities();
-        console.log('Mis actividades', this.myActivities);
         this.otherActivities = this.getOtherActivities();
-        console.log('Otras actividades', this.otherActivities);
         this.sortActivities();
         this.checkOwner();
         this.checkExipired();
