@@ -16,6 +16,7 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { registerLocaleData } from '@angular/common';
 import localeEsAr from '@angular/common/locales/es-AR'
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 registerLocaleData(localeEsAr, 'es-AR')
 
@@ -32,7 +33,8 @@ registerLocaleData(localeEsAr, 'es-AR')
     CoreModule,
     LayoutModule,
     RoutesModule,
-    AuthModule
+    AuthModule,
+    NgxSpinnerModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es-AR' },
