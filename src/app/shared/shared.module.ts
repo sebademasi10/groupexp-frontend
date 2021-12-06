@@ -8,6 +8,7 @@ import { CarModalComponent } from './modals/car-modal/car-modal.component';
 import { RunningModal } from './modals/running/running.modal';
 import { WalkingModal } from './modals/walking/walking.modal';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ConfirmationComponent } from './modals/confirmation/confirmation.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CarModalComponent,
     RunningModal,
     WalkingModal,
+    ConfirmationComponent,
   ],
   imports: [
     CommonModule,

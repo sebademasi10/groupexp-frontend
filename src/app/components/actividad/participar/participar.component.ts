@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { of, Subscription } from 'rxjs';
 import { ICONBYMEANS } from 'src/app/enums/icon-by-means.enum';
 import { Activity } from 'src/app/models/activity.model';
 import { ActividadService } from 'src/app/services/actividad.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { ConfirmationComponent } from 'src/app/shared/modals/confirmation/confirmation.component';
 
 @Component({
   selector: 'app-participar',
@@ -23,7 +25,8 @@ export class ParticiparComponent implements OnInit, OnDestroy {
   constructor(
     private activitiesService: ActividadService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private matDialog: MatDialog
   ) {
     this.loggedUserName = authService.getLoggedUserName();
   }
@@ -63,9 +66,14 @@ export class ParticiparComponent implements OnInit, OnDestroy {
   }
 
   eliminar(uid: string) {
-    this.activitiesService.delete(uid).subscribe(
-      () => { window.location.reload() }
-    )
+    let dialogRef = this.matDialog.open(ConfirmationComponent);
+    dialogRef.afterClosed().subscribe(value => {
+      if (value) {
+        this.activitiesService.delete(uid).subscribe(
+          () => { window.location.reload() }
+        )
+      }
+    })
   }
   ngOnDestroy(): void {
     this._activitiesSubscription.unsubscribe();
