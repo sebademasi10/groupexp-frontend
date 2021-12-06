@@ -44,6 +44,7 @@ export class ActivityDetailComponent implements OnInit {
   public isParticipant: boolean;
   public loggedUser: any;
   public loggedUserFullName: string;
+  public isOwner: boolean;
 
 
   constructor
@@ -65,6 +66,7 @@ export class ActivityDetailComponent implements OnInit {
     this.meansOfTransportation = this.activatedRoute.snapshot.data[ResolversEnum.MEDIOS_MOVILIDAD].meansOfTransportation;
     this.activity = this.activatedRoute.snapshot.data[ResolversEnum.ACTIVIDAD];
     this.isParticipant = this.checkParticipant()
+    this.isOwner = this.checkOwner()
     this.markerPositions.push(this.activity.fromCoordinates);
     this.markerPositions.push(this.activity.toCoordinates);
     this.activity.isOwner = this.activity.creators.includes(this.loggedUserName)
@@ -100,6 +102,11 @@ export class ActivityDetailComponent implements OnInit {
 
     return participant !== undefined;
   }
+  checkOwner() {
+    return this.activity.creators.find((creator) => {
+      return creator.uid === this.uid;
+    }) !== undefined;
+  }
 
   private _createForm() {
     this.activityForm = this.formBuilder.group({
@@ -115,7 +122,7 @@ export class ActivityDetailComponent implements OnInit {
     })
 
     this.activityForm.disable();
-    if (this.activity.isOwner) {
+    if (this.isOwner) {
       this.activityForm.controls.title.enable();
       this.activityForm.controls.description.enable();
       this.activityForm.controls.startDate.enable();
