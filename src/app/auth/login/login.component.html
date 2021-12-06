@@ -7,13 +7,13 @@
                 <p>
                     <mat-form-field class="example-full-width" appearance="fill">
                         <mat-label>Correo electrónico</mat-label>
-                        <input type="text" matInput formControlName="email" autocapitalize="off">
+                        <input autocomplete="off" type="text" matInput formControlName="email" autocapitalize="off">
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field class="example-full-width" appearance="fill">
                         <mat-label>Contraseña</mat-label>
-                        <input [type]="inputType" matInput formControlName="password">
+                        <input autocomplete="off" [type]="inputType" matInput formControlName="password">
                         <span matSuffix>
                             <mat-icon (click)="toggleInputType()">visibility</mat-icon>
                         </span>

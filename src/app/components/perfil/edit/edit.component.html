@@ -4,11 +4,11 @@
             <form [formGroup]="profileForm" (ngSubmit)="saveChanges()">
                 <mat-form-field>
                     <mat-label>Nombre</mat-label>
-                    <input matInput formControlName="name">
+                    <input autocomplete="off" matInput formControlName="name">
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label>Apellido</mat-label>
-                    <input matInput formControlName="surname">
+                    <input autocomplete="off" matInput formControlName="surname">
                 </mat-form-field>
 
                 <mat-card-actions>

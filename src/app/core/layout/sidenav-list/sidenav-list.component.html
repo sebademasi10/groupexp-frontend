@@ -4,7 +4,7 @@
 
   <div fxLayout="row" fxLayoutAlign="end">
     <div fxLayout="row" fxLayoutAlign="end center">
-      <input cdkFocusInitial style="display: none" type='text' />
+      <input autocomplete="off" cdkFocusInitial style="display: none" type='text' />
       <!-- Necesario para sacar el autofocus cuando se abre el sidenav. Bug de Angular -->
       <a [matMenuTriggerFor]="account" class="role-button" mat-flat-button>
         <mat-icon>account_circle</mat-icon>
