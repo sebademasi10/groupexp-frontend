@@ -20,6 +20,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSliderModule } from "@angular/material/slider";
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatExpansionModule } from "@angular/material/expansion";
 
 
 
@@ -47,7 +48,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatSliderModule,
     NgxMaterialTimepickerModule,
     MatListModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatExpansionModule
   ],
   exports: [
     MatDatepickerModule,
@@ -70,7 +72,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatSliderModule,
     NgxMaterialTimepickerModule,
     MatListModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatExpansionModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-AR' },

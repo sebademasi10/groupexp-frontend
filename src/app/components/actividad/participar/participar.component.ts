@@ -4,8 +4,10 @@ import { Router } from '@angular/router';
 import { of, Subscription } from 'rxjs';
 import { ICONBYMEANS } from 'src/app/enums/icon-by-means.enum';
 import { Activity } from 'src/app/models/activity.model';
+import { User } from 'src/app/models/user.model';
 import { ActividadService } from 'src/app/services/actividad.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 import { ConfirmationComponent } from 'src/app/shared/modals/confirmation/confirmation.component';
 
 @Component({
@@ -17,28 +19,53 @@ export class ParticiparComponent implements OnInit, OnDestroy {
 
   private _activitiesSubscription: Subscription;
   public activities: Activity[];
+  public myActivities: Activity[];
+  public otherActivities: Activity[];
   public ICONS = ICONBYMEANS;
   public activitiesLoaded$ = of(true);
   public loggedUserName: string;
   uid: string;
+  loggedUser: User;
+  showPanels = false;
 
   constructor(
     private activitiesService: ActividadService,
     private router: Router,
     private authService: AuthService,
+    private userService: UserService,
     private matDialog: MatDialog
   ) {
     this.loggedUserName = authService.getLoggedUserName();
   }
 
   ngOnInit(): void {
-    this.uid = this.authService.getUserId()
-    this._activitiesSubscription = this.activitiesService.getAll().subscribe((activities: Activity[]) => {
-      this.activities = activities;
-      this.sortActivities();
-      this.checkOwner();
-      this.checkExipired();
-      this.activitiesLoaded$ = of(this.activities.length === 0);
+    this.uid = this.authService.getUserId();
+    this.userService.getUser(this.uid).subscribe((user: any) => {
+      this.loggedUser = user.user;
+      this._activitiesSubscription = this.activitiesService.getAll().subscribe((activities: Activity[]) => {
+        this.activities = activities;
+        this.myActivities = this.getMyActivities();
+        this.otherActivities = this.getOtherActivities();
+        this.sortActivities();
+        this.checkOwner();
+        this.checkExipired();
+        this.activitiesLoaded$ = of(this.activities.length === 0);
+        this.showPanels = true;
+      })
+    })
+  }
+  getOtherActivities(): Activity[] {
+    return this.activities.filter((activity: Activity) => {
+      return this.loggedUser.meansOfTransportation.find(mot => {
+        return mot.name === activity.meanOfTransportation;
+      }) === undefined;
+    })
+  }
+  getMyActivities(): Activity[] {
+    return this.activities.filter((activity: Activity) => {
+      return this.loggedUser.meansOfTransportation.find(mot => {
+        return mot.name === activity.meanOfTransportation;
+      }) !== undefined;
     })
   }
   checkExipired() {

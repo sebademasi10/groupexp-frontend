@@ -82,7 +82,6 @@ export class MediosMovilidadComponent implements OnInit {
       userUpdated.meansOfTransportation.push(mot);
       if (value) {
         this.userService.update(this.loggedUser.uid, userUpdated).subscribe((data) => {
-          console.log('user update', data);
           this.loggedUser = data;
         })
       }
