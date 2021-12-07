@@ -6,7 +6,8 @@
 <ng-container *ngIf="showPanels">
     <mat-expansion-panel>
         <mat-expansion-panel-header>
-            <mat-panel-title>Actividades según mis medios de movilidad</mat-panel-title>
+            <mat-panel-title>Según mis medios de movilidad <span [matBadge]="myActivities.length"></span>
+            </mat-panel-title>
         </mat-expansion-panel-header>
 
         <ng-container *ngFor="let activity of myActivities">
@@ -52,7 +53,7 @@
 
     <mat-expansion-panel>
         <mat-expansion-panel-header>
-            <mat-panel-title>Otras actividades</mat-panel-title>
+            <mat-panel-title>Otras actividades <span [matBadge]="otherActivities.length"></span></mat-panel-title>
         </mat-expansion-panel-header>
         <ng-container *ngFor="let activity of otherActivities">
             <mat-card>

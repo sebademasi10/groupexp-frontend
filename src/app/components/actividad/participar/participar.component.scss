@@ -1,6 +1,14 @@
 mat-card {
     margin: 2vw;
 }
+.mat-expansion-panel-header-title {
+    display: flex;
+    flex-grow: 1;
+    margin-right: 16px;
+    height: 5vh;
+    justify-content: space-between;
+    align-items: center;
+}
 
 mat-card-actions {
     display: flex;
