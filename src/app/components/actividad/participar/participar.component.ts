@@ -92,11 +92,12 @@ export class ParticiparComponent implements OnInit, OnDestroy {
     return participant !== undefined;
   }
 
-  eliminar(uid: string) {
+  eliminar(element: any) {
     let dialogRef = this.matDialog.open(ConfirmationComponent);
+    dialogRef.componentInstance.message = `¿Cancelar actividad: ${element.title}?`
     dialogRef.afterClosed().subscribe(value => {
       if (value) {
-        this.activitiesService.delete(uid).subscribe(
+        this.activitiesService.delete(element.uid).subscribe(
           () => { window.location.reload() }
         )
       }

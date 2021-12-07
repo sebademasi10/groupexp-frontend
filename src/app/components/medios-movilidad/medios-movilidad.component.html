@@ -35,7 +35,7 @@
                     <button matTooltip="Ver" (click)="openDialog(element.uid, element, false)" mat-icon-button>
                         <mat-icon>visibility</mat-icon>
                     </button>
-                    <button matTooltip="Eliminar" mat-icon-button>
+                    <button matTooltip="Eliminar" (click)="remove(element)" mat-icon-button>
                         <mat-icon>delete</mat-icon>
                     </button>
                 </td>
