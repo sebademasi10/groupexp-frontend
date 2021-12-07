@@ -13,6 +13,8 @@ export class RollersModalComponent implements OnInit {
 
   public formBuilder: FormBuilder;
   public xpLevels = ExpLevelEnum;
+  enabled = true;
+  mot: any;
   public xpLevel: any;
   public form: FormGroup;
   constructor(
@@ -21,11 +23,14 @@ export class RollersModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      brand: [],
-      model: [],
-      wheelBase: [],
-      xpLevel: []
+      brand: [this.mot?.detail.brand],
+      model: [this.mot?.detail.model],
+      wheelBase: [this.mot?.detail.wheelBase],
+      xpLevel: [this.mot?.detail.xpLevel]
     })
+    if (!this.enabled) {
+      this.form.disable();
+    }
   }
 
   save() {

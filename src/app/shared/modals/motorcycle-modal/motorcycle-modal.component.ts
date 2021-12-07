@@ -12,16 +12,18 @@ export class MotorcycleModalComponent implements OnInit {
 
   formBuilder: FormBuilder;
 
+  enabled = true;
+  mot: any;
   public xpLevels = ExpLevelEnum;
   form: FormGroup;
   constructor(public dialogRef: MatDialogRef<MotorcycleModalComponent>) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      brand: [],
-      model: [],
-      motorCcs: [],
-      xpLevel: [],
+      brand: [this.mot?.detail.brand],
+      model: [this.mot?.detail.model],
+      motorCcs: [this.mot?.detail.motorCcs],
+      xpLevel: [this.mot?.detail.xpLevel],
     })
   }
 

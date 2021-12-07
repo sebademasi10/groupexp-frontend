@@ -13,16 +13,21 @@ export class BicycleModalComponent implements OnInit {
   formBuilder: FormBuilder;
 
   public xpLevels = ExpLevelEnum;
+  enabled = true;
   form: FormGroup;
+  mot: any;
   constructor(public dialogRef: MatDialogRef<BicycleModalComponent>,) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      brand: [],
-      model: [],
-      wheelBase: [],
-      xpLevel: []
+      brand: [this.mot?.detail.brand],
+      model: [this.mot?.detail.model],
+      wheelBase: [this.mot?.detail.wheelBase],
+      xpLevel: [this.mot?.detail.xpLevel]
     })
+    if (!this.enabled) {
+      this.form.disable();
+    }
   }
 
   save() {
