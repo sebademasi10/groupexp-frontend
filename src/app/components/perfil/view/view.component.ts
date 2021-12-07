@@ -11,6 +11,7 @@ import { User } from 'src/app/models/user.model';
 export class ViewComponent implements OnInit {
 
   user: User;
+  displayedColumns: string[] = ['name', 'xp-level'];
 
   constructor(
     private route: ActivatedRoute,
