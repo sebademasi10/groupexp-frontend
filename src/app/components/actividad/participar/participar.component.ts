@@ -74,7 +74,15 @@ export class ParticiparComponent implements OnInit, OnDestroy {
     })
   }
   sortActivitiesByStartDate() {
-    this.activities.sort((a: Activity, b: Activity) => a.startDate < b.startDate ? -1 : 1)
+    this.activities.sort((a: Activity, b: Activity) => {
+      const aDate = new Date(a.startDate).toLocaleDateString();
+      const bDate = new Date(b.startDate).toLocaleDateString();
+      if (aDate == bDate) {
+        return a.startTime < b.startTime ? -1 : 1
+      } else {
+        return a.startDate < b.startDate ? -1 : 1
+      }
+    })
   }
   checkOwner() {
     this.activities.forEach(activity => {
