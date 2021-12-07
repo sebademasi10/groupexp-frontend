@@ -93,7 +93,8 @@
 
             <div *ngIf="activity.participants?.length">
                 <mat-card-title class="mt-3">Participantes</mat-card-title>
-                <mat-card *ngFor="let participant of activity.participants" class="participants">
+                <mat-card *ngFor="let participant of activity.participants" routerLink="/perfil/ver/{{participant.uid}}"
+                    class="participants">
                     <h2>{{participant.name}} {{participant.surname}}</h2>
                     <mat-card-subtitle>{{participant.email}}</mat-card-subtitle>
                 </mat-card>
