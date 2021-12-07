@@ -12,6 +12,8 @@ import { MeanOfTransportation } from 'src/app/interfaces/mean-of-transportation'
 export class WalkingModal implements OnInit {
 
   public formBuilder: FormBuilder;
+  enabled = true;
+  mot: any;
   public xpLevels = ExpLevelEnum;
   public xpLevel: any;
   public form: FormGroup;
@@ -21,8 +23,11 @@ export class WalkingModal implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      xpLevel: []
+      xpLevel: [this.mot?.detail.xpLevel]
     })
+    if (!this.enabled) {
+      this.form.disable();
+    }
   }
 
   save() {

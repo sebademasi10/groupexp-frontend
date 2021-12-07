@@ -1,4 +1,4 @@
-<h1>Agregar bicicleta</h1>
+<h1>Bicicleta</h1>
 <form class="example-form text-align-center" [formGroup]="form" (ngSubmit)="save()">
     <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Marca</mat-label>
@@ -21,8 +21,7 @@
             </mat-option>
         </mat-select>
     </mat-form-field>
-    <button type="submit" mat-raised-button color="primary">
+    <button type="submit" *ngIf="enabled" mat-raised-button color="primary">
         <mat-icon>save</mat-icon> Guardar
     </button>
-
 </form>

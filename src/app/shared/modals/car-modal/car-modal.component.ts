@@ -12,16 +12,21 @@ export class CarModalComponent implements OnInit {
 
   public formBuilder: FormBuilder
   public xpLevels = ExpLevelEnum;
+  mot: any;
+  enabled = true;
   form: FormGroup;
   constructor(public dialogRef: MatDialogRef<CarModalComponent>) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      brand: [],
-      model: [],
-      motorCcs: [],
-      xpLevel: []
+      brand: [this.mot?.detail.brand],
+      model: [this.mot?.detail.model],
+      motorCcs: [this.mot?.detail.motorCcs],
+      xpLevel: [this.mot?.detail.xpLevel]
     })
+    if (!this.enabled) {
+      this.form.disable();
+    }
   }
 
   save() {

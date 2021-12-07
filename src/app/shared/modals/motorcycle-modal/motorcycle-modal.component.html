@@ -1,4 +1,4 @@
-<h1>Agregar motocicleta</h1>
+<h1>Motocicleta</h1>
 <form class="example-form text-align-center" [formGroup]="form">
     <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Marca</mat-label>
@@ -21,7 +21,7 @@
             </mat-option>
         </mat-select>
     </mat-form-field>
-    <button type="submit" mat-raised-button class="btn-primary" color="primary">
+    <button type="submit" *ngIf="enabled" mat-raised-button class="btn-primary" color="primary">
         <mat-icon>update</mat-icon> Guardar
     </button>
 

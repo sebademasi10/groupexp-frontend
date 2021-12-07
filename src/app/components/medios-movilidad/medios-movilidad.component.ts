@@ -64,15 +64,22 @@ export class MediosMovilidadComponent implements OnInit {
     return meanOfTransportation && meanOfTransportation.name ? meanOfTransportation.name : '';
   }
 
-  openDialog(uid: string) {
+  openDialog(uid: string, mot?: any, enabled = true) {
 
+    if (mot) {
+      this.meanOfTransportation = mot.name;
+    }
     const modalType = this.getModalType();
     let dialogRef = this.matDialog.open(modalType, {
       width: '99vw',
-      data: { uid }
+      data: { enabled }
     });
 
+    if (mot) {
+      dialogRef.componentInstance.mot = mot;
+    }
     dialogRef.componentInstance.formBuilder = this.formBuilder;
+    dialogRef.componentInstance.enabled = enabled;
 
 
     dialogRef.afterClosed().subscribe((value) => {

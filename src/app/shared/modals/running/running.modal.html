@@ -8,7 +8,7 @@
             </mat-option>
         </mat-select>
     </mat-form-field>
-    <button type="submit" mat-raised-button (click)="save()" class="btn-primary" color="primary">
+    <button type="submit" *ngIf="enabled" mat-raised-button (click)="save()" class="btn-primary" color="primary">
         <mat-icon>update</mat-icon> Guardar
     </button>
 </form>
