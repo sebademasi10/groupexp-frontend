@@ -44,11 +44,11 @@ export class ParticiparComponent implements OnInit, OnDestroy {
       this.loggedUser = user.user;
       this._activitiesSubscription = this.activitiesService.getAll().subscribe((activities: Activity[]) => {
         this.activities = activities;
+        this.checkExipired();
+        this.sortActivitiesByStartDate();
+        this.checkOwner();
         this.myActivities = this.getMyActivities();
         this.otherActivities = this.getOtherActivities();
-        this.sortActivities();
-        this.checkOwner();
-        this.checkExipired();
         this.activitiesLoaded$ = of(this.activities.length === 0);
         this.showPanels = true;
       })
@@ -73,7 +73,7 @@ export class ParticiparComponent implements OnInit, OnDestroy {
       return new Date(activity.startDate).toLocaleDateString() >= new Date().toLocaleDateString();
     })
   }
-  sortActivities() {
+  sortActivitiesByStartDate() {
     this.activities.sort((a: Activity, b: Activity) => a.startDate < b.startDate ? -1 : 1)
   }
   checkOwner() {
