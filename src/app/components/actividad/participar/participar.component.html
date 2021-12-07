@@ -34,7 +34,7 @@
                     {{activity.description}}
                 </mat-card-content>
                 <mat-card-actions [ngStyle]="{'justify-content': activity.isOwner? 'space-between':'flex-end'}">
-                    <button mat-icon-button (click)="eliminar(activity.uid)" color="warn" *ngIf="activity.isOwner">
+                    <button mat-icon-button (click)="eliminar(activity)" color="warn" *ngIf="activity.isOwner">
                         <mat-icon>delete</mat-icon>
                     </button>
                     <button *ngIf="!activity.isOwner" mat-raised-button color="primary"

@@ -18,6 +18,7 @@ import { RunningModal } from 'src/app/shared/modals/running/running.modal';
 import { AuthService } from 'src/app/services/auth.service';
 import { ExpLevelEnum } from 'src/app/enums/exp-level.enum';
 import { UserService } from 'src/app/services/user.service';
+import { ConfirmationComponent } from 'src/app/shared/modals/confirmation/confirmation.component';
 
 
 @Component({
@@ -62,6 +63,22 @@ export class MediosMovilidadComponent implements OnInit {
 
   displayFn(meanOfTransportation: MedioMovilidad): string {
     return meanOfTransportation && meanOfTransportation.name ? meanOfTransportation.name : '';
+  }
+
+  remove(element: any) {
+    let dialogRef = this.matDialog.open(ConfirmationComponent);
+    dialogRef.componentInstance.message = `¿Eliminar medio de movilidad: ${element.name}?`
+
+    dialogRef.afterClosed().subscribe(value => {
+      if (value) {
+        const newMots = this.loggedUser.meansOfTransportation.filter((mot) => mot.uid !== element.uid);
+        let userUpdated = JSON.parse(JSON.stringify(this.loggedUser));
+        userUpdated.meansOfTransportation = newMots;
+        this.userService.update(this.loggedUser.uid, userUpdated).subscribe((user: any) => {
+          this.loggedUser = user;
+        })
+      }
+    })
   }
 
   openDialog(uid: string, mot?: any, enabled = true) {
